@@ -366,57 +366,10 @@
         { x: 880, y: 196, rating: 747, delta: '+133', rank: '#22615', title: 'ROUND 1114 (DIV. 3) // PEAK' }
       ];
 
-      // Curated verified Codeforces solved problems categorized by graph trajectory tier
-      const SOLVED_PROBLEMS_TIERS = {
-        baseline: {
-          label: 'ENTRY BASELINE // 356 RATING',
-          badge: 'TIER 01',
-          problems: [
-            { id: '71A', name: 'Way Too Long Words', rating: 800, tag: 'strings', url: 'https://codeforces.com/problemset/problem/71/A' },
-            { id: '231A', name: 'Team', rating: 800, tag: 'greedy', url: 'https://codeforces.com/problemset/problem/231/A' },
-            { id: '282A', name: 'Bit++', rating: 800, tag: 'implementation', url: 'https://codeforces.com/problemset/problem/282/A' },
-            { id: '158A', name: 'Next Round', rating: 800, tag: 'special', url: 'https://codeforces.com/problemset/problem/158/A' }
-          ]
-        },
-        progression: {
-          label: 'ROUND 1107 // 614 RATING',
-          badge: 'TIER 02',
-          problems: [
-            { id: '263A', name: 'Beautiful Matrix', rating: 800, tag: 'implementation', url: 'https://codeforces.com/problemset/problem/263/A' },
-            { id: '50A', name: 'Domino piling', rating: 800, tag: 'math', url: 'https://codeforces.com/problemset/problem/50/A' },
-            { id: '617A', name: 'Elephant', rating: 800, tag: 'math', url: 'https://codeforces.com/problemset/problem/617/A' },
-            { id: '1901A', name: 'Line Trip', rating: 800, tag: 'greedy', url: 'https://codeforces.com/problemset/problem/1901/A' }
-          ]
-        },
-        peak: {
-          label: 'ROUND 1114 // 747 PEAK & CANDIDATE',
-          badge: 'PEAK TIER',
-          problems: [
-            { id: '25A', name: 'IQ test', rating: 1300, tag: 'brute force', url: 'https://codeforces.com/problemset/problem/25/A' },
-            { id: '1A', name: 'Theatre Square', rating: 1000, tag: 'math', url: 'https://codeforces.com/problemset/problem/1/A' },
-            { id: '118A', name: 'String Task', rating: 1000, tag: 'strings', url: 'https://codeforces.com/problemset/problem/118/A' },
-            { id: '1903A', name: 'Halloumi Boxes', rating: 800, tag: 'sortings', url: 'https://codeforces.com/problemset/problem/1903/A' }
-          ]
-        }
-      };
-
-      // Dwell inspection DOM elements
-      const dwellPanel = document.getElementById('cf-dwell-panel');
-      const dwellTierBadge = document.getElementById('dwell-tier-badge');
-      const dwellProblemsList = document.getElementById('dwell-problems-list');
-      const dwellChargeRing = document.getElementById('cf-dwell-charge-ring');
-      const calloutGroup = document.getElementById('cf-callout-line-group');
-      const calloutLine = document.getElementById('cf-callout-line');
-      const calloutDotOrigin = document.getElementById('cf-callout-dot-origin');
-      const calloutDotMid = document.getElementById('cf-callout-dot-mid');
-      const calloutDotEnd = document.getElementById('cf-callout-dot-end');
-
       // Set initial positions matching peak milestone (880, 196)
       gsap.set(pointGroup, { x: 880, y: 196, transformOrigin: 'center center' });
       gsap.set(scrubGuide, { x: 880, autoAlpha: 0 });
       gsap.set(tooltip, { autoAlpha: 0 });
-      if (calloutGroup) gsap.set(calloutGroup, { autoAlpha: 0 });
-      if (dwellChargeRing) gsap.set(dwellChargeRing, { strokeDashoffset: 100.53, opacity: 0 });
 
       // Hardware-accelerated quickTo responders for 60fps tracking
       const quickPointX = gsap.quickTo(pointGroup, 'x', { duration: 0.1, ease: 'power2.out' });
@@ -446,187 +399,7 @@
         return bestPoint;
       }
 
-      // Dwell state variables
-      let dwellTimer = null;
-      let isDwellActive = false;
-      let isHoveringDwellPanel = false;
-      let lastDwellClientX = -9999;
-      let lastDwellClientY = -9999;
-      let currentScrubPoint = { x: 880, y: 196 };
-      let currentScrubTargetX = 880;
-
-      function triggerDwellInspection(pt, targetX) {
-        if (!isHovering) return;
-        isDwellActive = true;
-
-        // Hide standard telemetry tooltip while deep inspection is active
-        gsap.to(tooltip, { autoAlpha: 0, duration: 0.2 });
-
-        // Flash & pulse the charging ring indicating target lock
-        if (dwellChargeRing) {
-          gsap.killTweensOf(dwellChargeRing);
-          gsap.to(dwellChargeRing, {
-            scale: 1.45,
-            opacity: 0,
-            duration: 0.35,
-            ease: 'power2.out',
-            onComplete: () => {
-              gsap.set(dwellChargeRing, { scale: 1, strokeDashoffset: 100.53 });
-            }
-          });
-        }
-
-        // Determine matching problem tier based on trajectory coordinate
-        let tierKey = 'progression';
-        if (targetX < 360) {
-          tierKey = 'baseline';
-        } else if (targetX >= 700) {
-          tierKey = 'peak';
-        }
-
-        const tier = SOLVED_PROBLEMS_TIERS[tierKey];
-        if (dwellTierBadge) {
-          dwellTierBadge.textContent = tier.badge;
-        }
-
-        // Render verified solved problems list
-        if (dwellProblemsList) {
-          dwellProblemsList.innerHTML = '';
-          tier.problems.forEach((p) => {
-            const row = document.createElement('a');
-            row.href = p.url;
-            row.target = '_blank';
-            row.rel = 'noopener noreferrer';
-            row.className = 'dwell-problem-row';
-
-            const ratingClass = p.rating >= 1200 ? 'rating-pupil' : (p.rating >= 1000 ? 'rating-specialist' : '');
-
-            row.innerHTML = `
-              <div class="dwell-prob-left">
-                <span class="dwell-prob-id">${p.id}</span>
-                <span class="dwell-prob-name">${p.name}</span>
-              </div>
-              <div class="dwell-prob-right">
-                <span class="dwell-prob-tag">${p.tag}</span>
-                <span class="dwell-prob-rating ${ratingClass}">${p.rating} ↗</span>
-              </div>
-            `;
-            dwellProblemsList.appendChild(row);
-          });
-        }
-
-        // Responsive position computation
-        const containerRect = svgContainer.getBoundingClientRect();
-        const pixelX = (pt.x / 1000) * containerRect.width;
-        const pixelY = (pt.y / 420) * containerRect.height;
-
-        const isLeftHalf = pt.x <= 550;
-
-        // Position floating HTML panel
-        let panelLeft = isLeftHalf ? pixelX + 90 : pixelX - 340;
-        panelLeft = Math.max(16, Math.min(containerRect.width - 336, panelLeft));
-        let panelTop = Math.max(16, Math.min(containerRect.height - 230, pixelY - 110));
-
-        gsap.set(dwellPanel, {
-          left: `${panelLeft}px`,
-          top: `${panelTop}px`
-        });
-
-        // Exact SVG coordinates corresponding to panel edge
-        const panelBorderSVG = isLeftHalf 
-          ? (panelLeft / containerRect.width) * 1000 
-          : ((panelLeft + 320) / containerRect.width) * 1000;
-
-        const endX = panelBorderSVG;
-        const midY = Math.max(45, pt.y - 50);
-        const midX = isLeftHalf ? pt.x + (endX - pt.x) * 0.45 : pt.x - (pt.x - endX) * 0.45;
-        const endY = midY;
-
-        // Set callout leader circuit lines
-        if (calloutLine && calloutGroup) {
-          const pathData = `M ${pt.x} ${pt.y} L ${midX} ${midY} L ${endX} ${endY}`;
-          calloutLine.setAttribute('d', pathData);
-          if (calloutDotOrigin) {
-            calloutDotOrigin.setAttribute('cx', pt.x);
-            calloutDotOrigin.setAttribute('cy', pt.y);
-          }
-          if (calloutDotMid) {
-            calloutDotMid.setAttribute('cx', midX);
-            calloutDotMid.setAttribute('cy', midY);
-          }
-          if (calloutDotEnd) {
-            calloutDotEnd.setAttribute('cx', endX);
-            calloutDotEnd.setAttribute('cy', endY);
-          }
-
-          // Pull line out with stroke-dash draw animation
-          gsap.killTweensOf([calloutGroup, calloutLine, dwellPanel]);
-          gsap.set(calloutGroup, { autoAlpha: 1 });
-
-          const lineLen = calloutLine.getTotalLength() || 140;
-          gsap.fromTo(calloutLine,
-            { strokeDasharray: lineLen, strokeDashoffset: lineLen },
-            {
-              strokeDashoffset: 0,
-              duration: 0.35,
-              ease: 'power2.out',
-              onComplete: () => {
-                calloutLine.style.strokeDasharray = '6 4';
-              }
-            }
-          );
-        }
-
-        // Pop in the inspection panel with spring physics
-        dwellPanel.classList.add('dwell-active');
-        gsap.fromTo(dwellPanel,
-          { autoAlpha: 0, scale: 0.92, y: 10 },
-          { autoAlpha: 1, scale: 1, y: 0, duration: 0.35, ease: 'back.out(1.5)' }
-        );
-      }
-
-      function dismissDwellInspection() {
-        if (!isDwellActive && (!dwellPanel || !dwellPanel.classList.contains('dwell-active'))) return;
-        isDwellActive = false;
-        clearTimeout(dwellTimer);
-
-        if (dwellChargeRing) {
-          gsap.killTweensOf(dwellChargeRing);
-          gsap.set(dwellChargeRing, { strokeDashoffset: 100.53, opacity: 0 });
-        }
-
-        if (calloutGroup) {
-          gsap.to(calloutGroup, { autoAlpha: 0, duration: 0.25 });
-        }
-
-        if (dwellPanel) {
-          gsap.to(dwellPanel, {
-            autoAlpha: 0,
-            scale: 0.95,
-            duration: 0.2,
-            ease: 'power2.in',
-            onComplete: () => {
-              dwellPanel.classList.remove('dwell-active');
-            }
-          });
-        }
-
-        if (isHovering && !isHoveringDwellPanel) {
-          gsap.to(tooltip, { autoAlpha: 1, duration: 0.2 });
-        }
-      }
-
-      if (dwellPanel) {
-        dwellPanel.addEventListener('pointerenter', () => {
-          isHoveringDwellPanel = true;
-        });
-        dwellPanel.addEventListener('pointerleave', () => {
-          isHoveringDwellPanel = false;
-          dismissDwellInspection();
-        });
-      }
-
-      function handleScrub(clientX, clientY) {
+      function handleScrub(clientX) {
         const rect = svg.getBoundingClientRect();
         if (rect.width === 0) return;
 
@@ -645,9 +418,6 @@
         }
 
         const pt = getPathPointAtX(chartPath, targetX);
-        currentScrubPoint = pt;
-        currentScrubTargetX = targetX;
-
         quickPointX(pt.x);
         quickPointY(pt.y);
         quickGuideX(pt.x);
@@ -700,88 +470,46 @@
 
         quickTooltipX(tooltipTargetX);
         quickTooltipY(tooltipTargetY);
-
-        // 1-Second Dwell Detection Logic
-        const moveDist = Math.hypot(clientX - lastDwellClientX, clientY - lastDwellClientY);
-
-        if (isDwellActive) {
-          if (moveDist > 45 && !isHoveringDwellPanel) {
-            dismissDwellInspection();
-            lastDwellClientX = clientX;
-            lastDwellClientY = clientY;
-          }
-        } else if (!isHoveringDwellPanel) {
-          if (moveDist > 20 || lastDwellClientX === -9999) {
-            lastDwellClientX = clientX;
-            lastDwellClientY = clientY;
-            clearTimeout(dwellTimer);
-
-            if (dwellChargeRing) {
-              gsap.killTweensOf(dwellChargeRing);
-              gsap.set(dwellChargeRing, { strokeDashoffset: 100.53, opacity: 0 });
-              gsap.to(dwellChargeRing, {
-                opacity: 0.95,
-                strokeDashoffset: 0,
-                duration: 1.0,
-                ease: 'linear'
-              });
-            }
-
-            dwellTimer = setTimeout(() => {
-              triggerDwellInspection(currentScrubPoint, currentScrubTargetX);
-            }, 1000);
-          }
-        }
       }
 
       let isHovering = false;
 
       svgContainer.addEventListener('pointerenter', (e) => {
         isHovering = true;
-        if (!isDwellActive) {
-          gsap.to(scrubGuide, { autoAlpha: 0.85, duration: 0.2 });
-          gsap.to(tooltip, { autoAlpha: 1, duration: 0.2 });
-        }
-        handleScrub(e.clientX, e.clientY);
+        gsap.to(scrubGuide, { autoAlpha: 0.85, duration: 0.2 });
+        gsap.to(tooltip, { autoAlpha: 1, duration: 0.2 });
+        handleScrub(e.clientX);
       });
 
       svgContainer.addEventListener('pointermove', (e) => {
         if (!isHovering) {
           isHovering = true;
-          if (!isDwellActive) {
-            gsap.to(scrubGuide, { autoAlpha: 0.85, duration: 0.2 });
-            gsap.to(tooltip, { autoAlpha: 1, duration: 0.2 });
-          }
+          gsap.to(scrubGuide, { autoAlpha: 0.85, duration: 0.2 });
+          gsap.to(tooltip, { autoAlpha: 1, duration: 0.2 });
         }
-        handleScrub(e.clientX, e.clientY);
+        handleScrub(e.clientX);
       });
 
       svgContainer.addEventListener('pointerleave', () => {
         isHovering = false;
-        clearTimeout(dwellTimer);
-
-        if (!isHoveringDwellPanel) {
-          dismissDwellInspection();
-
-          // Kinetic spring return to peak coordinate
-          gsap.to(pointGroup, {
-            x: 880,
-            y: 196,
-            duration: 0.6,
-            ease: 'power3.out'
-          });
-          gsap.to(scrubGuide, {
-            x: 880,
-            autoAlpha: 0,
-            duration: 0.45,
-            ease: 'power3.out'
-          });
-          gsap.to(tooltip, {
-            autoAlpha: 0,
-            duration: 0.25,
-            ease: 'power2.out'
-          });
-        }
+        // Kinetic spring return to peak coordinate
+        gsap.to(pointGroup, {
+          x: 880,
+          y: 196,
+          duration: 0.6,
+          ease: 'power3.out'
+        });
+        gsap.to(scrubGuide, {
+          x: 880,
+          autoAlpha: 0,
+          duration: 0.45,
+          ease: 'power3.out'
+        });
+        gsap.to(tooltip, {
+          autoAlpha: 0,
+          duration: 0.25,
+          ease: 'power2.out'
+        });
       });
     };
 
@@ -1147,6 +875,63 @@
         { name: 'games', count: 1, color: '#84CC16', glow: 'rgba(132, 204, 22, 0.85)' }
       ];
 
+      // Verified Codeforces Solved Problems by Tag for Itz_Arslan
+      const TAG_PROBLEMS_MAP = window.CF_TAG_PROBLEMS_MAP || {
+        'implementation': [
+          { id: '263A', name: 'Beautiful Matrix', rating: 800, url: 'https://codeforces.com/problemset/problem/263/A' },
+          { id: '282A', name: 'Bit++', rating: 800, url: 'https://codeforces.com/problemset/problem/282/A' },
+          { id: '158A', name: 'Next Round', rating: 800, url: 'https://codeforces.com/problemset/problem/158/A' },
+          { id: '118A', name: 'String Task', rating: 1000, url: 'https://codeforces.com/problemset/problem/118/A' },
+          { id: '236A', name: 'Boy or Girl', rating: 800, url: 'https://codeforces.com/problemset/problem/236/A' }
+        ],
+        'math': [
+          { id: '1A', name: 'Theatre Square', rating: 1000, url: 'https://codeforces.com/problemset/problem/1/A' },
+          { id: '617A', name: 'Elephant', rating: 800, url: 'https://codeforces.com/problemset/problem/617/A' },
+          { id: '50A', name: 'Domino piling', rating: 800, url: 'https://codeforces.com/problemset/problem/50/A' },
+          { id: '1901A', name: 'Line Trip', rating: 800, url: 'https://codeforces.com/problemset/problem/1901/A' },
+          { id: '1899A', name: 'Game with Integers', rating: 800, url: 'https://codeforces.com/problemset/problem/1899/A' }
+        ],
+        'greedy': [
+          { id: '231A', name: 'Team', rating: 800, url: 'https://codeforces.com/problemset/problem/231/A' },
+          { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' },
+          { id: '1901A', name: 'Line Trip', rating: 800, url: 'https://codeforces.com/problemset/problem/1901/A' },
+          { id: '1900A', name: 'Cover in Water', rating: 800, url: 'https://codeforces.com/problemset/problem/1900/A' },
+          { id: '50A', name: 'Domino piling', rating: 800, url: 'https://codeforces.com/problemset/problem/50/A' }
+        ],
+        'strings': [
+          { id: '71A', name: 'Way Too Long Words', rating: 800, url: 'https://codeforces.com/problemset/problem/71/A' },
+          { id: '118A', name: 'String Task', rating: 1000, url: 'https://codeforces.com/problemset/problem/118/A' },
+          { id: '112A', name: 'Petya and Strings', rating: 800, url: 'https://codeforces.com/problemset/problem/112/A' },
+          { id: '236A', name: 'Boy or Girl', rating: 800, url: 'https://codeforces.com/problemset/problem/236/A' },
+          { id: '1900A', name: 'Cover in Water', rating: 800, url: 'https://codeforces.com/problemset/problem/1900/A' }
+        ],
+        'brute force': [
+          { id: '25A', name: 'IQ test', rating: 1300, url: 'https://codeforces.com/problemset/problem/25/A' },
+          { id: '271A', name: 'Beautiful Year', rating: 800, url: 'https://codeforces.com/problemset/problem/271/A' },
+          { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' },
+          { id: '236A', name: 'Boy or Girl', rating: 800, url: 'https://codeforces.com/problemset/problem/236/A' },
+          { id: '231A', name: 'Team', rating: 800, url: 'https://codeforces.com/problemset/problem/231/A' }
+        ],
+        'sortings': [
+          { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' },
+          { id: '2254A', name: 'Riptide', rating: 800, url: 'https://codeforces.com/problemset/problem/2254/A' }
+        ],
+        'number theory': [
+          { id: '1899A', name: 'Game with Integers', rating: 800, url: 'https://codeforces.com/problemset/problem/1899/A' },
+          { id: '2241A', name: 'Divide and Conquer', rating: 800, url: 'https://codeforces.com/problemset/problem/2241/A' }
+        ],
+        'games': [
+          { id: '1899A', name: 'Game with Integers', rating: 800, url: 'https://codeforces.com/problemset/problem/1899/A' }
+        ],
+        'constructive algorithms': [
+          { id: '1900A', name: 'Cover in Water', rating: 800, url: 'https://codeforces.com/problemset/problem/1900/A' }
+        ],
+        '*special': [
+          { id: '158A', name: 'Next Round', rating: 800, url: 'https://codeforces.com/problemset/problem/158/A' }
+        ]
+      };
+      window.CF_TAG_PROBLEMS_MAP = TAG_PROBLEMS_MAP;
+
       let defaultUniqueCount = 21;
       const cx = 170, cy = 170, R = 130, r = 75, gapDeg = 1.2;
 
@@ -1198,6 +983,9 @@
           const pathD = describeArcSlice(cx, cy, r, R, startAngle, endAngle);
           currentAngle += sweep;
 
+          tag.startAngle = startAngle;
+          tag.endAngle = endAngle;
+
           const safeName = escapeHtml(tag.name);
           const safeColor = escapeHtml(tag.color);
           const safeGlow = escapeHtml(tag.glow);
@@ -1237,6 +1025,217 @@
 
         const sliceEls = document.querySelectorAll('.cf-donut-slice');
         const legendEls = document.querySelectorAll('.legend-tag-row');
+
+        // Spreading lines DOM references
+        const spreadingOverlay = document.getElementById('cf-donut-spreading-overlay');
+        const spreadingSvg = document.getElementById('cf-donut-spreading-svg');
+        const spreadingLabels = document.getElementById('cf-donut-spreading-labels');
+        const tagsBody = document.querySelector('.cf-tags-body');
+        const donutStage = document.querySelector('.cf-donut-stage');
+
+        let hideTimeout = null;
+        let activeTagIndex = -1;
+
+        function showSpreadingLines(index) {
+          if (hideTimeout) {
+            clearTimeout(hideTimeout);
+            hideTimeout = null;
+          }
+
+          if (index < 0 || index >= tagsData.length) return;
+          if (activeTagIndex === index && spreadingOverlay && spreadingOverlay.classList.contains('active')) return;
+          activeTagIndex = index;
+
+          const tag = tagsData[index];
+          const problems = TAG_PROBLEMS_MAP[tag.name] || [];
+          if (!spreadingOverlay || !spreadingSvg || !spreadingLabels || !tagsBody || !donutStage) return;
+
+          const bodyRect = tagsBody.getBoundingClientRect();
+          const stageRect = donutStage.getBoundingClientRect();
+          const cxPos = stageRect.left - bodyRect.left + 160;
+          const cyPos = stageRect.top - bodyRect.top + 160;
+          const outerRadius = 130;
+
+          // Clear previous elements
+          spreadingSvg.innerHTML = '';
+          spreadingLabels.innerHTML = '';
+
+          // Visual angles (-90deg SVG transform and polar offset)
+          const visStart = (tag.startAngle || 0) - 180;
+          const visEnd = (tag.endAngle || 360) - 180;
+          const visMid = (visStart + visEnd) / 2;
+          const isRightSide = Math.cos(visMid * Math.PI / 180) >= -0.25;
+
+          // Softly dim the background legend so laser circuits pop
+          legendContainer.classList.add('dimmed');
+          spreadingOverlay.classList.add('active');
+          gsap.set(spreadingOverlay, { autoAlpha: 1 });
+
+          const isCompact = bodyRect.width < 860;
+          const numProbs = Math.min(problems.length, 5);
+          const pathsToAnimate = [];
+          const dotsToAnimate = [];
+          const chipsToAnimate = [];
+
+          for (let i = 0; i < numProbs; i++) {
+            const p = problems[i];
+            const angleDeg = visStart + (i + 0.5) * (visEnd - visStart) / numProbs;
+            const rad = angleDeg * Math.PI / 180;
+            const startX = cxPos + (outerRadius + 4) * Math.cos(rad);
+            const startY = cyPos + (outerRadius + 4) * Math.sin(rad);
+
+            let endX, endY, d;
+
+            if (isCompact) {
+              const chipWidth = Math.min(260, bodyRect.width - 48);
+              endX = Math.max(24, cxPos - chipWidth / 2);
+              endY = cyPos + 155 + i * 38;
+              const wpY = (startY + endY) * 0.5;
+              d = `M ${startX.toFixed(1)} ${startY.toFixed(1)} Q ${startX.toFixed(1)} ${wpY.toFixed(1)} ${endX.toFixed(1)} ${endY.toFixed(1)}`;
+            } else {
+              endX = cxPos + 180 + (i % 2 === 1 ? 14 : 0);
+              if (numProbs <= 2) {
+                const baseY = cyPos + Math.sin(rad) * 45 - ((numProbs - 1) * 18);
+                endY = Math.max(30, Math.min(bodyRect.height - 40, baseY + i * 36));
+              } else if (Math.sin(visMid * Math.PI / 180) < 0) {
+                const baseY = Math.max(26, cyPos - 130);
+                endY = baseY + i * 36;
+              } else {
+                const baseY = Math.max(30, cyPos - 35);
+                endY = baseY + i * 36;
+              }
+
+              if (isRightSide) {
+                const midX = cxPos + (outerRadius + 25 + i * 8) * Math.cos(rad);
+                const midY = cyPos + (outerRadius + 25 + i * 8) * Math.sin(rad);
+                d = `M ${startX.toFixed(1)} ${startY.toFixed(1)} L ${midX.toFixed(1)} ${midY.toFixed(1)} L ${endX.toFixed(1)} ${endY.toFixed(1)}`;
+              } else {
+                const wpX = cxPos + Math.cos(rad) * 35 + (i * 20);
+                const wpY = Math.sin(rad) < 0
+                  ? Math.max(16, startY - 35 - (i * 10))
+                  : Math.min(bodyRect.height - 20, startY + 35 + (i * 10));
+                d = `M ${startX.toFixed(1)} ${startY.toFixed(1)} Q ${wpX.toFixed(1)} ${wpY.toFixed(1)} ${(endX - 30).toFixed(1)} ${endY.toFixed(1)} L ${endX.toFixed(1)} ${endY.toFixed(1)}`;
+              }
+            }
+
+            // Path line
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', d);
+            path.setAttribute('class', 'cf-spread-line');
+            path.setAttribute('stroke', tag.color);
+            path.style.filter = `drop-shadow(0 0 6px ${tag.glow})`;
+            spreadingSvg.appendChild(path);
+            pathsToAnimate.push(path);
+
+            // Node dot
+            const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dot.setAttribute('cx', endX);
+            dot.setAttribute('cy', endY);
+            dot.setAttribute('r', '3.5');
+            dot.setAttribute('fill', tag.color);
+            dot.setAttribute('class', 'cf-spread-dot');
+            dot.style.filter = `drop-shadow(0 0 8px ${tag.glow})`;
+            spreadingSvg.appendChild(dot);
+            dotsToAnimate.push(dot);
+
+            // Clickable problem link chip (target="_blank" rel="noopener noreferrer")
+            const chip = document.createElement('a');
+            chip.href = p.url;
+            chip.target = '_blank';
+            chip.rel = 'noopener noreferrer';
+            chip.className = 'cf-spread-chip';
+            chip.style.left = `${(endX + 8).toFixed(1)}px`;
+            chip.style.top = `${(endY - 13).toFixed(1)}px`;
+            chip.style.setProperty('--chip-color', tag.color);
+            chip.style.setProperty('--chip-glow', tag.glow);
+            chip.innerHTML = `
+              <span class="cf-spread-chip-id">${escapeHtml(p.id)}</span>
+              <span class="cf-spread-chip-name">${escapeHtml(p.name)}</span>
+              <span class="cf-spread-chip-rating">${escapeHtml(p.rating)}</span>
+              <span class="cf-spread-chip-arrow">↗</span>
+            `;
+
+            chip.addEventListener('pointerenter', () => {
+              if (hideTimeout) {
+                clearTimeout(hideTimeout);
+                hideTimeout = null;
+              }
+            });
+
+            chip.addEventListener('pointerleave', () => {
+              scheduleHide();
+            });
+
+            spreadingLabels.appendChild(chip);
+            chipsToAnimate.push(chip);
+          }
+
+          // GSAP laser draw animation
+          pathsToAnimate.forEach((p, lineIdx) => {
+            const len = p.getTotalLength() || 150;
+            gsap.fromTo(p,
+              { strokeDasharray: len, strokeDashoffset: len },
+              {
+                strokeDashoffset: 0,
+                duration: 0.35,
+                delay: lineIdx * 0.03,
+                ease: 'power2.out',
+                onComplete: () => {
+                  p.style.strokeDasharray = '6 4';
+                }
+              }
+            );
+          });
+
+          gsap.fromTo(dotsToAnimate,
+            { scale: 0, transformOrigin: 'center center' },
+            { scale: 1, stagger: 0.03, duration: 0.3, delay: 0.15, ease: 'back.out(2)' }
+          );
+
+          gsap.fromTo(chipsToAnimate,
+            { autoAlpha: 0, x: -15, scale: 0.95 },
+            { autoAlpha: 1, x: 0, scale: 1, stagger: 0.04, duration: 0.3, delay: 0.1, ease: 'power2.out' }
+          );
+        }
+
+        function scheduleHide() {
+          if (hideTimeout) clearTimeout(hideTimeout);
+          // Exactly 1.5 seconds retention after mouse leaves the shape
+          hideTimeout = setTimeout(() => {
+            retractSpreadingLines();
+          }, 1500);
+        }
+
+        function retractSpreadingLines() {
+          if (!spreadingOverlay || !spreadingOverlay.classList.contains('active')) return;
+          activeTagIndex = -1;
+
+          gsap.to([spreadingSvg, spreadingLabels], {
+            autoAlpha: 0,
+            duration: 0.25,
+            ease: 'power2.in',
+            onComplete: () => {
+              spreadingOverlay.classList.remove('active');
+              spreadingSvg.innerHTML = '';
+              spreadingLabels.innerHTML = '';
+              gsap.set([spreadingSvg, spreadingLabels], { autoAlpha: 1 });
+              legendContainer.classList.remove('dimmed');
+              unhighlightTag();
+            }
+          });
+        }
+
+        if (spreadingOverlay) {
+          spreadingOverlay.addEventListener('pointerenter', () => {
+            if (hideTimeout) {
+              clearTimeout(hideTimeout);
+              hideTimeout = null;
+            }
+          });
+          spreadingOverlay.addEventListener('pointerleave', () => {
+            scheduleHide();
+          });
+        }
 
         function highlightTag(index) {
           if (index < 0 || index >= tagsData.length) return;
@@ -1295,8 +1294,11 @@
           el.addEventListener('pointerenter', () => {
             const idx = parseInt(el.getAttribute('data-index'), 10);
             highlightTag(idx);
+            showSpreadingLines(idx);
           });
-          el.addEventListener('pointerleave', unhighlightTag);
+          el.addEventListener('pointerleave', () => {
+            scheduleHide();
+          });
         });
 
         // Bind legend row events
@@ -1304,8 +1306,11 @@
           el.addEventListener('pointerenter', () => {
             const idx = parseInt(el.getAttribute('data-index'), 10);
             highlightTag(idx);
+            showSpreadingLines(idx);
           });
-          el.addEventListener('pointerleave', unhighlightTag);
+          el.addEventListener('pointerleave', () => {
+            scheduleHide();
+          });
         });
 
         if (animate) {
@@ -1319,7 +1324,10 @@
       renderChart(false);
 
       // Global Live API hook to update the Donut Chart when Codeforces API returns fresh tags
-      window.updateCodeforcesTagsChart = function (tagCountsMap, uniqueSolvedCount) {
+      window.updateCodeforcesTagsChart = function (tagCountsMap, uniqueSolvedCount, tagProblemsMap) {
+        if (tagProblemsMap && typeof tagProblemsMap === 'object') {
+          Object.assign(TAG_PROBLEMS_MAP, tagProblemsMap);
+        }
         if (!tagCountsMap || typeof tagCountsMap !== 'object') return;
         const keys = Object.keys(tagCountsMap);
         if (keys.length === 0) return;

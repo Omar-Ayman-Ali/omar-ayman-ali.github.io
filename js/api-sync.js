@@ -144,7 +144,7 @@
 
     // 8. Codeforces Problem Taxonomy Tags Donut Chart
     if (stats.cfTags && typeof window.updateCodeforcesTagsChart === 'function') {
-      window.updateCodeforcesTagsChart(stats.cfTags, stats.cfUniqueSolved || 21);
+      window.updateCodeforcesTagsChart(stats.cfTags, stats.cfUniqueSolved || 21, stats.cfTagProblems);
     }
 
     // 9. Stream entry to diagnostic log feed if available
@@ -226,6 +226,7 @@
       if (statusData && statusData.status === 'OK' && Array.isArray(statusData.result)) {
         const solvedSet = new Set();
         const tagCounts = Object.create(null);
+        const tagProblems = Object.create(null);
 
         statusData.result.forEach((sub) => {
           if (sub.verdict === 'OK' && sub.problem) {
@@ -234,12 +235,20 @@
               : sub.problem.name;
             if (id && !solvedSet.has(id)) {
               solvedSet.add(id);
+              const pItem = {
+                id: sub.problem.contestId && sub.problem.index ? `${sub.problem.contestId}${sub.problem.index}` : sub.problem.name,
+                name: sub.problem.name,
+                rating: sub.problem.rating || 800,
+                url: sub.problem.contestId && sub.problem.index ? `https://codeforces.com/problemset/problem/${sub.problem.contestId}/${sub.problem.index}` : '#'
+              };
               if (Array.isArray(sub.problem.tags)) {
                 sub.problem.tags.forEach((rawTag) => {
                   if (typeof rawTag === 'string' || typeof rawTag === 'number') {
                     const tag = String(rawTag).replace(/[^a-zA-Z0-9\s*+\-_]/g, '').trim();
                     if (tag && tag !== '__proto__' && tag !== 'constructor' && tag !== 'prototype') {
                       tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                      if (!tagProblems[tag]) tagProblems[tag] = [];
+                      tagProblems[tag].push(pItem);
                     }
                   }
                 });
@@ -253,6 +262,7 @@
         result.cfUniqueSolved = Math.max(BASELINE_STATS.cfUniqueSolved, solvedSet.size);
         if (Object.keys(tagCounts).length > 0) {
           result.cfTags = tagCounts;
+          result.cfTagProblems = tagProblems;
         }
       }
     } catch (e) {

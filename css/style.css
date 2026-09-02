@@ -1233,219 +1233,6 @@ a, button {
 }
 
 /* ==========================================================================
-   1-Second Dwell Solved Problems Inspection Mode (Pullout Laser Circuit)
-   ========================================================================== */
-
-.cf-dwell-charge-ring {
-  fill: none;
-  stroke: var(--accent-green);
-  stroke-width: 2px;
-  stroke-dasharray: 100.53;
-  stroke-dashoffset: 100.53;
-  opacity: 0;
-  transform: rotate(-90deg);
-  transform-origin: center center;
-  pointer-events: none;
-  filter: drop-shadow(0 0 6px var(--accent-green));
-}
-
-.cf-callout-line-group {
-  pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.cf-callout-line {
-  stroke: var(--accent-green);
-  stroke-width: 1.75px;
-  stroke-dasharray: 6 4;
-  fill: none;
-  vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 8px rgba(0, 255, 102, 0.9));
-  animation: calloutDashStream 0.8s linear infinite;
-}
-
-@keyframes calloutDashStream {
-  to {
-    stroke-dashoffset: -20;
-  }
-}
-
-.cf-callout-dot {
-  fill: var(--accent-green);
-  filter: drop-shadow(0 0 8px rgba(0, 255, 102, 0.95));
-}
-
-/* Dwell Floating Inspection Panel */
-.cf-dwell-panel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 320px;
-  max-width: calc(100% - 32px);
-  background: rgba(12, 14, 20, 0.96);
-  border: 1px solid var(--accent-green);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 24px rgba(0, 255, 102, 0.25);
-  padding: 14px 16px;
-  border-radius: 4px;
-  font-family: var(--font-mono);
-  z-index: 50;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform-origin: center center;
-  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.cf-dwell-panel.dwell-active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.dwell-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 255, 102, 0.2);
-  padding-bottom: 8px;
-}
-
-.dwell-header-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dwell-pulse-dot {
-  width: 7px;
-  height: 7px;
-  background-color: var(--accent-green);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--accent-green);
-  animation: dwellDotPulse 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes dwellDotPulse {
-  0% { transform: scale(0.85); opacity: 0.6; }
-  100% { transform: scale(1.3); opacity: 1; }
-}
-
-.dwell-panel-title {
-  color: var(--accent-green);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.dwell-tier-badge {
-  font-size: 0.625rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  background: rgba(0, 255, 102, 0.18);
-  border: 1px solid rgba(0, 255, 102, 0.4);
-  padding: 2px 8px;
-  border-radius: 2px;
-  letter-spacing: 0.05em;
-}
-
-.dwell-problems-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.dwell-problem-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 7px 10px;
-  border-radius: 2px;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-.dwell-problem-row:hover {
-  background: rgba(0, 255, 102, 0.1);
-  border-color: var(--accent-green);
-  transform: translateX(4px);
-}
-
-.dwell-prob-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  overflow: hidden;
-}
-
-.dwell-prob-id {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  color: var(--accent-green);
-  white-space: nowrap;
-}
-
-.dwell-prob-name {
-  font-size: 0.6875rem;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 140px;
-}
-
-.dwell-prob-right {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.dwell-prob-tag {
-  font-size: 0.5625rem;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1px 5px;
-  border-radius: 2px;
-  text-transform: uppercase;
-}
-
-.dwell-prob-rating {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  color: #4CAF50;
-}
-
-.dwell-prob-rating.rating-pupil {
-  color: #00FF66;
-}
-
-.dwell-prob-rating.rating-specialist {
-  color: #00E5FF;
-}
-
-.dwell-panel-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--border-rule);
-  padding-top: 6px;
-  font-size: 0.5625rem;
-  color: var(--text-dim);
-  letter-spacing: 0.05em;
-}
-
-.dwell-hint {
-  color: var(--text-secondary);
-}
-
-/* ==========================================================================
    Codeforces Annual Activity Heatmap & Consistency Grid
    ========================================================================== */
 
@@ -1989,6 +1776,144 @@ a, button {
   font-family: var(--font-mono);
   font-size: 9px;
   color: var(--text-dim);
+}
+
+/* ==========================================================================
+   Codeforces Donut Spreading Circuit Lines (No box, pure laser tendrils)
+   ========================================================================== */
+
+.cf-tags-body {
+  position: relative;
+}
+
+.cf-tags-legend {
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+}
+
+.cf-tags-legend.dimmed {
+  opacity: 0.15;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+.cf-donut-spreading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 35;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.cf-donut-spreading-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cf-donut-spreading-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cf-spread-line {
+  fill: none;
+  stroke-width: 1.75px;
+  stroke-dasharray: 6 4;
+  vector-effect: non-scaling-stroke;
+  animation: spreadDashStream 0.75s linear infinite;
+  transition: stroke 0.3s ease;
+}
+
+@keyframes spreadDashStream {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.cf-spread-dot {
+  pointer-events: none;
+  transition: fill 0.3s ease;
+}
+
+.cf-donut-spreading-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Individual Spreading Problem Chip (Terminal aesthetic, no big box) */
+.cf-spread-chip {
+  position: absolute;
+  pointer-events: auto;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-primary);
+  background: rgba(10, 12, 18, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--chip-color, var(--accent-green));
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 14px var(--chip-glow, rgba(0, 255, 102, 0.4));
+  padding: 4px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transform-origin: left center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.cf-spread-chip:hover {
+  transform: translateX(4px) scale(1.03);
+  background: rgba(16, 22, 32, 0.98);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.9), 0 0 20px var(--chip-glow, rgba(0, 255, 102, 0.8));
+}
+
+.cf-spread-chip-id {
+  font-weight: 700;
+  color: var(--chip-color, var(--accent-green));
+  letter-spacing: 0.04em;
+}
+
+.cf-spread-chip-name {
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.cf-spread-chip-rating {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #4CAF50;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+.cf-spread-chip-arrow {
+  color: var(--chip-color, var(--accent-green));
+  font-size: 0.6875rem;
+  transition: transform 0.2s ease;
+}
+
+.cf-spread-chip:hover .cf-spread-chip-arrow {
+  transform: translate(2px, -2px);
 }
 
 /* Live C++ Problem-Solving Terminal */

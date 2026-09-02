@@ -626,19 +626,9 @@
             <!-- Interactive Vertical Scrubber Guide (Line with spaces in it moving over the graph) -->
             <line id="cf-scrub-guide" class="cf-scrub-guide" x1="0" y1="45" x2="0" y2="370"></line>
 
-            <!-- Dwell 1-Second Pullout Callout Line Group (Branching Circuit Lines) -->
-            <g id="cf-callout-line-group" class="cf-callout-line-group" opacity="0">
-              <path id="cf-callout-line" class="cf-callout-line" d="M 0 0 L 0 0"></path>
-              <circle id="cf-callout-dot-origin" class="cf-callout-dot" r="4.5" cx="0" cy="0"></circle>
-              <circle id="cf-callout-dot-mid" class="cf-callout-dot" r="2.5" cx="0" cy="0"></circle>
-              <circle id="cf-callout-dot-end" class="cf-callout-dot" r="3.5" cx="0" cy="0"></circle>
-            </g>
-
             <!-- Dynamic Interactive Scrubber Point along Curve -->
             <g id="cf-interactive-point-group" class="cf-interactive-point-group" transform="translate(880, 196)">
               <circle class="scrub-halo" r="18"></circle>
-              <!-- 1-Second Dwell Charging Progress Ring (Circumference: 100.53) -->
-              <circle id="cf-dwell-charge-ring" class="cf-dwell-charge-ring" r="16" cx="0" cy="0"></circle>
               <circle class="scrub-ring" r="8"></circle>
               <circle class="scrub-core" r="3.5"></circle>
             </g>
@@ -663,23 +653,6 @@
                 <span class="tooltip-label">DELTA:</span>
                 <span class="tooltip-value highlight-orange" id="tooltip-delta-val">+133</span>
               </div>
-            </div>
-          </div>
-
-          <!-- Dwell 1-Second Solved Problems Inspection Panel -->
-          <div id="cf-dwell-panel" class="cf-dwell-panel" aria-hidden="true">
-            <div class="dwell-panel-header">
-              <div class="dwell-header-left">
-                <span class="dwell-pulse-dot"></span>
-                <span class="dwell-panel-title">TELEMETRY // SOLVED PROBLEMS</span>
-              </div>
-              <span class="dwell-tier-badge" id="dwell-tier-badge">PEAK TIER</span>
-            </div>
-            <div class="dwell-problems-list" id="dwell-problems-list">
-              <!-- Dynamically populated via animations.js -->
-            </div>
-            <div class="dwell-panel-footer">
-              <span class="dwell-hint">VERIFIED ARCHIVE · CLICK TO OPEN ↗</span>
             </div>
           </div>
         </div>
@@ -818,6 +791,12 @@
 
           <!-- Right: Interactive Tags Legend Grid -->
           <div class="cf-tags-legend" id="cf-tags-legend"></div>
+
+          <!-- Interactive Spreading Circuit Lines Overlay (No box, pure laser tendrils) -->
+          <div id="cf-donut-spreading-overlay" class="cf-donut-spreading-overlay" aria-hidden="true">
+            <svg id="cf-donut-spreading-svg" class="cf-donut-spreading-svg"></svg>
+            <div id="cf-donut-spreading-labels" class="cf-donut-spreading-labels"></div>
+          </div>
         </div>
       </div>
 
