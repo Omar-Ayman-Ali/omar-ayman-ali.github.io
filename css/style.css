@@ -2553,21 +2553,21 @@ code::-webkit-scrollbar {
 .heatmap-cell:hover {
   transform: scale(1.35);
   z-index: 15;
-  box-shadow: 0 0 10px #39D353, 0 0 22px rgba(57, 211, 83, 0.75);
+  box-shadow: 0 0 10px #BC8CFF, 0 0 22px rgba(137, 87, 229, 0.85);
   border-color: #FFFFFF !important;
 }
 
 .heatmap-cell.git-lvl-0:hover {
-  background-color: #21262D;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  background-color: #21283B;
+  box-shadow: 0 0 8px rgba(137, 87, 229, 0.35);
 }
 
-/* Official GitHub Green Palette */
-.git-lvl-0 { background-color: #161B22; border: 1px solid rgba(255, 255, 255, 0.05); }
-.git-lvl-1 { background-color: #0E4429; border: 1px solid rgba(14, 68, 41, 0.6); }
-.git-lvl-2 { background-color: #006D32; border: 1px solid rgba(0, 109, 50, 0.7); }
-.git-lvl-3 { background-color: #26A641; border: 1px solid rgba(38, 166, 65, 0.8); box-shadow: 0 0 6px rgba(38, 166, 65, 0.4); }
-.git-lvl-4 { background-color: #39D353; border: 1px solid rgba(57, 211, 83, 0.9); box-shadow: 0 0 10px rgba(57, 211, 83, 0.6); }
+/* GitHub Dark Purple Palette */
+.git-lvl-0 { background-color: #0E121A; border: 1px solid #161C27; }
+.git-lvl-1 { background-color: #3B2361; border: 1px solid #4D2E7C; }
+.git-lvl-2 { background-color: #5C32A3; border: 1px solid #6E3CB8; }
+.git-lvl-3 { background-color: #8957E5; border: 1px solid #9D6EF8; box-shadow: 0 0 6px rgba(137, 87, 229, 0.45); }
+.git-lvl-4 { background-color: #BC8CFF; border: 1px solid #D2A8FF; box-shadow: 0 0 10px rgba(188, 140, 255, 0.7); }
 
 /* Heatmap Frame Footer */
 .heatmap-frame-footer {
@@ -2588,7 +2588,7 @@ code::-webkit-scrollbar {
 }
 
 .heatmap-help-link:hover {
-  color: #39D353;
+  color: #BC8CFF;
   text-decoration: underline;
 }
 
@@ -2615,8 +2615,8 @@ code::-webkit-scrollbar {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(13, 17, 23, 0.96);
-  border: 1px solid #39D353;
+  background-color: rgba(14, 18, 26, 0.96);
+  border: 1px solid #8957E5;
   padding: 7px 14px;
   display: flex;
   flex-direction: column;
@@ -2625,7 +2625,7 @@ code::-webkit-scrollbar {
   z-index: 50;
   font-family: var(--font-mono);
   border-radius: 6px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.95), 0 0 14px rgba(57, 211, 83, 0.45);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.95), 0 0 16px rgba(137, 87, 229, 0.5);
   transform: translate(-50%, -125%);
   opacity: 0;
   visibility: hidden;
@@ -2643,7 +2643,7 @@ code::-webkit-scrollbar {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #39D353;
+  border-top: 5px solid #8957E5;
 }
 
 .github-heatmap-tooltip.active {
@@ -2660,7 +2660,7 @@ code::-webkit-scrollbar {
 
 .github-tooltip-date {
   font-size: 10px;
-  color: #39D353;
+  color: #BC8CFF;
   line-height: 1.2;
   letter-spacing: 0.02em;
 }
