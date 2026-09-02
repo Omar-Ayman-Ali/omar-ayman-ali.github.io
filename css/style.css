@@ -495,6 +495,13 @@ a, button {
   border: 1px solid var(--border-rule);
   display: flex;
   flex-direction: column;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-terminal-window:hover {
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 0 24px rgba(0, 255, 102, 0.16), 0 8px 28px rgba(0, 0, 0, 0.7);
 }
 
 .terminal-header {
@@ -616,6 +623,14 @@ a, button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-terminal-card:hover {
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 0 24px rgba(0, 255, 102, 0.16), 0 8px 28px rgba(0, 0, 0, 0.7) !important;
 }
 
 .about-terminal-footer {
@@ -643,11 +658,16 @@ a, button {
   flex-direction: column;
   justify-content: space-between;
   min-height: 145px;
-  transition: background-color var(--duration-micro) ease;
+  position: relative;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-metric-tile:hover {
+  border-color: var(--accent-green) !important;
   background-color: var(--bg-surface-elevated);
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.16), 0 8px 24px rgba(0, 0, 0, 0.6) !important;
 }
 
 .metric-top {
@@ -669,6 +689,13 @@ a, button {
   border: 1px solid var(--border-rule-bright);
   font-size: 0.625rem;
   color: var(--text-muted);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.about-metric-tile:hover .metric-tag,
+.metric-tag:hover {
+  border-color: var(--accent-green);
+  color: var(--text-primary);
 }
 
 .metric-value {
@@ -2204,13 +2231,16 @@ code::-webkit-scrollbar {
   justify-content: space-between;
   min-height: 280px;
   position: relative;
-  transition: border-color var(--duration-micro) ease, background-color var(--duration-micro) ease, box-shadow var(--duration-micro) ease;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .capability-pillar:hover {
-  border-color: var(--accent-green);
+  border-color: var(--accent-green) !important;
   background-color: var(--bg-surface-elevated);
-  box-shadow: 0 0 20px rgba(0, 255, 102, 0.08);
+  box-shadow: 0 0 24px rgba(0, 255, 102, 0.16), 0 8px 28px rgba(0, 0, 0, 0.6) !important;
 }
 
 .pillar-header {
@@ -2229,6 +2259,12 @@ code::-webkit-scrollbar {
   background-color: var(--bg-surface-terminal);
   border: 1px solid var(--border-rule-bright);
   color: var(--accent-green);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.capability-pillar:hover .pillar-icon-box {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
 }
 
 .pillar-index {
@@ -2270,6 +2306,14 @@ code::-webkit-scrollbar {
   color: var(--text-muted);
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pillar-tag:hover {
+  border-color: var(--accent-green);
+  color: var(--text-primary);
+  background-color: var(--bg-surface-elevated);
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.25);
 }
 
 /* ==========================================================================
@@ -2295,13 +2339,17 @@ code::-webkit-scrollbar {
   flex-direction: column;
   justify-content: space-between;
   min-height: 290px;
-  transition: border-color var(--duration-micro) ease, background-color var(--duration-micro) ease, box-shadow var(--duration-micro) ease;
+  position: relative;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .arsenal-memory-block:hover {
-  border-color: var(--accent-green);
+  border-color: var(--accent-green) !important;
   background-color: var(--bg-surface-elevated);
-  box-shadow: 0 0 20px rgba(0, 255, 102, 0.08);
+  box-shadow: 0 0 24px rgba(0, 255, 102, 0.16), 0 8px 28px rgba(0, 0, 0, 0.6) !important;
 }
 
 .memory-block-header {
@@ -2322,6 +2370,14 @@ code::-webkit-scrollbar {
   font-family: var(--font-mono);
   font-weight: 700;
   letter-spacing: 0.04em;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.memory-addr-badge:hover,
+.arsenal-memory-block:hover .memory-addr-badge {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.25);
 }
 
 .memory-category {
@@ -2345,6 +2401,13 @@ code::-webkit-scrollbar {
   gap: 2px;
   padding: var(--space-2) 0;
   border-bottom: 1px solid var(--border-rule-subtle);
+  transition: background-color 0.2s ease, border-bottom-color 0.2s ease;
+  border-radius: 2px;
+}
+
+.skill-row:hover {
+  background-color: rgba(0, 255, 102, 0.04);
+  border-bottom-color: rgba(0, 255, 102, 0.3);
 }
 
 .skill-row:last-child {

@@ -181,7 +181,7 @@
 
     bindMagneticElements() {
       const magneticTargets = document.querySelectorAll(
-        'a, button, [data-magnetic], .btn-primary, .btn-secondary, .btn-ctrl, .nav-coord, .telemetry-tile, .capability-pillar, .repo-slide-card'
+        'a, button, [data-magnetic], .btn-primary, .btn-secondary, .btn-ctrl, .nav-coord, .telemetry-tile, .capability-pillar, .repo-slide-card, .about-terminal-card, .about-metric-tile, .arsenal-memory-block, .pillar-tag, .memory-addr-badge'
       );
 
       magneticTargets.forEach((el) => {
