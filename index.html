@@ -43,14 +43,19 @@
     </div>
 
     <!-- Phase 3: Hacker Matrix Monospace Rain & Telemetry -->
-    <div id="intro-hacker-rain" class="intro-hacker-rain" aria-hidden="true"></div>
+    <div id="intro-hacker-rain" class="intro-hacker-rain" aria-hidden="true">
+      <canvas id="intro-rain-canvas" class="intro-rain-canvas"></canvas>
+    </div>
     <div id="intro-status-bar" class="intro-status-bar" aria-hidden="true">
       <span class="intro-status-pulse"></span>
       <span id="intro-status-text" class="intro-status-text">INITIALIZING CORE...</span>
     </div>
 
+    <!-- Phase 4: Exit Flash Layer -->
+    <div id="intro-flash-layer" class="intro-flash-layer" aria-hidden="true"></div>
+
     <!-- Skip Affordance -->
-    <button id="intro-skip-btn" class="intro-skip-btn" aria-label="Skip Intro Animation" title="Skip Intro (Esc)">
+    <button id="intro-skip-btn" class="intro-skip-btn" aria-label="Skip Intro Animation" title="Skip Intro (Esc)" data-magnetic>
       <span class="intro-skip-text">SKIP</span>
       <span class="intro-skip-key">ESC</span>
     </button>
