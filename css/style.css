@@ -3154,6 +3154,7 @@ button:focus-visible,
   .diag-grid {
     grid-template-columns: 1fr;
   }
+}
 
 @media (max-width: 768px) {
   .page-container {
@@ -3296,6 +3297,228 @@ button:focus-visible,
 
   .footer-nav {
     gap: var(--space-2);
+  }
+}
+
+/* ==========================================================================
+   Cinematic One-Time Intro Sequence
+   ========================================================================== */
+
+.site-intro-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 999999;
+  background-color: var(--bg-black, #050505);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  will-change: opacity, transform;
+}
+
+/* Phase 1: Interactive Box Grid */
+.intro-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.intro-tile {
+  box-sizing: border-box;
+  background-color: rgba(10, 14, 22, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  transform-origin: center center;
+  will-change: transform, opacity, background-color;
+}
+
+/* Phase 2: SplitText Welcome Typography */
+.intro-text-container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  padding: 0 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.intro-line {
+  font-family: var(--font-display, 'Space Grotesk', -apple-system, sans-serif);
+  font-size: clamp(2.25rem, 6.2vw, 4.75rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  color: var(--text-primary, #EDEDED);
+  margin: 0;
+  will-change: transform, opacity;
+}
+
+.intro-line-1 {
+  margin-bottom: 0.25rem;
+  color: var(--text-primary, #EDEDED);
+}
+
+.intro-line-2 {
+  color: var(--text-primary, #EDEDED);
+}
+
+.intro-accent,
+.intro-accent .intro-char {
+  color: var(--accent-green, #00FF66) !important;
+  font-weight: 800;
+  display: inline-block;
+  will-change: transform, text-shadow;
+}
+
+.intro-char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}
+
+/* Phase 3: Hacker Matrix Rain */
+.intro-hacker-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.intro-rain-col {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: clamp(12px, 1.35vw, 15px);
+  font-weight: 600;
+  color: var(--accent-green, #00FF66);
+  will-change: transform, opacity;
+}
+
+.intro-glyph {
+  display: block;
+  line-height: 1;
+  transition: opacity 0.2s ease;
+}
+
+.intro-glyph-head {
+  color: #FFFFFF !important;
+  text-shadow: 0 0 8px var(--accent-green, #00FF66), 0 0 16px var(--accent-green, #00FF66);
+  font-weight: 700;
+}
+
+/* Compiler Telemetry Status Bar */
+.intro-status-bar {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  background-color: rgba(10, 14, 22, 0.85);
+  border: 1px solid var(--border-rule, #1B2029);
+  border-radius: 4px;
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary, #B8C4D1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.intro-status-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-green, #00FF66);
+  box-shadow: 0 0 8px var(--accent-green, #00FF66);
+  animation: introPulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes introPulse {
+  0% { opacity: 0.4; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Skip Affordance */
+.intro-skip-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background-color: rgba(12, 14, 20, 0.7);
+  border: 1px solid var(--border-rule, #1B2029);
+  border-radius: 4px;
+  color: var(--text-muted, #8C96A5);
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.intro-skip-btn:hover {
+  color: #FFFFFF;
+  border-color: var(--accent-green, #00FF66);
+  background-color: rgba(0, 255, 102, 0.08);
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.2);
+}
+
+.intro-skip-btn:active {
+  transform: scale(0.97);
+}
+
+.intro-skip-key {
+  font-size: 0.5625rem;
+  padding: 1px 5px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  color: var(--text-secondary, #B8C4D1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+  .intro-status-bar {
+    bottom: 1.5rem;
+    font-size: 0.625rem;
+    padding: 5px 12px;
+  }
+
+  .intro-skip-btn {
+    top: 1rem;
+    right: 1rem;
+    padding: 5px 10px;
   }
 }
 

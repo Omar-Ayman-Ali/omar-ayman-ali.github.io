@@ -106,57 +106,82 @@
 
     if (prefersReducedMotion) return;
 
-    // 2. Hero Section Entrance: Staggered Clip-Path Reveal
-    const headlineInners = document.querySelectorAll('.headline-inner');
-    if (headlineInners.length > 0) {
-      gsap.fromTo(
-        headlineInners,
-        {
-          clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
-          y: '105%',
-          opacity: 0
-        },
-        {
-          clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)',
-          y: '0%',
-          opacity: 1,
-          duration: 0.85,
-          stagger: 0.12,
-          ease: 'power3.out',
-          delay: 0.15,
-          onComplete: () => {
-            gsap.set(headlineInners, { clearProps: 'clipPath' });
+    // 2. Hero Section Entrance: Synchronized with Intro or Immediate
+    let heroEntered = false;
+    function triggerHeroEntrance() {
+      if (heroEntered || prefersReducedMotion) return;
+      heroEntered = true;
+
+      const headlineInners = document.querySelectorAll('.headline-inner');
+      if (headlineInners.length > 0) {
+        gsap.fromTo(
+          headlineInners,
+          {
+            clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
+            y: '105%',
+            opacity: 0
+          },
+          {
+            clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)',
+            y: '0%',
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.12,
+            ease: 'power3.out',
+            delay: 0.05,
+            onComplete: () => {
+              gsap.set(headlineInners, { clearProps: 'clipPath' });
+            }
           }
-        }
-      );
+        );
+      }
+
+      const heroChip = document.querySelector('.hero-chip');
+      if (heroChip) {
+        gsap.fromTo(
+          heroChip,
+          { opacity: 0, x: -16 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', delay: 0.0 }
+        );
+      }
+
+      const heroSubtext = document.querySelector('.hero-subtext');
+      const heroActions = document.querySelector('.hero-actions');
+      if (heroSubtext && heroActions) {
+        gsap.fromTo(
+          [heroSubtext, heroActions],
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.3 }
+        );
+      }
+
+      const heroTerminal = document.querySelector('.hero-terminal-window');
+      if (heroTerminal) {
+        gsap.fromTo(
+          heroTerminal,
+          { opacity: 0, x: 28 },
+          { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out', delay: 0.2 }
+        );
+      }
     }
 
-    const heroChip = document.querySelector('.hero-chip');
-    if (heroChip) {
-      gsap.fromTo(
-        heroChip,
-        { opacity: 0, x: -16 },
-        { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', delay: 0.05 }
-      );
+    // Check if intro is actively running this session
+    let isIntroActive = false;
+    try {
+      isIntroActive = !sessionStorage.getItem('arslan_intro_viewed') && !prefersReducedMotion && document.getElementById('site-intro-overlay');
+    } catch (e) {
+      isIntroActive = false;
     }
 
-    const heroSubtext = document.querySelector('.hero-subtext');
-    const heroActions = document.querySelector('.hero-actions');
-    if (heroSubtext && heroActions) {
-      gsap.fromTo(
-        [heroSubtext, heroActions],
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.45 }
-      );
+    if (!isIntroActive) {
+      triggerHeroEntrance();
     }
 
-    const heroTerminal = document.querySelector('.hero-terminal-window');
-    if (heroTerminal) {
-      gsap.fromTo(
-        heroTerminal,
-        { opacity: 0, x: 28 },
-        { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out', delay: 0.3 }
-      );
+    // Expose on motion namespace
+    if (window.PortfolioMotion) {
+      window.PortfolioMotion.triggerHeroEntrance = triggerHeroEntrance;
+    } else {
+      window.PortfolioMotion = { triggerHeroEntrance: triggerHeroEntrance };
     }
 
     // 2.5. Academic & Systems About Section Entrance

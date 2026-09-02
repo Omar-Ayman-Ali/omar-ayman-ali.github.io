@@ -31,6 +31,31 @@
 </head>
 <body style="background-color: #050505;">
 
+  <!-- Cinematic One-Time Intro Sequence Overlay -->
+  <div id="site-intro-overlay" class="site-intro-overlay" role="dialog" aria-modal="true" aria-label="Intro Sequence">
+    <!-- Phase 1: Interactive Box Grid -->
+    <div id="intro-grid" class="intro-grid" aria-hidden="true"></div>
+
+    <!-- Phase 2: SplitText Welcome Typography -->
+    <div id="intro-text-container" class="intro-text-container" aria-live="polite">
+      <div class="intro-line intro-line-1">Welcome,</div>
+      <div class="intro-line intro-line-2">to <span class="intro-accent">Arslan</span>'s website</div>
+    </div>
+
+    <!-- Phase 3: Hacker Matrix Monospace Rain & Telemetry -->
+    <div id="intro-hacker-rain" class="intro-hacker-rain" aria-hidden="true"></div>
+    <div id="intro-status-bar" class="intro-status-bar" aria-hidden="true">
+      <span class="intro-status-pulse"></span>
+      <span id="intro-status-text" class="intro-status-text">INITIALIZING CORE...</span>
+    </div>
+
+    <!-- Skip Affordance -->
+    <button id="intro-skip-btn" class="intro-skip-btn" aria-label="Skip Intro Animation" title="Skip Intro (Esc)">
+      <span class="intro-skip-text">SKIP</span>
+      <span class="intro-skip-key">ESC</span>
+    </button>
+  </div>
+
   <!-- 2D Algorithmic Node Graph Canvas Background (z-index: -1, opacity: 0.35) -->
   <canvas id="graph-canvas" class="graph-canvas" aria-hidden="true"></canvas>
 
@@ -1284,6 +1309,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" integrity="sha384-RVPQwTb0fPz9kI8s5GwAq1Qioto9fnEQt1aKGSQSm8xV6+DIdBSgcCShoHqfKnhv" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/vendor/SplitText.min.js"></script>
+  <script src="js/vendor/ScrambleTextPlugin.min.js"></script>
 
   <!-- Lenis 1.1+ Smooth Scrolling Engine from CDN with Subresource Integrity -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" integrity="sha384-eD5ubmuCcvTdCADWuSchJYE7wcj2nzNr0itbrh6w/KJyBiltSZ8w3VFRBSWu5YQ8" crossorigin="anonymous"></script>
@@ -1291,6 +1318,7 @@
   <!-- Application Modules -->
   <script src="js/canvas-graph.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/intro-sequence.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/app.js"></script>
   <script src="js/api-sync.js"></script>
