@@ -451,7 +451,29 @@ a, button {
 }
 
 /* Terminal Window in Hero */
+.hero-terminal-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-terminal-glow {
+  position: absolute;
+  inset: -14px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 60% 40%, rgba(0, 255, 102, 0.22) 0%, rgba(49, 140, 231, 0.08) 45%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  transition: opacity 0.3s ease;
+}
+
 .hero-terminal-window {
+  position: relative;
+  z-index: 1;
   background-color: var(--bg-surface-terminal);
   border: 1px solid var(--border-rule);
   display: flex;

@@ -112,57 +112,97 @@
       if (heroEntered || prefersReducedMotion) return;
       heroEntered = true;
 
-      const headlineInners = document.querySelectorAll('.headline-inner');
-      if (headlineInners.length > 0) {
-        gsap.fromTo(
-          headlineInners,
-          {
-            clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
-            y: '105%',
-            opacity: 0
-          },
-          {
-            clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)',
-            y: '0%',
-            opacity: 1,
-            duration: 0.85,
-            stagger: 0.12,
-            ease: 'power3.out',
-            delay: 0.05,
-            onComplete: () => {
-              gsap.set(headlineInners, { clearProps: 'clipPath' });
-            }
-          }
-        );
-      }
+      const heroMasterTl = gsap.timeline({ delay: 0.05 });
 
       const heroChip = document.querySelector('.hero-chip');
       if (heroChip) {
-        gsap.fromTo(
+        heroMasterTl.fromTo(
           heroChip,
-          { opacity: 0, x: -16 },
-          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', delay: 0.0 }
+          { opacity: 0, x: -20, filter: 'drop-shadow(0 0 10px rgba(0, 255, 102, 0.45))' },
+          { opacity: 1, x: 0, filter: 'drop-shadow(0 0 0px rgba(0, 255, 102, 0))', duration: 0.55, ease: 'power2.out' },
+          0
         );
+      }
+
+      const headlineInners = document.querySelectorAll('.headline-inner');
+      if (headlineInners.length > 0) {
+        headlineInners.forEach((el, i) => {
+          const isGreenLine = el.closest('.highlight-green') !== null;
+          const glowColor = isGreenLine ? 'rgba(0, 255, 102, 0.8)' : 'rgba(255, 255, 255, 0.65)';
+          const finalShadow = isGreenLine ? '0 0 16px rgba(0, 255, 102, 0.35)' : 'none';
+
+          heroMasterTl.fromTo(
+            el,
+            {
+              clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
+              y: '105%',
+              opacity: 0,
+              textShadow: `0 0 32px ${glowColor}, 0 0 54px ${glowColor}`
+            },
+            {
+              clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)',
+              y: '0%',
+              opacity: 1,
+              textShadow: finalShadow,
+              duration: 0.85,
+              ease: 'power3.out',
+              onComplete: () => {
+                gsap.set(el, { clearProps: 'clipPath' });
+              }
+            },
+            0.08 + i * 0.14
+          );
+        });
       }
 
       const heroSubtext = document.querySelector('.hero-subtext');
       const heroActions = document.querySelector('.hero-actions');
       if (heroSubtext && heroActions) {
-        gsap.fromTo(
+        heroMasterTl.fromTo(
           [heroSubtext, heroActions],
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.3 }
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
+          0.32
         );
       }
 
       const heroTerminal = document.querySelector('.hero-terminal-window');
+      const heroGlow = document.querySelector('.hero-terminal-glow');
       if (heroTerminal) {
-        gsap.fromTo(
+        heroMasterTl.fromTo(
           heroTerminal,
-          { opacity: 0, x: 28 },
-          { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out', delay: 0.2 }
+          { opacity: 0, x: 28, scale: 0.98 },
+          { opacity: 1, x: 0, scale: 1.0, duration: 0.75, ease: 'power3.out' },
+          0.2
         );
       }
+      if (heroGlow) {
+        heroMasterTl.fromTo(
+          heroGlow,
+          { opacity: 0, scale: 0.85 },
+          { opacity: 0.35, scale: 1.0, duration: 0.85, ease: 'power2.out' },
+          0.25
+        );
+      }
+    }
+
+    // 2.2. Terminal Backdrop Aura synced to scroll velocity (Lenis + GSAP ScrollTrigger)
+    const terminalGlow = document.querySelector('.hero-terminal-glow');
+    if (terminalGlow && !prefersReducedMotion) {
+      const quickGlowScale = gsap.quickTo(terminalGlow, 'scale', { duration: 0.45, ease: 'power2.out' });
+      const quickGlowOpacity = gsap.quickTo(terminalGlow, 'opacity', { duration: 0.45, ease: 'power2.out' });
+
+      ScrollTrigger.create({
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        onUpdate: (self) => {
+          const velocity = Math.abs(self.getVelocity() || 0);
+          const intensity = Math.min(velocity / 2500, 1.0);
+          quickGlowScale(1.0 + intensity * 0.25);
+          quickGlowOpacity(0.35 + intensity * 0.45);
+        }
+      });
     }
 
     // Check if intro is actively running this session

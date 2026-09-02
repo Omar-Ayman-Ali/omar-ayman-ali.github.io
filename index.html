@@ -113,80 +113,83 @@
       </div>
 
       <!-- Right Column: Interactive C++ Algorithmic Terminal Window -->
-      <div class="hero-terminal-window code-snap-card">
-        <div class="terminal-header">
-          <div class="terminal-controls">
-            <span class="terminal-dot"></span>
-            <span class="terminal-dot"></span>
-            <span class="terminal-dot"></span>
+      <div class="hero-terminal-container">
+        <div class="hero-terminal-glow" aria-hidden="true"></div>
+        <div class="hero-terminal-window code-snap-card">
+          <div class="terminal-header">
+            <div class="terminal-controls">
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+            </div>
+            <span id="terminal-filename" class="terminal-title">segment_tree.cpp</span>
+            <span>C++20 · -O3</span>
           </div>
-          <span id="terminal-filename" class="terminal-title">segment_tree.cpp</span>
-          <span>C++20 · -O3</span>
-        </div>
 
-        <div id="terminal-code-body" class="terminal-body">
-          <div class="code-line">
-            <span class="line-num">1</span>
-            <span class="code-text"><span class="syntax-kw">template</span>&lt;<span class="syntax-kw">typename</span> <span class="syntax-type">T</span>&gt;</span>
+          <div id="terminal-code-body" class="terminal-body">
+            <div class="code-line">
+              <span class="line-num">1</span>
+              <span class="code-text"><span class="syntax-kw">template</span>&lt;<span class="syntax-kw">typename</span> <span class="syntax-type">T</span>&gt;</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">2</span>
+              <span class="code-text"><span class="syntax-kw">class</span> <span class="syntax-type">SegmentTree</span> {</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">3</span>
+              <span class="code-text">  <span class="syntax-type">int</span> n; <span class="syntax-type">std::vector</span>&lt;<span class="syntax-type">T</span>&gt; tree;</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">4</span>
+              <span class="code-text"><span class="syntax-kw">public:</span></span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">5</span>
+              <span class="code-text">  <span class="syntax-kw">void</span> <span class="syntax-func">update</span>(<span class="syntax-type">int</span> node, <span class="syntax-type">int</span> l, <span class="syntax-type">int</span> r, <span class="syntax-type">int</span> idx, <span class="syntax-type">T</span> val) {</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">6</span>
+              <span class="code-text">    <span class="syntax-kw">if</span> (l == r) { tree[node] = val; <span class="syntax-kw">return</span>; }</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">7</span>
+              <span class="code-text">    <span class="syntax-type">int</span> mid = (l + r) &gt;&gt; <span class="syntax-type">1</span>;</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">8</span>
+              <span class="code-text">    <span class="syntax-kw">if</span> (idx &lt;= mid) update(node &lt;&lt; <span class="syntax-type">1</span>, l, mid, idx, val);</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">9</span>
+              <span class="code-text">    <span class="syntax-kw">else</span> update(node &lt;&lt; <span class="syntax-type">1</span> | <span class="syntax-type">1</span>, mid + <span class="syntax-type">1</span>, r, idx, val);</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">10</span>
+              <span class="code-text">    tree[node] = tree[node &lt;&lt; <span class="syntax-type">1</span>] + tree[node &lt;&lt; <span class="syntax-type">1</span> | <span class="syntax-type">1</span>];</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">11</span>
+              <span class="code-text">  }</span>
+            </div>
+            <div class="code-line">
+              <span class="line-num">12</span>
+              <span class="code-text">};</span>
+            </div>
           </div>
-          <div class="code-line">
-            <span class="line-num">2</span>
-            <span class="code-text"><span class="syntax-kw">class</span> <span class="syntax-type">SegmentTree</span> {</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">3</span>
-            <span class="code-text">  <span class="syntax-type">int</span> n; <span class="syntax-type">std::vector</span>&lt;<span class="syntax-type">T</span>&gt; tree;</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">4</span>
-            <span class="code-text"><span class="syntax-kw">public:</span></span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">5</span>
-            <span class="code-text">  <span class="syntax-kw">void</span> <span class="syntax-func">update</span>(<span class="syntax-type">int</span> node, <span class="syntax-type">int</span> l, <span class="syntax-type">int</span> r, <span class="syntax-type">int</span> idx, <span class="syntax-type">T</span> val) {</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">6</span>
-            <span class="code-text">    <span class="syntax-kw">if</span> (l == r) { tree[node] = val; <span class="syntax-kw">return</span>; }</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">7</span>
-            <span class="code-text">    <span class="syntax-type">int</span> mid = (l + r) &gt;&gt; <span class="syntax-type">1</span>;</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">8</span>
-            <span class="code-text">    <span class="syntax-kw">if</span> (idx &lt;= mid) update(node &lt;&lt; <span class="syntax-type">1</span>, l, mid, idx, val);</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">9</span>
-            <span class="code-text">    <span class="syntax-kw">else</span> update(node &lt;&lt; <span class="syntax-type">1</span> | <span class="syntax-type">1</span>, mid + <span class="syntax-type">1</span>, r, idx, val);</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">10</span>
-            <span class="code-text">    tree[node] = tree[node &lt;&lt; <span class="syntax-type">1</span>] + tree[node &lt;&lt; <span class="syntax-type">1</span> | <span class="syntax-type">1</span>];</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">11</span>
-            <span class="code-text">  }</span>
-          </div>
-          <div class="code-line">
-            <span class="line-num">12</span>
-            <span class="code-text">};</span>
-          </div>
-        </div>
 
-        <div class="terminal-benchmark-box">
-          <div>
-            <div class="bench-metric">LATENCY</div>
-            <div id="bench-time" class="bench-val">0.04 ms</div>
-          </div>
-          <div>
-            <div class="bench-metric">MEMORY</div>
-            <div id="bench-mem" class="bench-val">3.8 MB</div>
-          </div>
-          <div>
-            <div class="bench-metric">COMPLEXITY</div>
-            <div id="bench-complexity" class="bench-val">O(log N)</div>
+          <div class="terminal-benchmark-box">
+            <div>
+              <div class="bench-metric">LATENCY</div>
+              <div id="bench-time" class="bench-val">0.04 ms</div>
+            </div>
+            <div>
+              <div class="bench-metric">MEMORY</div>
+              <div id="bench-mem" class="bench-val">3.8 MB</div>
+            </div>
+            <div>
+              <div class="bench-metric">COMPLEXITY</div>
+              <div id="bench-complexity" class="bench-val">O(log N)</div>
+            </div>
           </div>
         </div>
       </div>
