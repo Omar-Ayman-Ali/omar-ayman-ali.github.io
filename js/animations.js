@@ -128,8 +128,10 @@
       if (headlineInners.length > 0) {
         headlineInners.forEach((el, i) => {
           const isGreenLine = el.closest('.highlight-green') !== null;
-          const glowColor = isGreenLine ? 'rgba(0, 255, 102, 0.8)' : 'rgba(255, 255, 255, 0.65)';
-          const finalShadow = isGreenLine ? '0 0 16px rgba(0, 255, 102, 0.35)' : 'none';
+          const glowColor = isGreenLine ? 'rgba(0, 255, 102, 0.9)' : 'rgba(255, 255, 255, 0.8)';
+          const finalShadow = isGreenLine
+            ? '0 0 14px rgba(0, 255, 102, 0.85), 0 0 32px rgba(0, 255, 102, 0.5), 0 0 60px rgba(0, 255, 102, 0.3)'
+            : '0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.12)';
 
           heroMasterTl.fromTo(
             el,
@@ -137,7 +139,7 @@
               clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
               y: '105%',
               opacity: 0,
-              textShadow: `0 0 32px ${glowColor}, 0 0 54px ${glowColor}`
+              textShadow: `0 0 36px ${glowColor}, 0 0 60px ${glowColor}`
             },
             {
               clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)',
@@ -147,7 +149,7 @@
               duration: 0.85,
               ease: 'power3.out',
               onComplete: () => {
-                gsap.set(el, { clearProps: 'clipPath' });
+                gsap.set(el, { clearProps: 'clipPath,textShadow' });
               }
             },
             0.08 + i * 0.14

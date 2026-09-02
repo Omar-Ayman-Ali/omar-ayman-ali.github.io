@@ -182,6 +182,17 @@ html.lenis body {
   outline-offset: 2px;
 }
 
+/* Containers with programmatic tabindex="-1" must never display focus outlines */
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible,
+#hero:focus,
+#hero:focus-visible,
+.hero-section:focus,
+.hero-section:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 a, button {
   color: inherit;
   font-family: inherit;
@@ -319,7 +330,7 @@ a, button {
   gap: var(--space-8);
   align-items: center;
   padding: var(--space-12) 0 var(--space-16) 0;
-  border-bottom: 1px solid var(--border-rule);
+  border-bottom: none;
 }
 
 .hero-content {
@@ -352,7 +363,7 @@ a, button {
   box-shadow: 0 0 6px var(--accent-green);
 }
 
-/* Headline with GSAP Clip-Path Reveal Masks */
+/* Headline with GSAP Clip-Path Reveal Masks & Radiant Neon Glow */
 .hero-headline {
   font-family: var(--font-display);
   font-size: clamp(2.15rem, 4.2vw, 3.85rem);
@@ -360,6 +371,7 @@ a, button {
   line-height: 1.05;
   letter-spacing: -0.03em;
   color: var(--text-primary);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.12);
   margin-bottom: var(--space-5);
 }
 
@@ -374,8 +386,15 @@ a, button {
   will-change: transform, clip-path;
 }
 
+.hero-headline .highlight-green,
+.headline-line.highlight-green,
 .highlight-green {
   color: var(--accent-green) !important;
+  text-shadow: 
+    0 0 14px rgba(0, 255, 102, 0.85),
+    0 0 32px rgba(0, 255, 102, 0.5),
+    0 0 60px rgba(0, 255, 102, 0.3) !important;
+  filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.4));
 }
 
 .highlight-orange {
@@ -3543,12 +3562,19 @@ code::-webkit-scrollbar {
   gap: var(--space-2);
 }
 
-/* Accessibility: Universal Visible Focus Rings */
+/* Accessibility: Universal Visible Focus Rings (interactive elements only) */
 a:focus-visible,
 button:focus-visible,
-[tabindex]:focus-visible {
+[tabindex="0"]:focus-visible {
   outline: 2px solid var(--accent-green) !important;
   outline-offset: 2px !important;
+}
+
+[tabindex="-1"],
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* ==========================================================================

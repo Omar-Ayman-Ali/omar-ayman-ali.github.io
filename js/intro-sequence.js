@@ -101,6 +101,7 @@
     if (heroSection && typeof heroSection.focus === 'function') {
       heroSection.setAttribute('tabindex', '-1');
       heroSection.focus({ preventScroll: true });
+      heroSection.blur();
     }
 
     // Trigger homepage hero entrance animation in synchrony if not already running
