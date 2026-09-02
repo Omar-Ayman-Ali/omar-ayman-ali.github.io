@@ -191,11 +191,16 @@
   }
 
   /**
-   * Populate GitHub Activity Heatmap Grid (52 Weeks x 7 Days)
+   * Populate GitHub Activity Heatmap Grid (52 Weeks x 7 Days) with Interactive Precision Tooltip
    */
   function initGitHubHeatmap() {
     const grid = document.getElementById('github-heatmap-grid');
     if (!grid) return;
+
+    const container = document.querySelector('.heatmap-container');
+    const tooltip = document.getElementById('github-heatmap-tooltip');
+    const tooltipCount = document.getElementById('github-tooltip-count');
+    const tooltipDate = document.getElementById('github-tooltip-date');
 
     // 22 verified contribution events distributed across active sprints for @Omar-Ayman-Ali
     const totalCells = 52 * 7;
@@ -208,22 +213,103 @@
       310, 312, 315, 320, 322
     ]);
 
+    // Anchor timeline to modern portfolio reference date
+    const baseDate = new Date(2026, 8, 2);
+
     for (let i = 0; i < totalCells; i++) {
       const cell = document.createElement('div');
       cell.className = 'heatmap-cell';
       
       let level = 0;
+      let count = 0;
       if (activeIndices.has(i)) {
         level = (i % 3 === 0) ? 3 : (i % 2 === 0 ? 2 : 1);
+        count = level === 1 ? 1 : (level === 2 ? 2 : (level === 3 ? 3 : 5));
       }
+
+      // Calculate calendar date for this cell
+      const daysAgo = (totalCells - 1) - i;
+      const cellDate = new Date(baseDate);
+      cellDate.setDate(baseDate.getDate() - daysAgo);
+      const dateStr = cellDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
 
       cell.classList.add(`git-lvl-${level}`);
       cell.setAttribute('data-level', level);
-      cell.setAttribute('title', `Contributions: ${level === 0 ? 'No activity' : (level === 1 ? '1 commit' : `${level} commits`)}`);
+      cell.setAttribute('data-count', count);
+      cell.setAttribute('data-date', dateStr);
       fragment.appendChild(cell);
     }
 
     grid.appendChild(fragment);
+
+    // Interactive Floating Tooltip Listener
+    if (container && tooltip) {
+      grid.addEventListener('mousemove', (e) => {
+        const cell = e.target.closest('.heatmap-cell');
+        if (cell) {
+          const count = parseInt(cell.getAttribute('data-count'), 10) || 0;
+          const date = cell.getAttribute('data-date') || '';
+
+          if (tooltipCount) {
+            if (count === 0) {
+              tooltipCount.textContent = 'No contributions';
+            } else if (count === 1) {
+              tooltipCount.textContent = '1 contribution';
+            } else {
+              tooltipCount.textContent = `${count} contributions`;
+            }
+          }
+          if (tooltipDate) {
+            tooltipDate.textContent = date;
+          }
+
+          const containerRect = container.getBoundingClientRect();
+          const cellRect = cell.getBoundingClientRect();
+          const posX = cellRect.left - containerRect.left + cellRect.width / 2;
+          const posY = cellRect.top - containerRect.top;
+
+          tooltip.style.left = `${posX}px`;
+          tooltip.style.top = `${posY}px`;
+          tooltip.classList.add('active');
+        } else {
+          tooltip.classList.remove('active');
+        }
+      });
+
+      grid.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('active');
+      });
+
+      // Also support hovering over legend indicator blocks
+      const legendBoxes = document.querySelectorAll('.heatmap-legend .legend-box');
+      const legendLabels = [
+        'No contributions',
+        '1 contribution',
+        '2-3 contributions',
+        '4-5 contributions',
+        '6+ contributions'
+      ];
+      legendBoxes.forEach((box, idx) => {
+        box.addEventListener('mousemove', () => {
+          if (tooltipCount) tooltipCount.textContent = legendLabels[idx] || 'Contributions';
+          if (tooltipDate) tooltipDate.textContent = 'Activity Intensity';
+          const containerRect = container.getBoundingClientRect();
+          const boxRect = box.getBoundingClientRect();
+          const posX = boxRect.left - containerRect.left + boxRect.width / 2;
+          const posY = boxRect.top - containerRect.top;
+          tooltip.style.left = `${posX}px`;
+          tooltip.style.top = `${posY}px`;
+          tooltip.classList.add('active');
+        });
+        box.addEventListener('mouseleave', () => {
+          tooltip.classList.remove('active');
+        });
+      });
+    }
   }
 
   // Initialization lifecycle

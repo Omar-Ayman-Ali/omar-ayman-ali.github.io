@@ -2419,6 +2419,7 @@ code::-webkit-scrollbar {
 
 /* Heatmap Grid */
 .heatmap-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -2490,6 +2491,61 @@ code::-webkit-scrollbar {
 .git-lvl-2 { background-color: #5C32A3; }
 .git-lvl-3 { background-color: #8957E5; }
 .git-lvl-4 { background-color: #BC8CFF; box-shadow: 0 0 8px rgba(188, 140, 255, 0.6); }
+
+/* Floating GitHub Heatmap Tooltip */
+.github-heatmap-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(14, 18, 26, 0.96);
+  border: 1px solid #8957E5;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+  z-index: 50;
+  font-family: var(--font-mono);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 14px rgba(137, 87, 229, 0.45);
+  transform: translate(-50%, -125%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.github-heatmap-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #8957E5;
+}
+
+.github-heatmap-tooltip.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.github-tooltip-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.github-tooltip-date {
+  font-size: 9.5px;
+  color: #BC8CFF;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
 
 /* Language Breakdown Bar */
 .language-breakdown-container {
