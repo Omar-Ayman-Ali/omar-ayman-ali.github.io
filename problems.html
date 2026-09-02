@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #050505;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://codeforces.com https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Codeforces Solved Problems Archive | Omar Ayman (Itz_Arslan)</title>
+
+  <!-- Google Fonts: Space Grotesk & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Problems Archive Specific Styles */
+    .archive-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background-color: var(--bg-black, #050505);
+      color: var(--text-primary, #EDEDED);
+      padding: var(--space-6) var(--space-4) var(--space-10);
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .archive-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--border-rule, #1B2029);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .archive-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 8px 16px;
+      background-color: rgba(12, 14, 20, 0.8);
+      border: 1px solid var(--border-rule, #1B2029);
+      border-radius: 4px;
+      color: var(--text-primary, #EDEDED);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .archive-back-btn:hover {
+      border-color: var(--accent-green, #00FF66);
+      color: var(--accent-green, #00FF66);
+      box-shadow: 0 0 14px rgba(0, 255, 102, 0.15);
+      transform: translateX(-2px);
+    }
+
+    .archive-telemetry {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .archive-telemetry-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .archive-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-green, #00FF66);
+      box-shadow: 0 0 8px var(--accent-green, #00FF66);
+    }
+
+    /* GitHub Repository Showcase Card */
+    .repo-hero-card {
+      background: linear-gradient(135deg, rgba(16, 22, 34, 0.85) 0%, rgba(10, 14, 22, 0.95) 100%);
+      border: 1px solid var(--border-rule-bright, #2A3241);
+      border-left: 4px solid var(--accent-green, #00FF66);
+      border-radius: 6px;
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .repo-hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(0, 255, 102, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .repo-info-block {
+      max-width: 750px;
+    }
+
+    .repo-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--accent-green, #00FF66);
+      background: rgba(0, 255, 102, 0.08);
+      border: 1px solid rgba(0, 255, 102, 0.25);
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: var(--space-3);
+    }
+
+    .repo-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 var(--space-2) 0;
+      letter-spacing: -0.02em;
+    }
+
+    .repo-desc {
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      color: var(--text-secondary, #B8C4D1);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .repo-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background-color: var(--accent-green, #00FF66);
+      color: #050505 !important;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+    }
+
+    .repo-action-btn:hover {
+      background-color: #FFFFFF;
+      box-shadow: 0 0 26px rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Controls Bar: Search & Filter Tabs */
+    .controls-panel {
+      margin-bottom: var(--space-6);
+    }
+
+    .search-box-row {
+      margin-bottom: var(--space-4);
+    }
+
+    .problem-search-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 18px;
+      background-color: var(--bg-surface-terminal, #07090D);
+      border: 1px solid var(--border-rule, #1B2029);
+      border-radius: 4px;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .problem-search-input:focus {
+      border-color: var(--accent-green, #00FF66);
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.2);
+    }
+
+    .tag-filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-tab {
+      padding: 6px 14px;
+      background: var(--bg-surface, #0C0E14);
+      border: 1px solid var(--border-rule, #1B2029);
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-tab:hover {
+      border-color: var(--tab-color, var(--accent-green));
+      color: #FFFFFF;
+    }
+
+    .filter-tab.active {
+      background: rgba(20, 26, 38, 0.9);
+      border-color: var(--tab-color, var(--accent-green));
+      color: var(--tab-color, var(--accent-green));
+      box-shadow: 0 0 12px var(--tab-glow, rgba(0, 255, 102, 0.25));
+      font-weight: 700;
+    }
+
+    .filter-count {
+      font-size: 0.6875rem;
+      opacity: 0.85;
+      padding: 1px 5px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 2px;
+    }
+
+    /* Problems Grid */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .problem-card {
+      background: var(--bg-surface, #0C0E14);
+      border: 1px solid var(--border-rule, #1B2029);
+      border-radius: 4px;
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .problem-card:hover {
+      border-color: var(--card-accent, var(--accent-green));
+      background: rgba(16, 22, 32, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 255, 102, 0.15);
+    }
+
+    .problem-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-3);
+      gap: 10px;
+    }
+
+    .problem-id-badge {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--accent-green, #00FF66);
+      background: rgba(0, 255, 102, 0.08);
+      border: 1px solid rgba(0, 255, 102, 0.2);
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    .problem-rating-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #4CAF50;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    .rating-1000 {
+      color: #00D4FF;
+      border-color: rgba(0, 212, 255, 0.3);
+    }
+
+    .rating-1300 {
+      color: #A855F7;
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .problem-title {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 var(--space-3) 0;
+      line-height: 1.3;
+    }
+
+    .problem-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: var(--space-4);
+    }
+
+    .problem-tag-chip {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      padding: 2px 8px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-rule, #1B2029);
+      color: var(--text-secondary, #B8C4D1);
+    }
+
+    .problem-actions-row {
+      display: flex;
+      gap: 10px;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border-rule-subtle, #131720);
+    }
+
+    .problem-action-link {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border: 1px solid var(--border-rule);
+    }
+
+    .problem-action-link:hover {
+      background: rgba(0, 255, 102, 0.1);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .problem-action-link.cf-link:hover {
+      border-color: #38BDF8;
+      color: #38BDF8;
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: var(--space-10) var(--space-4);
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 650px) {
+      .problems-grid {
+        grid-template-columns: 1fr;
+      }
+      .archive-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .repo-hero-card {
+        padding: var(--space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="archive-page">
+    
+    <!-- Header Navigation & Telemetry -->
+    <header class="archive-header">
+      <a href="index.html#competitive" class="archive-back-btn">
+        <span>←</span>
+        <span>RETURN TO PORTFOLIO</span>
+      </a>
+
+      <div class="archive-telemetry">
+        <div class="archive-telemetry-item">
+          <span class="archive-pulse"></span>
+          <span>SYSTEM // CF_ARCHIVE</span>
+        </div>
+        <div class="archive-telemetry-item">
+          <span>HANDLE:</span>
+          <span style="color: var(--accent-green);">Itz_Arslan</span>
+        </div>
+        <div class="archive-telemetry-item">
+          <span>TOTAL SOLVED:</span>
+          <span style="color: #FFFFFF;">21</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- GitHub Repository Spotlight Card -->
+    <section class="repo-hero-card">
+      <div class="repo-info-block">
+        <div class="repo-badge-pill">
+          <span>⚡</span>
+          <span>OFFICIAL REPOSITORY // C++ ALGORITHMIC SOLUTIONS</span>
+        </div>
+        <h1 class="repo-title">Omar-Ayman-Ali / codeforces-solutions</h1>
+        <p class="repo-desc">
+          Complete high-performance C++20 implementations for competitive programming contests, 
+          covering segment trees, dynamic programming, greedy algorithms, number theory, and graphs. 
+          Tested and accepted across official Codeforces rounds.
+        </p>
+      </div>
+      <div>
+        <a href="https://github.com/Omar-Ayman-Ali/codeforces-solutions" target="_blank" rel="noopener noreferrer" class="repo-action-btn">
+          <span>VIEW REPOSITORY ON GITHUB</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Controls Panel: Live Search & Tag Filter Tabs -->
+    <section class="controls-panel">
+      <div class="search-box-row">
+        <input 
+          type="text" 
+          id="problem-search" 
+          class="problem-search-input" 
+          placeholder="SEARCH PROBLEMS BY ID OR TITLE (e.g. 263A, Beautiful Matrix, Math, Tree)..."
+          autocomplete="off"
+        >
+      </div>
+
+      <nav class="tag-filter-tabs" id="tag-filter-tabs" aria-label="Filter problems by tag">
+        <!-- Dynamically rendered filter tabs -->
+      </nav>
+    </section>
+
+    <!-- Problems Grid -->
+    <main>
+      <div class="problems-grid" id="problems-grid">
+        <!-- Dynamically rendered problem cards -->
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const REPO_URL = 'https://github.com/Omar-Ayman-Ali/codeforces-solutions';
+
+      // Complete verified problems database for Itz_Arslan
+      const PROBLEMS_DATA = [
+        { id: '2254A', name: 'Riptide', rating: 800, tags: ['implementation', 'sortings'], cid: 2254, idx: 'A' },
+        { id: '1900A', name: 'Cover in Water', rating: 800, tags: ['implementation', 'greedy', 'strings', 'constructive algorithms'], cid: 1900, idx: 'A' },
+        { id: '110A', name: 'Nearly Lucky Number', rating: 800, tags: ['implementation'], cid: 110, idx: 'A' },
+        { id: '2227A', name: 'Koshary', rating: 800, tags: ['implementation', 'math'], cid: 2227, idx: 'A' },
+        { id: '118A', name: 'String Task', rating: 1000, tags: ['implementation', 'strings'], cid: 118, idx: 'A' },
+        { id: '236A', name: 'Boy or Girl', rating: 800, tags: ['implementation', 'strings', 'brute force'], cid: 236, idx: 'A' },
+        { id: '112A', name: 'Petya and Strings', rating: 800, tags: ['implementation', 'strings'], cid: 112, idx: 'A' },
+        { id: '263A', name: 'Beautiful Matrix', rating: 800, tags: ['implementation'], cid: 263, idx: 'A' },
+        { id: '158A', name: 'Next Round', rating: 800, tags: ['implementation', '*special'], cid: 158, idx: 'A' },
+        { id: '282A', name: 'Bit++', rating: 800, tags: ['implementation'], cid: 282, idx: 'A' },
+        { id: '1899A', name: 'Game with Integers', rating: 800, tags: ['math', 'games', 'number theory'], cid: 1899, idx: 'A' },
+        { id: '1901A', name: 'Line Trip', rating: 800, tags: ['math', 'greedy'], cid: 1901, idx: 'A' },
+        { id: '2241A', name: 'Divide and Conquer', rating: 800, tags: ['math', 'greedy', 'number theory'], cid: 2241, idx: 'A' },
+        { id: '617A', name: 'Elephant', rating: 800, tags: ['math'], cid: 617, idx: 'A' },
+        { id: '50A', name: 'Domino piling', rating: 800, tags: ['math', 'greedy'], cid: 50, idx: 'A' },
+        { id: '1A', name: 'Theatre Square', rating: 1000, tags: ['math'], cid: 1, idx: 'A' },
+        { id: '1903A', name: 'Halloumi Boxes', rating: 800, tags: ['greedy', 'brute force', 'sortings'], cid: 1903, idx: 'A' },
+        { id: '231A', name: 'Team', rating: 800, tags: ['greedy', 'brute force'], cid: 231, idx: 'A' },
+        { id: '71A', name: 'Way Too Long Words', rating: 800, tags: ['strings'], cid: 71, idx: 'A' },
+        { id: '271A', name: 'Beautiful Year', rating: 800, tags: ['brute force'], cid: 271, idx: 'A' },
+        { id: '25A', name: 'IQ test', rating: 1300, tags: ['brute force'], cid: 25, idx: 'A' }
+      ];
+
+      const TAG_COLORS = {
+        'implementation': { color: '#FF705A', glow: 'rgba(255, 112, 90, 0.35)' },
+        'math': { color: '#FF5D8F', glow: 'rgba(255, 93, 143, 0.35)' },
+        'greedy': { color: '#D946EF', glow: 'rgba(217, 70, 239, 0.35)' },
+        'brute force': { color: '#8B5CF6', glow: 'rgba(139, 92, 246, 0.35)' },
+        'strings': { color: '#6366F1', glow: 'rgba(99, 102, 241, 0.35)' },
+        'sortings': { color: '#38BDF8', glow: 'rgba(56, 189, 248, 0.35)' },
+        'number theory': { color: '#06B6D4', glow: 'rgba(6, 182, 212, 0.35)' },
+        '*special': { color: '#2DD4BF', glow: 'rgba(45, 212, 191, 0.35)' },
+        'constructive algorithms': { color: '#10B981', glow: 'rgba(16, 185, 129, 0.35)' },
+        'games': { color: '#84CC16', glow: 'rgba(132, 204, 22, 0.35)' }
+      };
+
+      let activeTag = 'ALL';
+      let searchQuery = '';
+
+      // Parse URL parameters (e.g. ?tag=implementation or ?tag=math)
+      function getInitialTag() {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const tagParam = urlParams.get('tag');
+          if (tagParam) {
+            const decoded = decodeURIComponent(tagParam).trim().toLowerCase();
+            const matchingTag = Object.keys(TAG_COLORS).find(t => t.toLowerCase() === decoded);
+            if (matchingTag) return matchingTag;
+          }
+          if (window.location.hash) {
+            const hash = window.location.hash.replace('#', '').trim().toLowerCase();
+            const matchingTag = Object.keys(TAG_COLORS).find(t => t.toLowerCase() === hash);
+            if (matchingTag) return matchingTag;
+          }
+        } catch (e) {}
+        return 'ALL';
+      }
+
+      activeTag = getInitialTag();
+
+      // Render filter tabs
+      function renderTabs() {
+        const tabsContainer = document.getElementById('tag-filter-tabs');
+        if (!tabsContainer) return;
+
+        // Compute tag counts
+        const tagCounts = {};
+        PROBLEMS_DATA.forEach(p => {
+          p.tags.forEach(t => {
+            tagCounts[t] = (tagCounts[t] || 0) + 1;
+          });
+        });
+
+        const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+        const tabsList = ['ALL', ...sortedTags];
+
+        tabsContainer.innerHTML = '';
+
+        tabsList.forEach(tagName => {
+          const btn = document.createElement('button');
+          btn.className = `filter-tab ${activeTag.toLowerCase() === tagName.toLowerCase() ? 'active' : ''}`;
+          
+          const tagInfo = TAG_COLORS[tagName] || { color: '#00FF66', glow: 'rgba(0, 255, 102, 0.3)' };
+          btn.style.setProperty('--tab-color', tagInfo.color);
+          btn.style.setProperty('--tab-glow', tagInfo.glow);
+
+          const count = tagName === 'ALL' ? PROBLEMS_DATA.length : (tagCounts[tagName] || 0);
+          btn.innerHTML = `
+            <span>${tagName.toUpperCase()}</span>
+            <span class="filter-count">${count}</span>
+          `;
+
+          btn.addEventListener('click', () => {
+            activeTag = tagName;
+            renderTabs();
+            renderProblems();
+            // Update URL search param without page reload
+            try {
+              const url = new URL(window.location);
+              if (tagName === 'ALL') url.searchParams.delete('tag');
+              else url.searchParams.set('tag', tagName);
+              window.history.replaceState({}, '', url);
+            } catch (e) {}
+          });
+
+          tabsContainer.appendChild(btn);
+        });
+      }
+
+      // Render problems list
+      function renderProblems() {
+        const grid = document.getElementById('problems-grid');
+        if (!grid) return;
+
+        const filtered = PROBLEMS_DATA.filter(p => {
+          // Tag match
+          if (activeTag !== 'ALL') {
+            const hasTag = p.tags.some(t => t.toLowerCase() === activeTag.toLowerCase());
+            if (!hasTag) return false;
+          }
+          // Search query match
+          if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            const idMatch = p.id.toLowerCase().includes(q);
+            const nameMatch = p.name.toLowerCase().includes(q);
+            const tagMatch = p.tags.some(t => t.toLowerCase().includes(q));
+            if (!idMatch && !nameMatch && !tagMatch) return false;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div class="empty-state">
+              <p>// NO PROBLEMS FOUND MATCHING CURRENT FILTER CRITERIA</p>
+              <button class="filter-tab" onclick="document.getElementById('problem-search').value = ''; window.location.search = '';" style="margin-top: 10px;">RESET FILTERS</button>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+
+        filtered.forEach(p => {
+          const card = document.createElement('article');
+          card.className = 'problem-card';
+
+          const primaryTag = p.tags[0] || 'implementation';
+          const primaryColor = TAG_COLORS[primaryTag]?.color || '#00FF66';
+          card.style.setProperty('--card-accent', primaryColor);
+
+          const cfUrl = `https://codeforces.com/problemset/problem/${p.cid}/${p.idx}`;
+
+          let ratingClass = 'problem-rating-badge';
+          if (p.rating >= 1300) ratingClass += ' rating-1300';
+          else if (p.rating >= 1000) ratingClass += ' rating-1000';
+
+          const tagsHtml = p.tags.map(t => `<span class="problem-tag-chip">${t}</span>`).join('');
+
+          card.innerHTML = `
+            <div>
+              <div class="problem-card-top">
+                <span class="problem-id-badge">${p.id}</span>
+                <span class="${ratingClass}">★ ${p.rating}</span>
+              </div>
+              <h2 class="problem-title">${p.name}</h2>
+              <div class="problem-tags-row">
+                ${tagsHtml}
+              </div>
+            </div>
+            <div class="problem-actions-row">
+              <a href="${cfUrl}" target="_blank" rel="noopener noreferrer" class="problem-action-link cf-link" title="View problem statement on Codeforces">
+                <span>CODEFORCES</span>
+                <span>↗</span>
+              </a>
+              <a href="${REPO_URL}" target="_blank" rel="noopener noreferrer" class="problem-action-link repo-link" title="View solution in GitHub repository">
+                <span>C++ REPO</span>
+                <span>↗</span>
+              </a>
+            </div>
+          `;
+
+          fragment.appendChild(card);
+        });
+
+        grid.appendChild(fragment);
+      }
+
+      // Wire search input
+      const searchInput = document.getElementById('problem-search');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value.trim();
+          renderProblems();
+        });
+      }
+
+      // Initialize
+      renderTabs();
+      renderProblems();
+    })();
+  </script>
+</body>
+</html>

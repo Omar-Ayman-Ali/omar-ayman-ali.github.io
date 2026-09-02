@@ -903,43 +903,51 @@
       // Verified Codeforces Solved Problems by Tag for Itz_Arslan
       const TAG_PROBLEMS_MAP = window.CF_TAG_PROBLEMS_MAP || {
         'implementation': [
-          { id: '263A', name: 'Beautiful Matrix', rating: 800, url: 'https://codeforces.com/problemset/problem/263/A' },
-          { id: '282A', name: 'Bit++', rating: 800, url: 'https://codeforces.com/problemset/problem/282/A' },
-          { id: '158A', name: 'Next Round', rating: 800, url: 'https://codeforces.com/problemset/problem/158/A' },
+          { id: '2254A', name: 'Riptide', rating: 800, url: 'https://codeforces.com/problemset/problem/2254/A' },
+          { id: '1900A', name: 'Cover in Water', rating: 800, url: 'https://codeforces.com/problemset/problem/1900/A' },
+          { id: '110A', name: 'Nearly Lucky Number', rating: 800, url: 'https://codeforces.com/problemset/problem/110/A' },
+          { id: '2227A', name: 'Koshary', rating: 800, url: 'https://codeforces.com/problemset/problem/2227/A' },
           { id: '118A', name: 'String Task', rating: 1000, url: 'https://codeforces.com/problemset/problem/118/A' },
-          { id: '236A', name: 'Boy or Girl', rating: 800, url: 'https://codeforces.com/problemset/problem/236/A' }
+          { id: '236A', name: 'Boy or Girl', rating: 800, url: 'https://codeforces.com/problemset/problem/236/A' },
+          { id: '112A', name: 'Petya and Strings', rating: 800, url: 'https://codeforces.com/problemset/problem/112/A' },
+          { id: '263A', name: 'Beautiful Matrix', rating: 800, url: 'https://codeforces.com/problemset/problem/263/A' },
+          { id: '158A', name: 'Next Round', rating: 800, url: 'https://codeforces.com/problemset/problem/158/A' },
+          { id: '282A', name: 'Bit++', rating: 800, url: 'https://codeforces.com/problemset/problem/282/A' }
         ],
         'math': [
-          { id: '1A', name: 'Theatre Square', rating: 1000, url: 'https://codeforces.com/problemset/problem/1/A' },
+          { id: '1899A', name: 'Game with Integers', rating: 800, url: 'https://codeforces.com/problemset/problem/1899/A' },
+          { id: '1901A', name: 'Line Trip', rating: 800, url: 'https://codeforces.com/problemset/problem/1901/A' },
+          { id: '2241A', name: 'Divide and Conquer', rating: 800, url: 'https://codeforces.com/problemset/problem/2241/A' },
           { id: '617A', name: 'Elephant', rating: 800, url: 'https://codeforces.com/problemset/problem/617/A' },
           { id: '50A', name: 'Domino piling', rating: 800, url: 'https://codeforces.com/problemset/problem/50/A' },
-          { id: '1901A', name: 'Line Trip', rating: 800, url: 'https://codeforces.com/problemset/problem/1901/A' },
-          { id: '1899A', name: 'Game with Integers', rating: 800, url: 'https://codeforces.com/problemset/problem/1899/A' }
+          { id: '2227A', name: 'Koshary', rating: 800, url: 'https://codeforces.com/problemset/problem/2227/A' },
+          { id: '1A', name: 'Theatre Square', rating: 1000, url: 'https://codeforces.com/problemset/problem/1/A' }
         ],
         'greedy': [
-          { id: '231A', name: 'Team', rating: 800, url: 'https://codeforces.com/problemset/problem/231/A' },
-          { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' },
-          { id: '1901A', name: 'Line Trip', rating: 800, url: 'https://codeforces.com/problemset/problem/1901/A' },
           { id: '1900A', name: 'Cover in Water', rating: 800, url: 'https://codeforces.com/problemset/problem/1900/A' },
-          { id: '50A', name: 'Domino piling', rating: 800, url: 'https://codeforces.com/problemset/problem/50/A' }
+          { id: '1901A', name: 'Line Trip', rating: 800, url: 'https://codeforces.com/problemset/problem/1901/A' },
+          { id: '2241A', name: 'Divide and Conquer', rating: 800, url: 'https://codeforces.com/problemset/problem/2241/A' },
+          { id: '50A', name: 'Domino piling', rating: 800, url: 'https://codeforces.com/problemset/problem/50/A' },
+          { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' },
+          { id: '231A', name: 'Team', rating: 800, url: 'https://codeforces.com/problemset/problem/231/A' }
         ],
         'strings': [
-          { id: '71A', name: 'Way Too Long Words', rating: 800, url: 'https://codeforces.com/problemset/problem/71/A' },
+          { id: '1900A', name: 'Cover in Water', rating: 800, url: 'https://codeforces.com/problemset/problem/1900/A' },
           { id: '118A', name: 'String Task', rating: 1000, url: 'https://codeforces.com/problemset/problem/118/A' },
-          { id: '112A', name: 'Petya and Strings', rating: 800, url: 'https://codeforces.com/problemset/problem/112/A' },
           { id: '236A', name: 'Boy or Girl', rating: 800, url: 'https://codeforces.com/problemset/problem/236/A' },
-          { id: '1900A', name: 'Cover in Water', rating: 800, url: 'https://codeforces.com/problemset/problem/1900/A' }
+          { id: '112A', name: 'Petya and Strings', rating: 800, url: 'https://codeforces.com/problemset/problem/112/A' },
+          { id: '71A', name: 'Way Too Long Words', rating: 800, url: 'https://codeforces.com/problemset/problem/71/A' }
         ],
         'brute force': [
-          { id: '25A', name: 'IQ test', rating: 1300, url: 'https://codeforces.com/problemset/problem/25/A' },
           { id: '271A', name: 'Beautiful Year', rating: 800, url: 'https://codeforces.com/problemset/problem/271/A' },
           { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' },
           { id: '236A', name: 'Boy or Girl', rating: 800, url: 'https://codeforces.com/problemset/problem/236/A' },
-          { id: '231A', name: 'Team', rating: 800, url: 'https://codeforces.com/problemset/problem/231/A' }
+          { id: '231A', name: 'Team', rating: 800, url: 'https://codeforces.com/problemset/problem/231/A' },
+          { id: '25A', name: 'IQ test', rating: 1300, url: 'https://codeforces.com/problemset/problem/25/A' }
         ],
         'sortings': [
-          { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' },
-          { id: '2254A', name: 'Riptide', rating: 800, url: 'https://codeforces.com/problemset/problem/2254/A' }
+          { id: '2254A', name: 'Riptide', rating: 800, url: 'https://codeforces.com/problemset/problem/2254/A' },
+          { id: '1903A', name: 'Halloumi Boxes', rating: 800, url: 'https://codeforces.com/problemset/problem/1903/A' }
         ],
         'number theory': [
           { id: '1899A', name: 'Game with Integers', rating: 800, url: 'https://codeforces.com/problemset/problem/1899/A' },
@@ -1097,14 +1105,20 @@
           gsap.set(spreadingOverlay, { autoAlpha: 1 });
 
           const isCompact = bodyRect.width < 860;
-          const numProbs = Math.min(problems.length, 5);
+          const allProblems = TAG_PROBLEMS_MAP[tag.name] || [];
+          const hasMore = allProblems.length > 5 || tag.count > 5;
+          const displayProblems = allProblems.slice(0, 5);
+          const totalItems = hasMore ? displayProblems.length + 1 : displayProblems.length;
+          if (totalItems === 0) return;
+
           const pathsToAnimate = [];
           const dotsToAnimate = [];
           const chipsToAnimate = [];
 
-          for (let i = 0; i < numProbs; i++) {
-            const p = problems[i];
-            const angleDeg = visStart + (i + 0.5) * (visEnd - visStart) / numProbs;
+          for (let i = 0; i < totalItems; i++) {
+            const isMoreItem = hasMore && i === displayProblems.length;
+            const p = isMoreItem ? null : displayProblems[i];
+            const angleDeg = visStart + (i + 0.5) * (visEnd - visStart) / totalItems;
             const rad = angleDeg * Math.PI / 180;
             const startX = cxPos + (outerRadius + 4) * Math.cos(rad);
             const startY = cyPos + (outerRadius + 4) * Math.sin(rad);
@@ -1112,15 +1126,15 @@
             let endX, endY, d;
 
             if (isCompact) {
-              const chipWidth = Math.min(260, bodyRect.width - 48);
+              const chipWidth = Math.min(280, bodyRect.width - 48);
               endX = Math.max(24, cxPos - chipWidth / 2);
               endY = cyPos + 155 + i * 38;
               const wpY = (startY + endY) * 0.5;
               d = `M ${startX.toFixed(1)} ${startY.toFixed(1)} Q ${startX.toFixed(1)} ${wpY.toFixed(1)} ${endX.toFixed(1)} ${endY.toFixed(1)}`;
             } else {
               endX = cxPos + 180 + (i % 2 === 1 ? 14 : 0);
-              if (numProbs <= 2) {
-                const baseY = cyPos + Math.sin(rad) * 45 - ((numProbs - 1) * 18);
+              if (totalItems <= 2) {
+                const baseY = cyPos + Math.sin(rad) * 45 - ((totalItems - 1) * 18);
                 endY = Math.max(30, Math.min(bodyRect.height - 40, baseY + i * 36));
               } else if (Math.sin(visMid * Math.PI / 180) < 0) {
                 const baseY = Math.max(26, cyPos - 130);
@@ -1156,29 +1170,39 @@
             const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             dot.setAttribute('cx', endX);
             dot.setAttribute('cy', endY);
-            dot.setAttribute('r', '3.5');
+            dot.setAttribute('r', isMoreItem ? '4.5' : '3.5');
             dot.setAttribute('fill', tag.color);
             dot.setAttribute('class', 'cf-spread-dot');
             dot.style.filter = `drop-shadow(0 0 8px ${tag.glow})`;
             spreadingSvg.appendChild(dot);
             dotsToAnimate.push(dot);
 
-            // Clickable problem link chip (target="_blank" rel="noopener noreferrer")
+            // Clickable problem link chip
             const chip = document.createElement('a');
-            chip.href = p.url;
             chip.target = '_blank';
             chip.rel = 'noopener noreferrer';
-            chip.className = 'cf-spread-chip';
             chip.style.left = `${(endX + 8).toFixed(1)}px`;
             chip.style.top = `${(endY - 13).toFixed(1)}px`;
             chip.style.setProperty('--chip-color', tag.color);
             chip.style.setProperty('--chip-glow', tag.glow);
-            chip.innerHTML = `
-              <span class="cf-spread-chip-id">${escapeHtml(p.id)}</span>
-              <span class="cf-spread-chip-name">${escapeHtml(p.name)}</span>
-              <span class="cf-spread-chip-rating">${escapeHtml(p.rating)}</span>
-              <span class="cf-spread-chip-arrow">↗</span>
-            `;
+
+            if (isMoreItem) {
+              chip.href = `problems.html?tag=${encodeURIComponent(tag.name)}`;
+              chip.className = 'cf-spread-chip cf-spread-more-chip';
+              chip.innerHTML = `
+                <span class="cf-spread-more-text" style="color: ${tag.color}; font-weight: 700;">Want to see more questions?</span>
+                <span class="cf-spread-chip-arrow" style="color: ${tag.color}; font-weight: 700;">↗</span>
+              `;
+            } else {
+              chip.href = p.url;
+              chip.className = 'cf-spread-chip';
+              chip.innerHTML = `
+                <span class="cf-spread-chip-id">${escapeHtml(p.id)}</span>
+                <span class="cf-spread-chip-name">${escapeHtml(p.name)}</span>
+                <span class="cf-spread-chip-rating">${escapeHtml(p.rating)}</span>
+                <span class="cf-spread-chip-arrow">↗</span>
+              `;
+            }
 
             chip.addEventListener('pointerenter', () => {
               if (hideTimeout) {
@@ -1314,7 +1338,7 @@
           }
         }
 
-        // Bind slice events
+        // Bind slice events (Glow slice and show spreading questions on hover)
         sliceEls.forEach(el => {
           el.addEventListener('pointerenter', () => {
             const idx = parseInt(el.getAttribute('data-index'), 10);
@@ -1326,15 +1350,14 @@
           });
         });
 
-        // Bind legend row events
+        // Bind legend row events (Glow graph slice only, do NOT display spreading questions)
         legendEls.forEach(el => {
           el.addEventListener('pointerenter', () => {
             const idx = parseInt(el.getAttribute('data-index'), 10);
             highlightTag(idx);
-            showSpreadingLines(idx);
           });
           el.addEventListener('pointerleave', () => {
-            scheduleHide();
+            unhighlightTag();
           });
         });
 

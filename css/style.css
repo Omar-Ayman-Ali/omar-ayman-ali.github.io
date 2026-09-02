@@ -1916,6 +1916,26 @@ a, button {
   transform: translate(2px, -2px);
 }
 
+.cf-spread-more-chip {
+  background: rgba(12, 16, 24, 0.95);
+  border-color: var(--chip-color, var(--accent-green));
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 12px var(--chip-glow, rgba(0, 255, 102, 0.4));
+}
+
+.cf-spread-more-chip:hover {
+  background: rgba(18, 26, 38, 0.98);
+  border-color: #FFFFFF;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.9), 0 0 24px var(--chip-glow, rgba(0, 255, 102, 0.9));
+}
+
+.cf-spread-more-text {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* Live C++ Problem-Solving Terminal */
 .cf-terminal-card {
   background-color: var(--bg-surface-terminal);
@@ -2403,10 +2423,10 @@ code::-webkit-scrollbar {
 }
 
 .git-lvl-0 { background-color: #0E121A; border: 1px solid #161C27; }
-.git-lvl-1 { background-color: #003816; border: 1px solid #005421; }
-.git-lvl-2 { background-color: #007A33; }
-.git-lvl-3 { background-color: #00B34D; }
-.git-lvl-4 { background-color: #00FF66; box-shadow: 0 0 6px rgba(0, 255, 102, 0.4); }
+.git-lvl-1 { background-color: #3B2361; border: 1px solid #4D2E7C; }
+.git-lvl-2 { background-color: #5C32A3; }
+.git-lvl-3 { background-color: #8957E5; }
+.git-lvl-4 { background-color: #BC8CFF; box-shadow: 0 0 8px rgba(188, 140, 255, 0.6); }
 
 /* Language Breakdown Bar */
 .language-breakdown-container {
@@ -2646,6 +2666,246 @@ code::-webkit-scrollbar {
 .action-arrow {
   font-size: 0.875rem;
   color: var(--accent-green);
+}
+
+/* ==========================================================================
+   GitHub Intelligence & Repository Cards (GitHub Dark Purple Theme)
+   ========================================================================== */
+
+:root {
+  --gh-purple: #8957E5;
+  --gh-purple-light: #BC8CFF;
+  --gh-purple-dim: rgba(137, 87, 229, 0.12);
+  --gh-purple-glow: rgba(137, 87, 229, 0.4);
+  --gh-purple-border: rgba(137, 87, 229, 0.3);
+}
+
+.highlight-purple {
+  color: var(--gh-purple-light, #BC8CFF) !important;
+  text-shadow: 0 0 12px rgba(188, 140, 255, 0.35);
+}
+
+.gh-card-purple {
+  border-color: rgba(137, 87, 229, 0.25);
+}
+
+.gh-card-purple:hover {
+  border-color: var(--gh-purple-border);
+}
+
+.gh-profile-link-btn {
+  border-color: rgba(137, 87, 229, 0.4) !important;
+  color: var(--gh-purple-light, #BC8CFF) !important;
+}
+
+.gh-profile-link-btn:hover {
+  background-color: rgba(137, 87, 229, 0.15) !important;
+  border-color: var(--gh-purple) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 20px var(--gh-purple-glow) !important;
+}
+
+.gh-section-tag {
+  color: var(--gh-purple-light, #BC8CFF) !important;
+  border-color: var(--gh-purple-border) !important;
+  background-color: var(--gh-purple-dim) !important;
+}
+
+.lang-cpp-gh {
+  background-color: var(--gh-purple, #8957E5) !important;
+}
+
+.bullet-cpp-gh {
+  background-color: var(--gh-purple, #8957E5) !important;
+  box-shadow: 0 0 6px var(--gh-purple-glow);
+}
+
+/* GitHub Terminal Repo Slide Cards */
+.repo-slide-card {
+  width: 480px;
+  min-width: 480px;
+  background-color: var(--bg-surface-terminal, #07090D);
+  border: 1px solid var(--border-rule, #1B2029);
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.repo-slide-card:hover {
+  border-color: var(--gh-purple, #8957E5) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 24px var(--gh-purple-glow);
+}
+
+.repo-card-top-bar {
+  padding: 8px 14px;
+  background-color: #0B0E14;
+  border-bottom: 1px solid var(--border-rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.repo-terminal-filename {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+}
+
+.repo-terminal-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--gh-purple-light);
+  font-weight: 600;
+}
+
+.gh-led-purple {
+  background-color: var(--gh-purple-light, #BC8CFF) !important;
+  box-shadow: 0 0 8px var(--gh-purple, #8957E5) !important;
+}
+
+.repo-slide-card .slide-card-header {
+  padding: var(--space-3) var(--space-5) var(--space-2);
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.gh-id-tag {
+  color: var(--gh-purple-light, #BC8CFF) !important;
+}
+
+.gh-badge {
+  color: var(--gh-purple-light, #BC8CFF) !important;
+  border-color: var(--gh-purple-border) !important;
+  background-color: var(--gh-purple-dim) !important;
+}
+
+.repo-slide-card .slide-card-title {
+  padding: 0 var(--space-5);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+  color: #FFFFFF;
+}
+
+.repo-slide-card .slide-card-desc {
+  padding: 0 var(--space-5);
+  font-size: 0.8125rem;
+  margin-bottom: var(--space-3);
+  color: var(--text-secondary);
+}
+
+.repo-slide-card .slide-specs-grid {
+  margin: 0 var(--space-5) var(--space-3);
+  background-color: #090C12;
+  border: 1px solid var(--border-rule-subtle);
+}
+
+.repo-code-preview-container {
+  margin: 0 var(--space-5) var(--space-4);
+  background-color: #06080D;
+  border: 1px solid var(--border-rule);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.repo-code-file-tag {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--text-dim);
+  padding: 3px 8px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-rule-subtle);
+  letter-spacing: 0.04em;
+}
+
+.repo-code-pre {
+  margin: 0;
+  padding: 8px 12px;
+  max-height: 125px;
+  overflow-y: auto;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  scrollbar-width: thin;
+}
+
+.repo-slide-card .slide-tech-chips {
+  padding: 0 var(--space-5);
+  margin-bottom: var(--space-4);
+}
+
+.gh-tech-chip {
+  background-color: var(--gh-purple-dim) !important;
+  border-color: var(--gh-purple-border) !important;
+  color: var(--gh-purple-light) !important;
+}
+
+.repo-card-actions {
+  display: flex;
+  gap: 10px;
+  padding: var(--space-4) var(--space-5) !important;
+  margin-top: auto;
+  background-color: #090C12;
+  border-top: 1px solid var(--border-rule);
+}
+
+.gh-btn-action {
+  background-color: var(--gh-purple, #8957E5) !important;
+  color: #FFFFFF !important;
+  border-color: var(--gh-purple) !important;
+  flex: 1;
+}
+
+.gh-btn-action:hover {
+  background-color: var(--gh-purple-light, #BC8CFF) !important;
+  color: #050505 !important;
+  box-shadow: 0 0 20px rgba(188, 140, 255, 0.6) !important;
+}
+
+.gh-btn-action-sec {
+  background-color: transparent !important;
+  color: var(--gh-purple-light) !important;
+  border: 1px solid var(--gh-purple-border) !important;
+}
+
+.gh-btn-action-sec:hover {
+  background-color: var(--gh-purple-dim) !important;
+  border-color: var(--gh-purple) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 16px var(--gh-purple-glow) !important;
+}
+
+/* 3-Second Hover Charging & Expansion for Repo Cards in Purple */
+.repo-slide-card.code-snap-card::before {
+  background: var(--gh-purple-light, #BC8CFF) !important;
+  box-shadow: 0 0 10px var(--gh-purple, #8957E5), 0 0 20px var(--gh-purple-light, #BC8CFF) !important;
+}
+
+.repo-slide-card.code-snap-card.code-snap-expanded {
+  border-color: var(--gh-purple-light, #BC8CFF) !important;
+  box-shadow: 0 0 35px rgba(137, 87, 229, 0.45),
+              0 0 80px rgba(137, 87, 229, 0.22),
+              0 20px 40px rgba(0, 0, 0, 0.9),
+              inset 0 0 25px rgba(137, 87, 229, 0.08) !important;
+}
+
+.repo-slide-card.code-snap-card.code-snap-expanded::before {
+  box-shadow: 0 0 18px var(--gh-purple, #8957E5), 0 0 35px var(--gh-purple-light, #BC8CFF) !important;
+}
+
+@media (max-width: 768px) {
+  .repo-slide-card {
+    width: 100% !important;
+    min-width: unset !important;
+  }
 }
 
 /* ==========================================================================
