@@ -1689,10 +1689,10 @@ a, button {
 
 .cf-donut-slice:hover,
 .cf-donut-slice.active {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 14px var(--slice-glow)) brightness(1.2);
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 18px var(--slice-glow)) drop-shadow(0 0 8px var(--slice-glow)) brightness(1.25);
   stroke: #FFFFFF;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
   stroke-linejoin: round;
 }
 
@@ -2469,12 +2469,20 @@ code::-webkit-scrollbar {
   width: 11px;
   height: 11px;
   border-radius: 1px;
-  transition: transform var(--duration-micro) ease;
+  transition: transform var(--duration-micro) ease, box-shadow var(--duration-micro) ease, border-color var(--duration-micro) ease;
+  will-change: transform;
 }
 
 .heatmap-cell:hover {
-  transform: scale(1.35);
+  transform: scale(1.4);
   z-index: 10;
+  box-shadow: 0 0 10px #BC8CFF, 0 0 20px rgba(137, 87, 229, 0.7);
+  border-color: #FFFFFF !important;
+}
+
+.heatmap-cell.git-lvl-0:hover {
+  background-color: #21283B;
+  box-shadow: 0 0 8px rgba(137, 87, 229, 0.4);
 }
 
 .git-lvl-0 { background-color: #0E121A; border: 1px solid #161C27; }

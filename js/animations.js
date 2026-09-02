@@ -1468,10 +1468,14 @@
           });
         });
 
-        if (animate) {
+        if (animate && !prefersReducedMotion) {
           gsap.fromTo(sliceEls,
-            { scale: 0.4, opacity: 0, transformOrigin: '170px 170px' },
-            { scale: 1, opacity: 1, stagger: 0.02, duration: 0.4, ease: 'back.out(1.6)' }
+            { scale: 0.1, opacity: 0, transformOrigin: '170px 170px' },
+            { scale: 1, opacity: 1, stagger: 0.045, duration: 0.65, ease: 'back.out(1.6)', clearProps: 'transform' }
+          );
+          gsap.fromTo(legendEls,
+            { opacity: 0, x: 14 },
+            { opacity: 1, x: 0, stagger: 0.03, duration: 0.45, ease: 'power2.out' }
           );
         }
       }
@@ -1587,17 +1591,18 @@
 
     initCodeSnapHoverExpansion();
 
-    // 5. GitHub Activity Card Entrance
+    // 5. GitHub Activity Card Entrance & 52-Week Contributions Staggered Cell Ripple
     const githubCard = document.querySelector('.github-matrix-card');
     if (githubCard) {
       gsap.fromTo(
         githubCard,
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 28, scale: 0.98 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 0.65,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: '.github-section',
             start: 'top 80%',
@@ -1605,6 +1610,36 @@
           }
         }
       );
+    }
+
+    const githubGrid = document.getElementById('github-heatmap-grid');
+    if (githubGrid && !prefersReducedMotion) {
+      ScrollTrigger.create({
+        trigger: '#github-heatmap-grid',
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          const cells = githubGrid.querySelectorAll('.heatmap-cell');
+          if (cells.length > 0) {
+            gsap.fromTo(
+              cells,
+              { scale: 0.2, opacity: 0 },
+              {
+                scale: 1,
+                opacity: 1,
+                duration: 0.35,
+                stagger: {
+                  grid: [7, 52],
+                  from: 'start',
+                  amount: 0.6
+                },
+                ease: 'back.out(1.5)',
+                clearProps: 'transform'
+              }
+            );
+          }
+        }
+      });
     }
 
     // 6. GSAP Pinned Horizontal Projects Gallery
