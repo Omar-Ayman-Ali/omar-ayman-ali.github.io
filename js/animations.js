@@ -1196,10 +1196,11 @@
             } else {
               chip.href = p.url;
               chip.className = 'cf-spread-chip';
+              const ratingColor = p.rating >= 1900 ? '#A855F7' : (p.rating >= 1600 ? '#3B82F6' : (p.rating >= 1400 ? '#06B6D4' : (p.rating >= 1200 ? '#22C55E' : '#94A3B8')));
               chip.innerHTML = `
                 <span class="cf-spread-chip-id">${escapeHtml(p.id)}</span>
                 <span class="cf-spread-chip-name">${escapeHtml(p.name)}</span>
-                <span class="cf-spread-chip-rating">${escapeHtml(p.rating)}</span>
+                <span class="cf-spread-chip-rating" style="color: ${ratingColor}; border: 1px solid ${ratingColor}44; background: ${ratingColor}15;">${escapeHtml(p.rating)}</span>
                 <span class="cf-spread-chip-arrow">↗</span>
               `;
             }

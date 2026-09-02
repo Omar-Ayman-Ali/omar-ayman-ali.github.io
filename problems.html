@@ -17,14 +17,27 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /* Problems Archive Specific Styles */
+    /* Codeforces Brand & Theme Variables */
+    :root {
+      --cf-blue: #318CE7;
+      --cf-blue-light: #38BDF8;
+      --cf-blue-dim: rgba(49, 140, 231, 0.12);
+      --cf-blue-glow: rgba(49, 140, 231, 0.35);
+      --cf-yellow: #FFD233;
+      --cf-red: #FF3B30;
+      --gh-purple: #8957E5;
+      --gh-purple-light: #BC8CFF;
+      --gh-purple-dim: rgba(137, 87, 229, 0.12);
+    }
+
+    /* Problems Archive Layout */
     .archive-page {
       min-height: 100vh;
       min-height: 100dvh;
       background-color: var(--bg-black, #050505);
       color: var(--text-primary, #EDEDED);
       padding: var(--space-6) var(--space-4) var(--space-10);
-      max-width: 1300px;
+      max-width: 1320px;
       margin: 0 auto;
     }
 
@@ -32,7 +45,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: var(--space-5);
+      padding-bottom: var(--space-4);
       border-bottom: 1px solid var(--border-rule, #1B2029);
       margin-bottom: var(--space-6);
       flex-wrap: wrap;
@@ -43,8 +56,8 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      padding: 8px 16px;
-      background-color: rgba(12, 14, 20, 0.8);
+      padding: 7px 16px;
+      background-color: #0A0D14;
       border: 1px solid var(--border-rule, #1B2029);
       border-radius: 4px;
       color: var(--text-primary, #EDEDED);
@@ -52,13 +65,14 @@
       font-size: 0.8125rem;
       font-weight: 500;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .archive-back-btn:hover {
-      border-color: var(--accent-green, #00FF66);
-      color: var(--accent-green, #00FF66);
-      box-shadow: 0 0 14px rgba(0, 255, 102, 0.15);
+      border-color: var(--cf-blue-light);
+      color: #FFFFFF;
+      background-color: var(--cf-blue-dim);
+      box-shadow: 0 0 16px var(--cf-blue-glow);
       transform: translateX(-2px);
     }
 
@@ -81,93 +95,244 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: var(--accent-green, #00FF66);
-      box-shadow: 0 0 8px var(--accent-green, #00FF66);
+      background-color: var(--cf-blue-light);
+      box-shadow: 0 0 8px var(--cf-blue);
+      animation: pulse-indicator 2s infinite ease-in-out;
     }
 
-    /* GitHub Repository Showcase Card */
-    .repo-hero-card {
-      background: linear-gradient(135deg, rgba(16, 22, 34, 0.85) 0%, rgba(10, 14, 22, 0.95) 100%);
-      border: 1px solid var(--border-rule-bright, #2A3241);
-      border-left: 4px solid var(--accent-green, #00FF66);
+    @keyframes pulse-indicator {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* ==========================================================================
+       Redesigned Repository Workbench Card (Linear / Cursor Developer Aesthetic)
+       ========================================================================== */
+    .repo-workbench-card {
+      background: #090C12;
+      border: 1px solid #1F2430;
       border-radius: 6px;
-      padding: var(--space-6);
       margin-bottom: var(--space-8);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--space-6);
-      position: relative;
       overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .repo-hero-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 250px;
-      height: 100%;
-      background: radial-gradient(circle at top right, rgba(0, 255, 102, 0.08), transparent 70%);
-      pointer-events: none;
+    .repo-workbench-card:hover {
+      border-color: #2D3648;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(49, 140, 231, 0.08);
     }
 
-    .repo-info-block {
-      max-width: 750px;
+    /* Terminal-style top navigation bar */
+    .repo-wb-top-bar {
+      padding: 10px 18px;
+      background: #06080D;
+      border-bottom: 1px solid #181C26;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-3);
     }
 
-    .repo-badge-pill {
+    .repo-wb-breadcrumbs {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .repo-wb-breadcrumbs .gh-icon {
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+    }
+
+    .repo-wb-breadcrumbs .repo-owner {
+      color: var(--text-secondary);
+    }
+
+    .repo-wb-breadcrumbs .repo-sep {
+      color: var(--text-dim);
+    }
+
+    .repo-wb-breadcrumbs .repo-name {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .repo-wb-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid #1F2430;
+      padding: 3px 10px;
+      border-radius: 3px;
+    }
+
+    .cf-bars-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      height: 12px;
+    }
+
+    .cf-bar {
+      width: 2.5px;
+      border-radius: 1px;
+    }
+    .cf-bar-1 { height: 7px; background: #FFD233; align-self: flex-end; }
+    .cf-bar-2 { height: 12px; background: #318CE7; }
+    .cf-bar-3 { height: 9px; background: #FF3B30; align-self: flex-end; }
+
+    /* Main body layout */
+    .repo-wb-body {
+      padding: var(--space-6) var(--space-6);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .repo-wb-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 800px;
+    }
+
+    .repo-wb-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .repo-wb-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--cf-blue-light);
+      background: var(--cf-blue-dim);
+      border: 1px solid rgba(49, 140, 231, 0.3);
+      padding: 3px 9px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    .repo-wb-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .repo-wb-desc {
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+      max-width: 720px;
+    }
+
+    /* Telemetry specs grid */
+    .repo-wb-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+      padding-top: var(--space-4);
+      border-top: 1px solid #181C26;
+    }
+
+    .repo-wb-spec-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-family: var(--font-mono);
       font-size: 0.6875rem;
-      font-weight: 600;
-      color: var(--accent-green, #00FF66);
-      background: rgba(0, 255, 102, 0.08);
-      border: 1px solid rgba(0, 255, 102, 0.25);
-      padding: 3px 10px;
+      background: #06080D;
+      border: 1px solid #1F2430;
+      padding: 5px 11px;
       border-radius: 3px;
-      margin-bottom: var(--space-3);
     }
 
-    .repo-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 700;
+    .repo-wb-spec-label {
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .repo-wb-spec-val {
       color: #FFFFFF;
-      margin: 0 0 var(--space-2) 0;
-      letter-spacing: -0.02em;
+      font-weight: 600;
     }
 
-    .repo-desc {
-      font-family: var(--font-display);
-      font-size: 0.9375rem;
-      color: var(--text-secondary, #B8C4D1);
-      line-height: 1.5;
-      margin: 0;
+    /* Action buttons block */
+    .repo-wb-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 240px;
     }
 
-    .repo-action-btn {
+    .repo-btn-github {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      background-color: var(--accent-green, #00FF66);
-      color: #050505 !important;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 18px;
+      background: #141822;
+      border: 1px solid #2B3342;
+      border-radius: 4px;
+      color: #FFFFFF !important;
       font-family: var(--font-mono);
       font-size: 0.8125rem;
-      font-weight: 700;
+      font-weight: 600;
       text-decoration: none;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-      box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
 
-    .repo-action-btn:hover {
-      background-color: #FFFFFF;
-      box-shadow: 0 0 26px rgba(255, 255, 255, 0.5);
+    .repo-btn-github:hover {
+      background: rgba(137, 87, 229, 0.15);
+      border-color: var(--gh-purple);
+      color: var(--gh-purple-light) !important;
+      box-shadow: 0 0 20px rgba(137, 87, 229, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .repo-btn-codeforces {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 18px;
+      background: #0B101A;
+      border: 1px solid #1E293B;
+      border-radius: 4px;
+      color: var(--cf-blue-light) !important;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .repo-btn-codeforces:hover {
+      background: rgba(49, 140, 231, 0.15);
+      border-color: var(--cf-blue);
+      color: #FFFFFF !important;
+      box-shadow: 0 0 18px var(--cf-blue-glow);
       transform: translateY(-2px);
     }
 
@@ -184,8 +349,8 @@
       width: 100%;
       box-sizing: border-box;
       padding: 12px 18px;
-      background-color: var(--bg-surface-terminal, #07090D);
-      border: 1px solid var(--border-rule, #1B2029);
+      background-color: #080B10;
+      border: 1px solid #1C222E;
       border-radius: 4px;
       color: #FFFFFF;
       font-family: var(--font-mono);
@@ -195,8 +360,8 @@
     }
 
     .problem-search-input:focus {
-      border-color: var(--accent-green, #00FF66);
-      box-shadow: 0 0 16px rgba(0, 255, 102, 0.2);
+      border-color: var(--cf-blue);
+      box-shadow: 0 0 16px var(--cf-blue-glow);
     }
 
     .tag-filter-tabs {
@@ -207,8 +372,8 @@
 
     .filter-tab {
       padding: 6px 14px;
-      background: var(--bg-surface, #0C0E14);
-      border: 1px solid var(--border-rule, #1B2029);
+      background: #0A0D14;
+      border: 1px solid #1A202C;
       border-radius: 4px;
       color: var(--text-muted);
       font-family: var(--font-mono);
@@ -222,15 +387,15 @@
     }
 
     .filter-tab:hover {
-      border-color: var(--tab-color, var(--accent-green));
+      border-color: var(--tab-color, var(--cf-blue-light));
       color: #FFFFFF;
     }
 
     .filter-tab.active {
-      background: rgba(20, 26, 38, 0.9);
-      border-color: var(--tab-color, var(--accent-green));
-      color: var(--tab-color, var(--accent-green));
-      box-shadow: 0 0 12px var(--tab-glow, rgba(0, 255, 102, 0.25));
+      background: rgba(16, 22, 34, 0.95);
+      border-color: var(--tab-color, var(--cf-blue-light));
+      color: var(--tab-color, var(--cf-blue-light));
+      box-shadow: 0 0 12px var(--tab-glow, rgba(49, 140, 231, 0.3));
       font-weight: 700;
     }
 
@@ -245,27 +410,27 @@
     /* Problems Grid */
     .problems-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
       gap: var(--space-4);
     }
 
     .problem-card {
-      background: var(--bg-surface, #0C0E14);
-      border: 1px solid var(--border-rule, #1B2029);
-      border-radius: 4px;
-      padding: var(--space-4);
+      background: #090C12;
+      border: 1px solid #1B202A;
+      border-radius: 5px;
+      padding: var(--space-4) var(--space-5);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       position: relative;
     }
 
     .problem-card:hover {
-      border-color: var(--card-accent, var(--accent-green));
-      background: rgba(16, 22, 32, 0.95);
+      border-color: var(--card-accent, var(--cf-blue-light));
+      background: #0C1018;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 255, 102, 0.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 16px var(--card-glow, rgba(49, 140, 231, 0.15));
     }
 
     .problem-card-top {
@@ -276,45 +441,70 @@
       gap: 10px;
     }
 
+    /* Problem ID Badge (Codeforces Blue style) */
     .problem-id-badge {
       font-family: var(--font-mono);
       font-size: 0.8125rem;
       font-weight: 700;
-      color: var(--accent-green, #00FF66);
-      background: rgba(0, 255, 102, 0.08);
-      border: 1px solid rgba(0, 255, 102, 0.2);
-      padding: 2px 7px;
-      border-radius: 2px;
+      color: var(--cf-blue-light);
+      background: var(--cf-blue-dim);
+      border: 1px solid rgba(49, 140, 231, 0.35);
+      padding: 2px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
     }
 
+    /* Rating Badges in authentic Codeforces rank colors */
     .problem-rating-badge {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #4CAF50;
-      border: 1px solid rgba(76, 175, 80, 0.3);
+      padding: 2px 8px;
+      border-radius: 3px;
     }
 
-    .rating-1000 {
-      color: #00D4FF;
-      border-color: rgba(0, 212, 255, 0.3);
+    /* Rating < 1200: Newbie (Gray) */
+    .rating-newbie {
+      color: #94A3B8;
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.25);
     }
 
-    .rating-1300 {
+    /* Rating 1200 - 1399: Pupil (Green) */
+    .rating-pupil {
+      color: #22C55E;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    /* Rating 1400 - 1599: Specialist (Cyan) */
+    .rating-specialist {
+      color: #06B6D4;
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    /* Rating 1600 - 1899: Expert (Blue) */
+    .rating-expert {
+      color: #3B82F6;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    /* Rating 1900+: Candidate Master (Purple) */
+    .rating-cm {
       color: #A855F7;
-      border-color: rgba(168, 85, 247, 0.3);
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.3);
     }
 
     .problem-title {
       font-family: var(--font-display);
-      font-size: 1.125rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: #FFFFFF;
       margin: 0 0 var(--space-3) 0;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .problem-tags-row {
@@ -324,21 +514,30 @@
       margin-bottom: var(--space-4);
     }
 
+    /* Problem Tag Chips with Codeforces Topic Colors */
     .problem-tag-chip {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
-      padding: 2px 8px;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-rule, #1B2029);
-      color: var(--text-secondary, #B8C4D1);
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 3px;
+      color: var(--t-color, var(--cf-blue-light));
+      background: var(--t-bg, rgba(49, 140, 231, 0.08));
+      border: 1px solid var(--t-border, rgba(49, 140, 231, 0.28));
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .problem-tag-chip:hover {
+      border-color: var(--t-color);
+      box-shadow: 0 0 10px var(--t-glow, rgba(49, 140, 231, 0.25));
+      transform: translateY(-1px);
     }
 
     .problem-actions-row {
       display: flex;
       gap: 10px;
       padding-top: var(--space-3);
-      border-top: 1px solid var(--border-rule-subtle, #131720);
+      border-top: 1px solid #141923;
     }
 
     .problem-action-link {
@@ -347,28 +546,30 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 7px 10px;
+      padding: 8px 10px;
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 600;
       text-decoration: none;
       border-radius: 3px;
       transition: all 0.2s ease;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-primary);
-      border: 1px solid var(--border-rule);
-    }
-
-    .problem-action-link:hover {
-      background: rgba(0, 255, 102, 0.1);
-      border-color: var(--accent-green);
-      color: var(--accent-green);
+      background: #06080D;
+      color: var(--text-secondary);
+      border: 1px solid #1E2430;
     }
 
     .problem-action-link.cf-link:hover {
-      border-color: #38BDF8;
-      color: #38BDF8;
-      background: rgba(56, 189, 248, 0.08);
+      border-color: var(--cf-blue);
+      color: #FFFFFF;
+      background: var(--cf-blue-dim);
+      box-shadow: 0 0 12px var(--cf-blue-glow);
+    }
+
+    .problem-action-link.repo-link:hover {
+      border-color: var(--gh-purple);
+      color: var(--gh-purple-light);
+      background: var(--gh-purple-dim);
+      box-shadow: 0 0 12px rgba(137, 87, 229, 0.3);
     }
 
     /* Empty state */
@@ -380,6 +581,17 @@
       color: var(--text-muted);
     }
 
+    @media (max-width: 900px) {
+      .repo-wb-body {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+      .repo-wb-actions {
+        width: 100%;
+        min-width: unset;
+      }
+    }
+
     @media (max-width: 650px) {
       .problems-grid {
         grid-template-columns: 1fr;
@@ -388,8 +600,15 @@
         flex-direction: column;
         align-items: flex-start;
       }
-      .repo-hero-card {
+      .repo-wb-body {
         padding: var(--space-4);
+      }
+      .repo-wb-specs {
+        gap: 6px;
+      }
+      .repo-wb-spec-pill {
+        flex: 1 1 calc(50% - 6px);
+        justify-content: space-between;
       }
     }
   </style>
@@ -412,34 +631,86 @@
         </div>
         <div class="archive-telemetry-item">
           <span>HANDLE:</span>
-          <span style="color: var(--accent-green);">Itz_Arslan</span>
+          <span style="color: var(--cf-blue-light); font-weight: 600;">Itz_Arslan</span>
         </div>
         <div class="archive-telemetry-item">
           <span>TOTAL SOLVED:</span>
-          <span style="color: #FFFFFF;">21</span>
+          <span style="color: #FFFFFF; font-weight: 600;">21</span>
         </div>
       </div>
     </header>
 
-    <!-- GitHub Repository Spotlight Card -->
-    <section class="repo-hero-card">
-      <div class="repo-info-block">
-        <div class="repo-badge-pill">
-          <span>⚡</span>
-          <span>OFFICIAL REPOSITORY // C++ ALGORITHMIC SOLUTIONS</span>
+    <!-- Redesigned Repository Workbench Showcase Card -->
+    <section class="repo-workbench-card">
+      <!-- Terminal Top Bar -->
+      <div class="repo-wb-top-bar">
+        <div class="repo-wb-breadcrumbs">
+          <span class="gh-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </span>
+          <span class="repo-owner">Omar-Ayman-Ali</span>
+          <span class="repo-sep">/</span>
+          <span class="repo-name">codeforces-solutions</span>
         </div>
-        <h1 class="repo-title">Omar-Ayman-Ali / codeforces-solutions</h1>
-        <p class="repo-desc">
-          Complete high-performance C++20 implementations for competitive programming contests, 
-          covering segment trees, dynamic programming, greedy algorithms, number theory, and graphs. 
-          Tested and accepted across official Codeforces rounds.
-        </p>
+
+        <div class="repo-wb-status">
+          <span class="cf-bars-icon" title="Codeforces">
+            <span class="cf-bar cf-bar-1"></span>
+            <span class="cf-bar cf-bar-2"></span>
+            <span class="cf-bar cf-bar-3"></span>
+          </span>
+          <span>STATUS: LIVE CP ARCHIVE</span>
+        </div>
       </div>
-      <div>
-        <a href="https://github.com/Omar-Ayman-Ali/codeforces-solutions" target="_blank" rel="noopener noreferrer" class="repo-action-btn">
-          <span>VIEW REPOSITORY ON GITHUB</span>
-          <span>↗</span>
-        </a>
+
+      <!-- Workbench Body -->
+      <div class="repo-wb-body">
+        <div class="repo-wb-info">
+          <div class="repo-wb-tag-row">
+            <span class="repo-wb-tag">C++20 // COMPETITIVE PROGRAMMING</span>
+            <span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-dim);">// ASSIUT UNIVERSITY TRAINING</span>
+          </div>
+
+          <h1 class="repo-wb-title">codeforces-solutions</h1>
+
+          <p class="repo-wb-desc">
+            Complete high-performance C++20 implementations for competitive programming contests, Assiut University training sheets, 
+            and algorithmic problem-solving. Tested, benchmarked, and accepted across official Codeforces rounds.
+          </p>
+
+          <div class="repo-wb-specs">
+            <div class="repo-wb-spec-pill">
+              <span class="repo-wb-spec-label">PROBLEMS SOLVED:</span>
+              <span class="repo-wb-spec-val" style="color: var(--cf-blue-light);">21 Accepted</span>
+            </div>
+            <div class="repo-wb-spec-pill">
+              <span class="repo-wb-spec-label">LANGUAGE:</span>
+              <span class="repo-wb-spec-val">C++20 // Fast I/O</span>
+            </div>
+            <div class="repo-wb-spec-pill">
+              <span class="repo-wb-spec-label">TOPICS COVERED:</span>
+              <span class="repo-wb-spec-val">10 Algorithmic Tags</span>
+            </div>
+            <div class="repo-wb-spec-pill">
+              <span class="repo-wb-spec-label">LICENSE:</span>
+              <span class="repo-wb-spec-val">MIT // Open Source</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="repo-wb-actions">
+          <a href="https://github.com/Omar-Ayman-Ali/codeforces-solutions" target="_blank" rel="noopener noreferrer" class="repo-btn-github">
+            <span>VIEW ON GITHUB</span>
+            <span>↗</span>
+          </a>
+          <a href="https://codeforces.com/profile/Itz_Arslan" target="_blank" rel="noopener noreferrer" class="repo-btn-codeforces">
+            <span>CODEFORCES PROFILE</span>
+            <span>↗</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -450,7 +721,7 @@
           type="text" 
           id="problem-search" 
           class="problem-search-input" 
-          placeholder="SEARCH PROBLEMS BY ID OR TITLE (e.g. 263A, Beautiful Matrix, Math, Tree)..."
+          placeholder="SEARCH PROBLEMS BY ID OR TITLE (e.g. 263A, Beautiful Matrix, Math, Tree)..." 
           autocomplete="off"
         >
       </div>
@@ -500,7 +771,9 @@
         { id: '25A', name: 'IQ test', rating: 1300, tags: ['brute force'], cid: 25, idx: 'A' }
       ];
 
+      // Authentic Codeforces Topic Tag Colors
       const TAG_COLORS = {
+        'ALL': { color: '#318CE7', glow: 'rgba(49, 140, 231, 0.35)' },
         'implementation': { color: '#FF705A', glow: 'rgba(255, 112, 90, 0.35)' },
         'math': { color: '#FF5D8F', glow: 'rgba(255, 93, 143, 0.35)' },
         'greedy': { color: '#D946EF', glow: 'rgba(217, 70, 239, 0.35)' },
@@ -559,7 +832,7 @@
           const btn = document.createElement('button');
           btn.className = `filter-tab ${activeTag.toLowerCase() === tagName.toLowerCase() ? 'active' : ''}`;
           
-          const tagInfo = TAG_COLORS[tagName] || { color: '#00FF66', glow: 'rgba(0, 255, 102, 0.3)' };
+          const tagInfo = TAG_COLORS[tagName] || { color: '#38BDF8', glow: 'rgba(56, 189, 248, 0.3)' };
           btn.style.setProperty('--tab-color', tagInfo.color);
           btn.style.setProperty('--tab-glow', tagInfo.glow);
 
@@ -584,6 +857,28 @@
 
           tabsContainer.appendChild(btn);
         });
+      }
+
+      // Helper to determine Codeforces rank rating badge
+      function getRatingBadgeHtml(rating) {
+        let rankClass = 'rating-newbie';
+        let rankLabel = 'NEWBIE';
+
+        if (rating >= 1900) {
+          rankClass = 'rating-cm';
+          rankLabel = 'CANDIDATE MASTER';
+        } else if (rating >= 1600) {
+          rankClass = 'rating-expert';
+          rankLabel = 'EXPERT';
+        } else if (rating >= 1400) {
+          rankClass = 'rating-specialist';
+          rankLabel = 'SPECIALIST';
+        } else if (rating >= 1200) {
+          rankClass = 'rating-pupil';
+          rankLabel = 'PUPIL';
+        }
+
+        return `<span class="problem-rating-badge ${rankClass}" title="${rankLabel}">★ ${rating}</span>`;
       }
 
       // Render problems list
@@ -612,7 +907,7 @@
           grid.innerHTML = `
             <div class="empty-state">
               <p>// NO PROBLEMS FOUND MATCHING CURRENT FILTER CRITERIA</p>
-              <button class="filter-tab" onclick="document.getElementById('problem-search').value = ''; window.location.search = '';" style="margin-top: 10px;">RESET FILTERS</button>
+              <button class="filter-tab" onclick="document.getElementById('problem-search').value = ''; activeTag = 'ALL'; renderTabs(); renderProblems();" style="margin-top: 10px;">RESET FILTERS</button>
             </div>
           `;
           return;
@@ -626,22 +921,25 @@
           card.className = 'problem-card';
 
           const primaryTag = p.tags[0] || 'implementation';
-          const primaryColor = TAG_COLORS[primaryTag]?.color || '#00FF66';
-          card.style.setProperty('--card-accent', primaryColor);
+          const tagInfo = TAG_COLORS[primaryTag] || { color: '#38BDF8', glow: 'rgba(56, 189, 248, 0.25)' };
+          card.style.setProperty('--card-accent', tagInfo.color);
+          card.style.setProperty('--card-glow', tagInfo.glow);
 
           const cfUrl = `https://codeforces.com/problemset/problem/${p.cid}/${p.idx}`;
+          const ratingBadge = getRatingBadgeHtml(p.rating);
 
-          let ratingClass = 'problem-rating-badge';
-          if (p.rating >= 1300) ratingClass += ' rating-1300';
-          else if (p.rating >= 1000) ratingClass += ' rating-1000';
-
-          const tagsHtml = p.tags.map(t => `<span class="problem-tag-chip">${t}</span>`).join('');
+          // Render each tag chip with authentic Codeforces topic colors
+          const tagsHtml = p.tags.map(t => {
+            const tConf = TAG_COLORS[t] || { color: '#38BDF8', glow: 'rgba(56, 189, 248, 0.25)' };
+            const hexColor = tConf.color;
+            return `<span class="problem-tag-chip" style="--t-color: ${hexColor}; --t-border: ${hexColor}40; --t-bg: ${hexColor}14; --t-glow: ${tConf.glow};">${t}</span>`;
+          }).join('');
 
           card.innerHTML = `
             <div>
               <div class="problem-card-top">
                 <span class="problem-id-badge">${p.id}</span>
-                <span class="${ratingClass}">★ ${p.rating}</span>
+                ${ratingBadge}
               </div>
               <h2 class="problem-title">${p.name}</h2>
               <div class="problem-tags-row">
