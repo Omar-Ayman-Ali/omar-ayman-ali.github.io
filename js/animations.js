@@ -396,7 +396,7 @@
       });
     };
 
-    // 4.6. Codeforces SVG Rating Trajectory Path Initialization
+    // 4.6. Codeforces SVG Rating Trajectory Path Initialization & Stroke-Dasharray Reveal
     const chartPath = document.getElementById('cf-rating-line');
     const chartGlow = document.getElementById('cf-rating-glow');
     const chartBeam = document.getElementById('cf-rating-beam');
@@ -404,33 +404,67 @@
     const chartSvg = document.getElementById('cf-rating-chart');
 
     if (chartPath) {
-      // Ensure trajectory line is 100% complete and reaches the right side (0 to 1000) instantly on page load / refresh
-      chartPath.style.strokeDasharray = 'none';
-      chartPath.style.strokeDashoffset = '0';
-      if (chartGlow) {
-        chartGlow.style.strokeDasharray = 'none';
-        chartGlow.style.strokeDashoffset = '0';
+      if (prefersReducedMotion) {
+        chartPath.style.strokeDasharray = 'none';
+        chartPath.style.strokeDashoffset = '0';
+        if (chartGlow) {
+          chartGlow.style.strokeDasharray = 'none';
+          chartGlow.style.strokeDashoffset = '0';
+        }
+        if (chartArea) gsap.set(chartArea, { opacity: 1 });
+        if (chartBeam) gsap.set(chartBeam, { opacity: 1 });
+      } else {
+        const totalPathLength = Math.ceil(chartPath.getTotalLength()) || 1080;
+        gsap.set([chartPath, chartGlow], {
+          strokeDasharray: totalPathLength,
+          strokeDashoffset: totalPathLength
+        });
+        if (chartArea) gsap.set(chartArea, { opacity: 0 });
+        if (chartBeam) gsap.set(chartBeam, { opacity: 0 });
+
+        ScrollTrigger.create({
+          trigger: '#cf-rating-chart',
+          start: 'top 82%',
+          once: true,
+          onEnter: () => {
+            const chartEntranceTl = gsap.timeline();
+            chartEntranceTl
+              .to([chartPath, chartGlow], {
+                strokeDashoffset: 0,
+                duration: 1.6,
+                ease: 'power2.out',
+                onComplete: () => {
+                  chartPath.style.strokeDasharray = 'none';
+                  chartPath.style.strokeDashoffset = '0';
+                  if (chartGlow) {
+                    chartGlow.style.strokeDasharray = 'none';
+                    chartGlow.style.strokeDashoffset = '0';
+                  }
+                }
+              })
+              .to(chartArea, {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power2.out'
+              }, '<0.5')
+              .to(chartBeam, {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power2.out'
+              }, '<0.2')
+              .fromTo(chartSvg,
+                { filter: 'drop-shadow(0 0 2px rgba(0, 255, 102, 0.15))' },
+                { filter: 'drop-shadow(0 0 16px rgba(0, 255, 102, 0.55))', duration: 1.2, ease: 'power2.out' },
+                0
+              );
+          }
+        });
       }
-      if (chartArea) gsap.set(chartArea, { opacity: 1 });
-      if (chartBeam) gsap.set(chartBeam, { opacity: 1 });
 
       // Initialize interactive scrubber immediately so it never waits
       if (window.initCodeforcesInteractiveScrubber) {
         window.initCodeforcesInteractiveScrubber();
       }
-
-      // Hardware-accelerated neon glow bloom on scroll into view
-      ScrollTrigger.create({
-        trigger: '#cf-rating-chart',
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          gsap.fromTo(chartSvg,
-            { filter: 'drop-shadow(0 0 2px rgba(0, 255, 102, 0.2))' },
-            { filter: 'drop-shadow(0 0 12px rgba(0, 255, 102, 0.45))', duration: 1.0, ease: 'power2.out' }
-          );
-        }
-      });
     }
 
     // 4.7. Interactive Codeforces Curve Scrubber (gsap.quickTo 60FPS)
@@ -567,6 +601,10 @@
         isHovering = true;
         gsap.to(scrubGuide, { autoAlpha: 0.85, duration: 0.2 });
         gsap.to(tooltip, { autoAlpha: 1, duration: 0.2 });
+        const halo = pointGroup.querySelector('.scrub-halo');
+        const ring = pointGroup.querySelector('.scrub-ring');
+        if (halo) gsap.to(halo, { scale: 1.45, opacity: 0.85, duration: 0.25, ease: 'power2.out', transformOrigin: 'center center' });
+        if (ring) gsap.to(ring, { scale: 1.25, filter: 'drop-shadow(0 0 14px rgba(0, 255, 102, 0.95))', duration: 0.25, ease: 'power2.out', transformOrigin: 'center center' });
         handleScrub(e.clientX);
       });
 
@@ -588,6 +626,10 @@
           duration: 0.6,
           ease: 'power3.out'
         });
+        const halo = pointGroup.querySelector('.scrub-halo');
+        const ring = pointGroup.querySelector('.scrub-ring');
+        if (halo) gsap.to(halo, { scale: 1.0, opacity: 0.35, duration: 0.35, ease: 'power2.out', transformOrigin: 'center center' });
+        if (ring) gsap.to(ring, { scale: 1.0, filter: 'drop-shadow(0 0 8px rgba(0, 255, 102, 0.8))', duration: 0.35, ease: 'power2.out', transformOrigin: 'center center' });
         gsap.to(scrubGuide, {
           x: 880,
           autoAlpha: 0,
