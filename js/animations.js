@@ -1642,7 +1642,7 @@
       });
     }
 
-    // 6. GSAP Pinned Horizontal Projects Gallery
+    // 6. GSAP Pinned Horizontal Projects Gallery & Parallax Glow / 3D Magnetic Card Tilt
     // Uses ScrollTrigger.matchMedia() for smooth desktop pinning with scrub: 1,
     // and automatic fallback to vertical stack on mobile (<= 768px).
     ScrollTrigger.matchMedia({
@@ -1671,9 +1671,27 @@
             }
           });
 
+          // Parallax glow layer offset during horizontal scroll
+          const cardGlows = track.querySelectorAll('.project-card-glow');
+          let glowTween = null;
+          if (cardGlows.length > 0) {
+            glowTween = gsap.to(cardGlows, {
+              x: 35,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: section,
+                scrub: 1,
+                start: 'top top',
+                end: () => `+=${getScrollAmount()}`
+              }
+            });
+          }
+
           return () => {
             if (tween.scrollTrigger) tween.scrollTrigger.kill();
+            if (glowTween && glowTween.scrollTrigger) glowTween.scrollTrigger.kill();
             gsap.set(track, { clearProps: 'all' });
+            if (cardGlows.length > 0) gsap.set(cardGlows, { clearProps: 'all' });
           };
         }
       },
@@ -1685,6 +1703,41 @@
           gsap.set(track, { clearProps: 'all' });
         }
       }
+    });
+
+    // 6.2. 3D Magnetic Card Tilt on Hover (respecting data-magnetic)
+    const projectCards = document.querySelectorAll('.project-slide-card');
+    projectCards.forEach((card) => {
+      if (prefersReducedMotion) return;
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+        // Subtle 3D tilt
+        const rotX = -relY * 10;
+        const rotY = relX * 10;
+
+        gsap.to(card, {
+          rotateX: rotX,
+          rotateY: rotY,
+          transformPerspective: 1000,
+          duration: 0.22,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      });
     });
 
     // 7. Algorithmic Manifesto Kinetic Scroll Scrub
