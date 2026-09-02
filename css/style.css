@@ -829,22 +829,42 @@ a, button {
   line-height: 1.4;
 }
 
+/* Interactive SVG Rating Trajectory Chart with Ambient Glow Bleed */
+.cf-rating-bleed-path {
+  fill: none;
+  stroke-width: 32px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.85;
+  pointer-events: none;
+  will-change: stroke-dashoffset, opacity;
+}
+
 /* Interactive SVG Rating Trajectory Chart */
 .cf-chart-card {
-  background-color: var(--bg-surface);
+  position: relative;
+  z-index: 1;
+  background-color: rgba(12, 16, 24, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-rule);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  transition: border-color var(--duration-micro) ease;
+  transition: border-color var(--duration-micro) ease, box-shadow 0.3s ease;
+  overflow: visible; /* Enables ambient glow bleed past card boundary */
 }
 
 .cf-chart-card:hover {
-  border-color: var(--border-rule-bright);
+  border-color: rgba(0, 255, 102, 0.45);
+  box-shadow: 0 0 35px rgba(0, 255, 102, 0.1);
 }
 
 .cf-chart-header {
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -906,34 +926,16 @@ a, button {
   height: 420px;
   min-height: 400px;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* CRITICAL: No clipping of curve or glow */
   background: radial-gradient(circle at 80% 30%, rgba(0, 255, 102, 0.03) 0%, transparent 60%);
   cursor: crosshair;
-}
-
-/* Atmospheric Side Gradient Fades (Seamless Edge Blending) */
-.cf-svg-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 72px;
-  height: 100%;
-  background: linear-gradient(to right, var(--bg-surface) 0%, rgba(12, 14, 20, 0.7) 40%, transparent 100%);
-  pointer-events: none;
   z-index: 5;
 }
 
+/* Atmospheric Side Gradient Fades removed so glow can bleed naturally */
+.cf-svg-container::before,
 .cf-svg-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 72px;
-  height: 100%;
-  background: linear-gradient(to left, var(--bg-surface) 0%, rgba(12, 14, 20, 0.7) 40%, transparent 100%);
-  pointer-events: none;
-  z-index: 5;
+  display: none;
 }
 
 #cf-rating-chart {
@@ -977,25 +979,26 @@ a, button {
 .cf-rating-glow {
   fill: none;
   stroke: var(--accent-green);
-  stroke-width: 8px;
+  stroke-width: 10px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.45;
-  filter: blur(8px) drop-shadow(0 0 12px rgba(0, 255, 102, 0.7));
+  opacity: 0.65;
+  filter: blur(8px) drop-shadow(0 0 16px rgba(0, 255, 102, 0.8));
   vector-effect: non-scaling-stroke;
   animation: cfGlowAura 2.4s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
 @keyframes cfGlowAura {
   0% {
-    opacity: 0.35;
-    stroke-width: 6px;
-    filter: blur(6px) drop-shadow(0 0 8px rgba(0, 255, 102, 0.4));
+    opacity: 0.45;
+    stroke-width: 8px;
+    filter: blur(6px) drop-shadow(0 0 10px rgba(0, 255, 102, 0.5));
   }
   100% {
     opacity: 0.85;
-    stroke-width: 10px;
-    filter: blur(10px) drop-shadow(0 0 20px rgba(0, 255, 102, 0.9));
+    stroke-width: 12px;
+    filter: blur(10px) drop-shadow(0 0 24px rgba(0, 255, 102, 0.95));
   }
 }
 
@@ -1006,7 +1009,7 @@ a, button {
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 8px rgba(0, 255, 102, 0.8));
+  filter: drop-shadow(0 0 8px rgba(0, 255, 102, 0.9));
 }
 
 .cf-rating-beam {
@@ -1017,12 +1020,12 @@ a, button {
   stroke-linejoin: round;
   stroke-dasharray: 120 1020;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 6px #00FF66) drop-shadow(0 0 14px #00FF66);
+  filter: drop-shadow(0 0 6px #00FF66) drop-shadow(0 0 16px #00FF66);
   animation: cfBeamTravel 2.8s linear infinite;
   pointer-events: none;
 }
 
-/* Hover-Activated Dashed Trajectory Stream (Line with spaces in it moving across the curve) */
+/* Hover-Activated Dashed Trajectory Stream */
 .cf-hover-dash-path {
   fill: none;
   stroke: #00FF66;

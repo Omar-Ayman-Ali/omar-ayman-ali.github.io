@@ -565,15 +565,15 @@
             <span class="cf-metric-label">CONTESTS ATTENDED</span>
             <span class="cf-metric-badge">RATED ROUNDS</span>
           </div>
-          <div class="cf-metric-val-wrap">
+            <div class="cf-metric-val-wrap">
             <span id="cf-contests-val" class="cf-counter-val highlight-green" data-target="3" data-suffix="">0</span>
           </div>
           <div class="cf-metric-sub">Official rated Codeforces division rounds completed</div>
         </div>
       </div>
 
-      <!-- Interactive SVG Rating Trajectory Chart -->
-      <div class="cf-chart-card">
+      <!-- Interactive SVG Rating Trajectory Chart with Ambient Glow Bleed -->
+      <div id="cf-chart-card" class="cf-chart-card">
         <div class="cf-chart-header">
           <div class="cf-chart-title-group">
             <span class="chart-main-title">RATING TRAJECTORY: 3 RATED ROUNDS</span>
@@ -586,7 +586,7 @@
           </div>
         </div>
 
-        <div class="cf-svg-container">
+        <div id="cf-svg-container" class="cf-svg-container">
           <svg id="cf-rating-chart" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-label="Codeforces Rating Growth Graph" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
             <defs>
               <linearGradient id="cf-gradient" x1="0" y1="0" x2="0" y2="1">
@@ -594,6 +594,24 @@
                 <stop offset="50%" stop-color="#00FF66" stop-opacity="0.08"></stop>
                 <stop offset="100%" stop-color="#050505" stop-opacity="0.0"></stop>
               </linearGradient>
+              <!-- Trajectory line & glow gradient: naturally fades to transparent at both ends -->
+              <linearGradient id="cf-stroke-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00FF66" stop-opacity="0"></stop>
+                <stop offset="4%" stop-color="#00FF66" stop-opacity="0.3"></stop>
+                <stop offset="14%" stop-color="#00FF66" stop-opacity="0.95"></stop>
+                <stop offset="84%" stop-color="#00FF66" stop-opacity="0.95"></stop>
+                <stop offset="94%" stop-color="#00FF66" stop-opacity="0.3"></stop>
+                <stop offset="100%" stop-color="#00FF66" stop-opacity="0"></stop>
+              </linearGradient>
+              <!-- Multi-stage Gaussian filter for oversized ambient glow bleed -->
+              <filter id="cf-bleed-filter" x="-40%" y="-60%" width="180%" height="220%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="22" result="blurDeep"></feGaussianBlur>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blurMid"></feGaussianBlur>
+                <feMerge>
+                  <feMergeNode in="blurDeep"></feMergeNode>
+                  <feMergeNode in="blurMid"></feMergeNode>
+                </feMerge>
+              </filter>
             </defs>
 
             <!-- Rating Threshold Gridlines & Zones -->
@@ -623,74 +641,82 @@
             <!-- Area Fill Gradient (Full span from 0 to 1000) -->
             <path id="cf-rating-area" class="cf-rating-area" fill="url(#cf-gradient)" d="M 0 340 C 80 330, 120 320, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1000 196 L 1000 370 L 0 370 Z"></path>
 
-            <!-- Layer 1: Ambient Pulsing Glow Aura (Full span from 0 to 1000) -->
-            <path id="cf-rating-glow" class="cf-rating-glow" d="M 0 340 C 80 330, 120 320, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1000 196"></path>
+            <!-- Layer 0: Oversized Ambient Bleed Glow (Bleeds smoothly past card bounds) -->
+            <path id="cf-rating-bleed-path" class="cf-rating-bleed-path" stroke="url(#cf-stroke-gradient)" filter="url(#cf-bleed-filter)"
+                  d="M -70 348 C 10 342, 90 328, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1070 196"></path>
 
-            <!-- Layer 2: Main Solid Core Trajectory Path (Full span from 0 to 1000) -->
-            <path id="cf-rating-line" class="cf-rating-path" d="M 0 340 C 80 330, 120 320, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1000 196"></path>
+            <!-- Layer 1: Ambient Pulsing Glow Aura (Extended soft fade curve) -->
+            <path id="cf-rating-glow" class="cf-rating-glow" stroke="url(#cf-stroke-gradient)"
+                  d="M -70 348 C 10 342, 90 328, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1070 196"></path>
 
-            <!-- Layer 3: Kinetic Energy Laser Pulse Beam (Full span from 0 to 1000) -->
-            <path id="cf-rating-beam" class="cf-rating-beam" d="M 0 340 C 80 330, 120 320, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1000 196"></path>
+            <!-- Layer 2: Main Solid Core Trajectory Path -->
+            <path id="cf-rating-line" class="cf-rating-path" stroke="url(#cf-stroke-gradient)"
+                  d="M -70 348 C 10 342, 90 328, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1070 196"></path>
+
+            <!-- Layer 3: Kinetic Energy Laser Pulse Beam -->
+            <path id="cf-rating-beam" class="cf-rating-beam" stroke="url(#cf-stroke-gradient)"
+                  d="M -70 348 C 10 342, 90 328, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1070 196"></path>
 
             <!-- Layer 4: Interactive Hover Dashed Stream (Line with spaces in it moving across the graph on hover) -->
-            <path id="cf-hover-dash-path" class="cf-hover-dash-path" d="M 0 340 C 80 330, 120 320, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1000 196"></path>
+            <path id="cf-hover-dash-path" class="cf-hover-dash-path" stroke="url(#cf-stroke-gradient)"
+                  d="M -70 348 C 10 342, 90 328, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1070 196"></path>
 
-            <!-- Data Milestone Points (Historical 3 Contests with Badges) -->
-            <!-- Milestone 1 -->
-            <circle cx="160" cy="313" r="6" class="chart-point"></circle>
-            <g class="chart-pill" transform="translate(160, 282)">
-              <rect x="-44" y="-11" width="88" height="18" rx="2" class="pill-rect"></rect>
-              <text x="0" y="2" text-anchor="middle" class="pill-text">CONTEST 1 · 356</text>
-            </g>
+              <!-- Data Milestone Points (Historical 3 Contests with Badges) -->
+              <!-- Milestone 1 -->
+              <circle cx="160" cy="313" r="6" class="chart-point"></circle>
+              <g class="chart-pill" transform="translate(160, 282)">
+                <rect x="-44" y="-11" width="88" height="18" rx="2" class="pill-rect"></rect>
+                <text x="0" y="2" text-anchor="middle" class="pill-text">CONTEST 1 · 356</text>
+              </g>
 
-            <!-- Milestone 2 -->
-            <circle cx="520" cy="236" r="6" class="chart-point"></circle>
-            <g class="chart-pill" transform="translate(520, 205)">
-              <rect x="-44" y="-11" width="88" height="18" rx="2" class="pill-rect"></rect>
-              <text x="0" y="2" text-anchor="middle" class="pill-text">CONTEST 2 · 614</text>
-            </g>
+              <!-- Milestone 2 -->
+              <circle cx="520" cy="236" r="6" class="chart-point"></circle>
+              <g class="chart-pill" transform="translate(520, 205)">
+                <rect x="-44" y="-11" width="88" height="18" rx="2" class="pill-rect"></rect>
+                <text x="0" y="2" text-anchor="middle" class="pill-text">CONTEST 2 · 614</text>
+              </g>
 
-            <!-- Milestone 3: Peak -->
-            <circle cx="880" cy="196" r="7" class="chart-point-peak"></circle>
-            <g class="chart-pill pill-peak" transform="translate(880, 160)">
-              <rect x="-68" y="-12" width="136" height="20" rx="2" class="pill-rect peak-rect"></rect>
-              <text x="0" y="2" text-anchor="middle" class="pill-text peak-text">★ PEAK &amp; CURRENT: 747</text>
-            </g>
+              <!-- Milestone 3: Peak -->
+              <circle cx="880" cy="196" r="7" class="chart-point-peak"></circle>
+              <g class="chart-pill pill-peak" transform="translate(880, 160)">
+                <rect x="-68" y="-12" width="136" height="20" rx="2" class="pill-rect peak-rect"></rect>
+                <text x="0" y="2" text-anchor="middle" class="pill-text peak-text">★ PEAK &amp; CURRENT: 747</text>
+              </g>
 
-            <!-- Interactive Vertical Scrubber Guide (Line with spaces in it moving over the graph) -->
-            <line id="cf-scrub-guide" class="cf-scrub-guide" x1="0" y1="45" x2="0" y2="370"></line>
+              <!-- Interactive Vertical Scrubber Guide (Line with spaces in it moving over the graph) -->
+              <line id="cf-scrub-guide" class="cf-scrub-guide" x1="0" y1="45" x2="0" y2="370"></line>
 
-            <!-- Dynamic Interactive Scrubber Point along Curve -->
-            <g id="cf-interactive-point-group" class="cf-interactive-point-group" transform="translate(880, 196)">
-              <circle class="scrub-halo" r="18"></circle>
-              <circle class="scrub-ring" r="8"></circle>
-              <circle class="scrub-core" r="3.5"></circle>
-            </g>
-          </svg>
+              <!-- Dynamic Interactive Scrubber Point along Curve -->
+              <g id="cf-interactive-point-group" class="cf-interactive-point-group" transform="translate(880, 196)">
+                <circle class="scrub-halo" r="18"></circle>
+                <circle class="scrub-ring" r="8"></circle>
+                <circle class="scrub-core" r="3.5"></circle>
+              </g>
+            </svg>
 
-          <!-- Floating Precision Telemetry Tooltip -->
-          <div id="cf-chart-tooltip" class="cf-chart-tooltip" aria-hidden="true">
-            <div class="tooltip-header">
-              <span class="tooltip-status-dot"></span>
-              <span class="tooltip-title" id="tooltip-contest-title">ROUND 1114 (DIV. 3)</span>
-            </div>
-            <div class="tooltip-body">
-              <div class="tooltip-metric">
-                <span class="tooltip-label">RATING:</span>
-                <span class="tooltip-value highlight-green" id="tooltip-rating-val">747</span>
+            <!-- Floating Precision Telemetry Tooltip -->
+            <div id="cf-chart-tooltip" class="cf-chart-tooltip" aria-hidden="true">
+              <div class="tooltip-header">
+                <span class="tooltip-status-dot"></span>
+                <span class="tooltip-title" id="tooltip-contest-title">ROUND 1114 (DIV. 3)</span>
               </div>
-              <div class="tooltip-metric">
-                <span class="tooltip-label">RANK:</span>
-                <span class="tooltip-value" id="tooltip-rank-val">#22615</span>
-              </div>
-              <div class="tooltip-metric">
-                <span class="tooltip-label">DELTA:</span>
-                <span class="tooltip-value highlight-orange" id="tooltip-delta-val">+133</span>
+              <div class="tooltip-body">
+                <div class="tooltip-metric">
+                  <span class="tooltip-label">RATING:</span>
+                  <span class="tooltip-value highlight-green" id="tooltip-rating-val">747</span>
+                </div>
+                <div class="tooltip-metric">
+                  <span class="tooltip-label">RANK:</span>
+                  <span class="tooltip-value" id="tooltip-rank-val">#22615</span>
+                </div>
+                <div class="tooltip-metric">
+                  <span class="tooltip-label">DELTA:</span>
+                  <span class="tooltip-value highlight-orange" id="tooltip-delta-val">+133</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
       <!-- Codeforces Annual Activity Matrix & Consistency Grid -->
       <div class="cf-activity-card">

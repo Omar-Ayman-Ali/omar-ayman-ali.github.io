@@ -399,9 +399,13 @@
     // 4.6. Codeforces SVG Rating Trajectory Path Initialization & Stroke-Dasharray Reveal
     const chartPath = document.getElementById('cf-rating-line');
     const chartGlow = document.getElementById('cf-rating-glow');
+    const chartBleed = document.getElementById('cf-rating-bleed-path');
     const chartBeam = document.getElementById('cf-rating-beam');
     const chartArea = document.getElementById('cf-rating-area');
     const chartSvg = document.getElementById('cf-rating-chart');
+    const chartCard = document.getElementById('cf-chart-card');
+    const chartPoints = document.querySelectorAll('.chart-point, .chart-point-peak');
+    const chartPills = document.querySelectorAll('.chart-pill');
 
     if (chartPath) {
       if (prefersReducedMotion) {
@@ -411,50 +415,102 @@
           chartGlow.style.strokeDasharray = 'none';
           chartGlow.style.strokeDashoffset = '0';
         }
+        if (chartBleed) {
+          chartBleed.style.strokeDasharray = 'none';
+          chartBleed.style.strokeDashoffset = '0';
+        }
         if (chartArea) gsap.set(chartArea, { opacity: 1 });
         if (chartBeam) gsap.set(chartBeam, { opacity: 1 });
+        gsap.set(chartPoints, { opacity: 1, scale: 1 });
+        gsap.set(chartPills, { opacity: 1, y: 0 });
+
+        ScrollTrigger.create({
+          trigger: '#cf-chart-card',
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(chartCard,
+              { opacity: 0 },
+              { opacity: 1, duration: 0.8, ease: 'power2.out' }
+            );
+          }
+        });
       } else {
-        const totalPathLength = Math.ceil(chartPath.getTotalLength()) || 1080;
-        gsap.set([chartPath, chartGlow], {
+        const totalPathLength = Math.ceil(chartPath.getTotalLength()) || 1160;
+        const animatedStrokePaths = [chartPath, chartGlow, chartBleed].filter(Boolean);
+
+        gsap.set(animatedStrokePaths, {
           strokeDasharray: totalPathLength,
           strokeDashoffset: totalPathLength
         });
+        if (chartBleed) gsap.set(chartBleed, { opacity: 0 });
         if (chartArea) gsap.set(chartArea, { opacity: 0 });
         if (chartBeam) gsap.set(chartBeam, { opacity: 0 });
+        gsap.set(chartPoints, { opacity: 0, scale: 0, transformOrigin: 'center center' });
+        gsap.set(chartPills, { opacity: 0, y: 14 });
 
         ScrollTrigger.create({
-          trigger: '#cf-rating-chart',
+          trigger: '#cf-chart-card',
           start: 'top 82%',
           once: true,
           onEnter: () => {
-            const chartEntranceTl = gsap.timeline();
+            const chartEntranceTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+            // 1. Draw trajectory paths (core line, tight glow, and ambient bleed) in synchrony
             chartEntranceTl
-              .to([chartPath, chartGlow], {
+              .to(animatedStrokePaths, {
                 strokeDashoffset: 0,
-                duration: 1.6,
+                duration: 1.8,
                 ease: 'power2.out',
                 onComplete: () => {
-                  chartPath.style.strokeDasharray = 'none';
-                  chartPath.style.strokeDashoffset = '0';
-                  if (chartGlow) {
-                    chartGlow.style.strokeDasharray = 'none';
-                    chartGlow.style.strokeDashoffset = '0';
-                  }
+                  animatedStrokePaths.forEach(p => {
+                    p.style.strokeDasharray = 'none';
+                    p.style.strokeDashoffset = '0';
+                  });
                 }
-              })
+              }, 0);
+
+            // Animate ambient bleed path opacity arrival in tandem with the draw
+            if (chartBleed) {
+              chartEntranceTl.to(chartBleed, {
+                opacity: 0.85,
+                duration: 1.4,
+                ease: 'power1.out'
+              }, 0);
+            }
+
+            chartEntranceTl
+              // Area gradient fill gently fades in behind the curve
               .to(chartArea, {
                 opacity: 1,
-                duration: 0.8,
+                duration: 0.9,
                 ease: 'power2.out'
               }, '<0.5')
+              // Kinetic beam awakens as line completes
               .to(chartBeam, {
                 opacity: 1,
-                duration: 0.8,
+                duration: 0.7,
                 ease: 'power2.out'
-              }, '<0.2')
+              }, '<0.4')
+              // Stagger milestone points right after line reaches each one
+              .to(chartPoints, {
+                opacity: 1,
+                scale: 1,
+                stagger: 0.18,
+                duration: 0.45,
+                ease: 'back.out(2.2)'
+              }, '-=0.7')
+              // Stagger pill badges right with milestone points
+              .to(chartPills, {
+                opacity: 1,
+                y: 0,
+                stagger: 0.18,
+                duration: 0.45,
+                ease: 'power2.out'
+              }, '<0.08')
               .fromTo(chartSvg,
-                { filter: 'drop-shadow(0 0 2px rgba(0, 255, 102, 0.15))' },
-                { filter: 'drop-shadow(0 0 16px rgba(0, 255, 102, 0.55))', duration: 1.2, ease: 'power2.out' },
+                { filter: 'drop-shadow(0 0 2px rgba(0, 255, 102, 0.12))' },
+                { filter: 'drop-shadow(0 0 18px rgba(0, 255, 102, 0.5))', duration: 1.4, ease: 'power2.out' },
                 0
               );
           }
@@ -603,8 +659,44 @@
         gsap.to(tooltip, { autoAlpha: 1, duration: 0.2 });
         const halo = pointGroup.querySelector('.scrub-halo');
         const ring = pointGroup.querySelector('.scrub-ring');
-        if (halo) gsap.to(halo, { scale: 1.45, opacity: 0.85, duration: 0.25, ease: 'power2.out', transformOrigin: 'center center' });
-        if (ring) gsap.to(ring, { scale: 1.25, filter: 'drop-shadow(0 0 14px rgba(0, 255, 102, 0.95))', duration: 0.25, ease: 'power2.out', transformOrigin: 'center center' });
+        if (halo) {
+          gsap.killTweensOf(halo);
+          // High-intensity glow burst on entry
+          gsap.fromTo(halo,
+            { scale: 1, opacity: 0.35, filter: 'drop-shadow(0 0 4px #00FF66)' },
+            {
+              scale: 1.6,
+              opacity: 0.95,
+              filter: 'drop-shadow(0 0 18px #00FF66)',
+              duration: 0.3,
+              ease: 'back.out(2)',
+              transformOrigin: 'center center',
+              onComplete: () => {
+                // Subtle breathing pulse while hovering
+                if (isHovering) {
+                  gsap.to(halo, {
+                    scale: 1.85,
+                    opacity: 0.75,
+                    filter: 'drop-shadow(0 0 24px #00FF66)',
+                    duration: 0.85,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'sine.inOut'
+                  });
+                }
+              }
+            }
+          );
+        }
+        if (ring) {
+          gsap.to(ring, {
+            scale: 1.25,
+            filter: 'drop-shadow(0 0 14px rgba(0, 255, 102, 0.95))',
+            duration: 0.25,
+            ease: 'power2.out',
+            transformOrigin: 'center center'
+          });
+        }
         handleScrub(e.clientX);
       });
 
@@ -628,8 +720,26 @@
         });
         const halo = pointGroup.querySelector('.scrub-halo');
         const ring = pointGroup.querySelector('.scrub-ring');
-        if (halo) gsap.to(halo, { scale: 1.0, opacity: 0.35, duration: 0.35, ease: 'power2.out', transformOrigin: 'center center' });
-        if (ring) gsap.to(ring, { scale: 1.0, filter: 'drop-shadow(0 0 8px rgba(0, 255, 102, 0.8))', duration: 0.35, ease: 'power2.out', transformOrigin: 'center center' });
+        if (halo) {
+          gsap.killTweensOf(halo);
+          gsap.to(halo, {
+            scale: 1.0,
+            opacity: 0.35,
+            filter: 'drop-shadow(0 0 6px rgba(0, 255, 102, 0.4))',
+            duration: 0.4,
+            ease: 'power2.out',
+            transformOrigin: 'center center'
+          });
+        }
+        if (ring) {
+          gsap.to(ring, {
+            scale: 1.0,
+            filter: 'drop-shadow(0 0 8px rgba(0, 255, 102, 0.8))',
+            duration: 0.35,
+            ease: 'power2.out',
+            transformOrigin: 'center center'
+          });
+        }
         gsap.to(scrubGuide, {
           x: 880,
           autoAlpha: 0,
