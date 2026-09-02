@@ -16,14 +16,17 @@
       if (!this.canvas) return;
 
       this.ctx = this.canvas.getContext('2d', { alpha: true });
-      this.nodeCount = window.innerWidth <= 768 ? 20 : 45;
-      this.maxEdgeDistance = 140;
-      this.mouseProximityDistance = 160;
+      const isMobile = window.innerWidth <= 768;
+      this.nodeCount = isMobile ? 14 : 38;
+      this.maxEdgeDistance = isMobile ? 100 : 140;
+      this.mouseProximityDistance = isMobile ? 120 : 160;
       this.nodes = [];
       this.mouse = { x: -9999, y: -9999, active: false };
+      this.pendingMouse = { x: -9999, y: -9999, active: false };
       this.animFrameId = null;
       this.isPaused = false;
-      this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+      this.isOffscreen = false;
+      this.dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
 
       window.GraphVisualizerInstance = this;
       this.init();
@@ -33,20 +36,66 @@
       this.handleResize();
       this.createNodes();
       this.bindEvents();
+      this.setupHeroObserver();
 
-      if (!prefersReducedMotion) {
-        this.startRenderLoop();
-      } else {
+      if (prefersReducedMotion) {
         this.renderStatic();
+        return;
+      }
+
+      // Defer render loop if intro overlay is currently running
+      const introOverlay = document.getElementById('site-intro-overlay');
+      let introActive = false;
+      try {
+        introActive = introOverlay &&
+          introOverlay.style.display !== 'none' &&
+          sessionStorage.getItem('arslan_intro_viewed') !== 'true';
+      } catch (e) {
+        introActive = false;
+      }
+
+      if (introActive) {
+        window.addEventListener('portfolio:intro-complete', () => {
+          if (!this.isPaused && !this.isOffscreen) {
+            this.startRenderLoop();
+          }
+        }, { once: true });
+      } else {
+        this.startRenderLoop();
+      }
+    }
+
+    setupHeroObserver() {
+      const heroEl = document.getElementById('hero');
+      if (heroEl && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              this.isOffscreen = true;
+              if (this.animFrameId) {
+                cancelAnimationFrame(this.animFrameId);
+                this.animFrameId = null;
+              }
+            } else {
+              this.isOffscreen = false;
+              if (!this.isPaused && !prefersReducedMotion && !this.animFrameId) {
+                this.startRenderLoop();
+              }
+            }
+          });
+        }, { threshold: 0.05 });
+        observer.observe(heroEl);
       }
     }
 
     handleResize() {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
-      const targetCount = this.width <= 768 ? 20 : 45;
+      const isMobile = this.width <= 768;
+      const targetCount = isMobile ? 14 : 38;
       const countChanged = this.nodeCount !== targetCount;
       this.nodeCount = targetCount;
+      this.dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
 
       // Scale for device pixel ratio
       this.canvas.width = this.width * this.dpr;
@@ -64,7 +113,6 @@
     createNodes() {
       this.nodes = [];
       for (let i = 0; i < this.nodeCount; i++) {
-        // Distribute across viewport
         this.nodes.push({
           id: i,
           x: Math.random() * this.width,
@@ -74,13 +122,12 @@
           radius: 1.8 + Math.random() * 1.4,
           baseRadius: 1.8 + Math.random() * 1.4,
           frontierAlpha: 0,
-          depth: Math.floor(Math.random() * 4) // Simulated graph depth
+          depth: Math.floor(Math.random() * 4)
         });
       }
     }
 
     bindEvents() {
-      // Debounced window resize
       let resizeTimeout;
       this.onResize = () => {
         clearTimeout(resizeTimeout);
@@ -90,40 +137,65 @@
       };
       window.addEventListener('resize', this.onResize, { passive: true });
 
-      // Mouse proximity tracking
+      // Batched mouse proximity tracking
       this.onMouseMove = (e) => {
-        this.mouse.x = e.clientX;
-        this.mouse.y = e.clientY;
-        this.mouse.active = true;
+        this.pendingMouse.x = e.clientX;
+        this.pendingMouse.y = e.clientY;
+        this.pendingMouse.active = true;
       };
       window.addEventListener('mousemove', this.onMouseMove, { passive: true });
 
       this.onMouseLeave = () => {
-        this.mouse.active = false;
-        this.mouse.x = -9999;
-        this.mouse.y = -9999;
+        this.pendingMouse.active = false;
+        this.pendingMouse.x = -9999;
+        this.pendingMouse.y = -9999;
       };
       window.addEventListener('mouseout', this.onMouseLeave, { passive: true });
 
-      // Tab visibility listener to halt RAF when tab is hidden (zero memory leaks/CPU load)
+      // Tab visibility listener to halt RAF when tab is hidden
       this.onVisibilityChange = () => {
         if (document.hidden) {
           this.isPaused = true;
-          if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
+          if (this.animFrameId) {
+            cancelAnimationFrame(this.animFrameId);
+            this.animFrameId = null;
+          }
         } else {
           this.isPaused = false;
-          this.startRenderLoop();
+          if (!this.isOffscreen && !prefersReducedMotion) {
+            this.startRenderLoop();
+          }
         }
       };
       document.addEventListener('visibilitychange', this.onVisibilityChange);
     }
 
     startRenderLoop() {
-      const render = () => {
-        if (this.isPaused) return;
-        this.updateAndDraw();
+      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
+
+      const isMobile = window.innerWidth <= 768;
+      const targetInterval = isMobile ? 1000 / 30 : 1000 / 60; // 30fps mobile, 60fps desktop
+      let lastFrameTime = 0;
+
+      const render = (currentTime) => {
+        if (this.isPaused || this.isOffscreen) {
+          this.animFrameId = null;
+          return;
+        }
+
         this.animFrameId = requestAnimationFrame(render);
+
+        if (currentTime - lastFrameTime < targetInterval) return;
+        lastFrameTime = currentTime;
+
+        // Apply batched mouse coordinates
+        this.mouse.x = this.pendingMouse.x;
+        this.mouse.y = this.pendingMouse.y;
+        this.mouse.active = this.pendingMouse.active;
+
+        this.updateAndDraw();
       };
+
       this.animFrameId = requestAnimationFrame(render);
     }
 

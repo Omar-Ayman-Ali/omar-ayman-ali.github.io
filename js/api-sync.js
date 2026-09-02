@@ -38,7 +38,7 @@
   };
 
   /**
-   * Safe Fetch with AbortController timeout
+   * Safe Fetch with AbortController timeout and silent fallback on rate-limits
    */
   async function safeFetchJson(url) {
     const controller = new AbortController();
@@ -50,12 +50,12 @@
       });
       clearTimeout(timer);
       if (!response.ok) {
-        throw new Error(`HTTP Error ${response.status}`);
+        return null; // Silent fallback to baseline stats without console errors
       }
       return await response.json();
     } catch (err) {
       clearTimeout(timer);
-      throw err;
+      return null;
     }
   }
 
@@ -322,11 +322,19 @@
     }
   }
 
-  // Initialize once DOM is parsed
+  // Initialize via requestIdleCallback to guarantee zero competition with critical path
+  function scheduleSync() {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => syncMetrics(), { timeout: 3500 });
+    } else {
+      setTimeout(syncMetrics, 2000);
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncMetrics);
+    document.addEventListener('DOMContentLoaded', scheduleSync);
   } else {
-    syncMetrics();
+    scheduleSync();
   }
 
   // Expose test hooks for automated verification

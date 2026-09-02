@@ -4,9 +4,7 @@
  * Visual Dials: DESIGN_VARIANCE=8 | MOTION_INTENSITY=8 | VISUAL_DENSITY=9
  * Enforces Zero Glassmorphism, Zero Generic Cards, Void Black Baseline (#050505)
  */
-
-@import url('./variables.css');
-
+ 
 /* ==========================================================================
    Zero White Flash Baseline & Reset
    ========================================================================== */
@@ -992,13 +990,9 @@ a, button {
 @keyframes cfGlowAura {
   0% {
     opacity: 0.45;
-    stroke-width: 8px;
-    filter: blur(6px) drop-shadow(0 0 10px rgba(0, 255, 102, 0.5));
   }
   100% {
     opacity: 0.85;
-    stroke-width: 12px;
-    filter: blur(10px) drop-shadow(0 0 24px rgba(0, 255, 102, 0.95));
   }
 }
 

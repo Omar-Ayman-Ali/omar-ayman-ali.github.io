@@ -48,8 +48,8 @@
   --text-secondary: #B8C4D1;
   /* Text Muted: #8C96A5 on #050505 -> 5.8:1 contrast (WCAG AA compliant) */
   --text-muted: #8C96A5;
-  /* Text Subtle / Terminal Inactive: #5B6675 on #050505 -> 3.2:1 contrast */
-  --text-dim: #5B6675;
+  /* Text Subtle / Terminal Inactive: #8F9BA8 on #050505 -> 6.1:1 contrast (WCAG AA compliant) */
+  --text-dim: #8F9BA8;
 
   /* Visual Density 9 Spacing Scale (Tight, compact, data-dense) */
   --space-0: 0px;

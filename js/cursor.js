@@ -69,9 +69,30 @@
       const allCursorEls = [this.dot, this.ring];
       if (this.glow) allCursorEls.push(this.glow);
 
+      let rafPending = false;
+      let mouseX = -100, mouseY = -100;
+
+      const updateCursorFrame = () => {
+        rafPending = false;
+        this.setDotX(mouseX);
+        this.setDotY(mouseY);
+
+        if (!this.activeMagneticEl) {
+          this.setRingX(mouseX);
+          this.setRingY(mouseY);
+        }
+
+        if (this.glow) {
+          this.setGlowX(mouseX);
+          this.setGlowY(mouseY);
+        }
+      };
+
       window.addEventListener('mousemove', (e) => {
-        this.mouse.x = e.clientX;
-        this.mouse.y = e.clientY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        this.mouse.x = mouseX;
+        this.mouse.y = mouseY;
 
         // Reveal cursor elements once initial coordinate is captured
         if (!this.cursorVisible) {
@@ -79,17 +100,9 @@
           gsap.to(allCursorEls, { opacity: 1, duration: 0.25, overwrite: 'auto' });
         }
 
-        this.setDotX(this.mouse.x);
-        this.setDotY(this.mouse.y);
-
-        if (!this.activeMagneticEl) {
-          this.setRingX(this.mouse.x);
-          this.setRingY(this.mouse.y);
-        }
-
-        if (this.glow) {
-          this.setGlowX(this.mouse.x);
-          this.setGlowY(this.mouse.y);
+        if (!rafPending) {
+          rafPending = true;
+          requestAnimationFrame(updateCursorFrame);
         }
       }, { passive: true });
 

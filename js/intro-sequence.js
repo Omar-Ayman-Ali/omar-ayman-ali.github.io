@@ -107,6 +107,11 @@
     if (window.PortfolioMotion && typeof window.PortfolioMotion.triggerHeroEntrance === 'function') {
       window.PortfolioMotion.triggerHeroEntrance();
     }
+
+    // Dispatch intro completion event so canvas-graph and background workers awaken cleanly
+    try {
+      window.dispatchEvent(new CustomEvent('portfolio:intro-complete'));
+    } catch (e) {}
   }
 
   /**
@@ -175,9 +180,10 @@
 
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const targetCellSize = vw < 600 ? 55 : 72;
-    const cols = Math.max(8, Math.round(vw / targetCellSize));
-    const rows = Math.max(6, Math.round(vh / targetCellSize));
+    const isMobile = vw <= 768;
+    const targetCellSize = isMobile ? 88 : 72;
+    const cols = Math.max(isMobile ? 5 : 8, Math.round(vw / targetCellSize));
+    const rows = Math.max(isMobile ? 6 : 6, Math.round(vh / targetCellSize));
 
     gridContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;

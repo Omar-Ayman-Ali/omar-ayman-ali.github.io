@@ -6,6 +6,66 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://codeforces.com https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Codeforces Solved Problems Archive | Omar Ayman (Itz_Arslan)</title>
+  <meta name="description" content="Categorized archive of accepted Codeforces algorithmic problems, division rounds, tags, and verified C++ solutions by Omar Ayman Ali (Itz_Arslan).">
+  <link rel="canonical" href="https://omar-ayman-ali.github.io/my-portfolio/problems.html">
+
+  <!-- Favicon / Brand Identity -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://omar-ayman-ali.github.io/my-portfolio/problems.html">
+  <meta property="og:title" content="Codeforces Solved Problems Archive | Omar Ayman (Itz_Arslan)">
+  <meta property="og:description" content="Categorized archive of accepted Codeforces algorithmic problems, division rounds, complexity tags, and direct solution references by Omar Ayman Ali.">
+  <meta property="og:image" content="https://omar-ayman-ali.github.io/my-portfolio/favicon.svg">
+  <meta property="og:site_name" content="Omar Ayman Ali Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://omar-ayman-ali.github.io/my-portfolio/problems.html">
+  <meta name="twitter:title" content="Codeforces Solved Problems Archive | Omar Ayman (Itz_Arslan)">
+  <meta name="twitter:description" content="Categorized archive of accepted Codeforces algorithmic problems, division rounds, complexity tags, and direct solution references.">
+  <meta name="twitter:image" content="https://omar-ayman-ali.github.io/my-portfolio/favicon.svg">
+
+  <!-- Structured Data: BreadcrumbList & CollectionPage (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://omar-ayman-ali.github.io/my-portfolio/problems.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://omar-ayman-ali.github.io/my-portfolio/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Codeforces Solved Problems Archive",
+            "item": "https://omar-ayman-ali.github.io/my-portfolio/problems.html"
+          }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://omar-ayman-ali.github.io/my-portfolio/problems.html#collectionpage",
+        "url": "https://omar-ayman-ali.github.io/my-portfolio/problems.html",
+        "name": "Codeforces Solved Problems Archive | Omar Ayman (Itz_Arslan)",
+        "description": "Categorized archive of accepted Codeforces algorithmic problems, official division rounds, complexity tags, and direct solution references by Omar Ayman Ali.",
+        "author": {
+          "@type": "Person",
+          "name": "Omar Ayman Ali",
+          "url": "https://omar-ayman-ali.github.io/my-portfolio/"
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- Google Fonts: Space Grotesk & Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,10 +75,6 @@
   <!-- Project Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- GSAP 3 & ScrollTrigger (Matching Portfolio Tech Stack) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <style>
     /* Codeforces Brand & Theme Variables */
@@ -460,9 +516,10 @@
 
     .filter-count {
       font-size: 0.6875rem;
-      opacity: 0.85;
+      color: #E2E8F0;
+      font-weight: 600;
       padding: 1px 5px;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 2px;
     }
 
@@ -796,8 +853,11 @@
         <!-- Dynamically rendered problem cards -->
       </div>
     </main>
-
   </div>
+
+  <!-- GSAP 3 & ScrollTrigger (Non-render-blocking) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
     (function () {
@@ -835,19 +895,19 @@
         { id: '25A', name: 'IQ test', rating: 1300, tags: ['brute force'], cid: 25, idx: 'A', path: 'Rating-1300/25A-IQ_test/solution.cpp' }
       ];
 
-      // Authentic Codeforces Topic Tag Colors
+      // Authentic Codeforces Topic Tag Colors (WCAG AA Compliant Contrast)
       const TAG_COLORS = {
-        'ALL': { color: '#318CE7', glow: 'rgba(49, 140, 231, 0.35)' },
-        'implementation': { color: '#FF705A', glow: 'rgba(255, 112, 90, 0.35)' },
-        'math': { color: '#FF5D8F', glow: 'rgba(255, 93, 143, 0.35)' },
-        'greedy': { color: '#D946EF', glow: 'rgba(217, 70, 239, 0.35)' },
-        'brute force': { color: '#8B5CF6', glow: 'rgba(139, 92, 246, 0.35)' },
-        'strings': { color: '#6366F1', glow: 'rgba(99, 102, 241, 0.35)' },
+        'ALL': { color: '#60A5FA', glow: 'rgba(96, 165, 250, 0.35)' },
+        'implementation': { color: '#FF8577', glow: 'rgba(255, 133, 119, 0.35)' },
+        'math': { color: '#FF759F', glow: 'rgba(255, 117, 159, 0.35)' },
+        'greedy': { color: '#E879F9', glow: 'rgba(232, 121, 249, 0.35)' },
+        'brute force': { color: '#A78BFA', glow: 'rgba(167, 139, 250, 0.35)' },
+        'strings': { color: '#818CF8', glow: 'rgba(129, 140, 248, 0.35)' },
         'sortings': { color: '#38BDF8', glow: 'rgba(56, 189, 248, 0.35)' },
-        'number theory': { color: '#06B6D4', glow: 'rgba(6, 182, 212, 0.35)' },
+        'number theory': { color: '#22D3EE', glow: 'rgba(34, 211, 238, 0.35)' },
         '*special': { color: '#2DD4BF', glow: 'rgba(45, 212, 191, 0.35)' },
-        'constructive algorithms': { color: '#10B981', glow: 'rgba(16, 185, 129, 0.35)' },
-        'games': { color: '#84CC16', glow: 'rgba(132, 204, 22, 0.35)' }
+        'constructive algorithms': { color: '#34D399', glow: 'rgba(52, 211, 153, 0.35)' },
+        'games': { color: '#A3E635', glow: 'rgba(163, 230, 53, 0.35)' }
       };
 
       let activeTag = 'ALL';

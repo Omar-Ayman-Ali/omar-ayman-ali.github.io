@@ -6,6 +6,78 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://codeforces.com https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Ain Shams AI &amp; C++ Systems Portfolio | High-Performance Computing</title>
+  <meta name="description" content="Ain Shams University AI &amp; C++ Systems portfolio of Omar Ayman Ali (Itz_Arslan). High-performance algorithms, 200+ Codeforces verified solutions, and low-latency architectures.">
+  <link rel="canonical" href="https://omar-ayman-ali.github.io/my-portfolio/">
+
+  <!-- Favicon / Brand Identity -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://omar-ayman-ali.github.io/my-portfolio/">
+  <meta property="og:title" content="Ain Shams AI &amp; C++ Systems Portfolio | Omar Ayman Ali">
+  <meta property="og:description" content="High-performance systems engineering, algorithmic problem solving, and C++ architectures by Omar Ayman Ali (Itz_Arslan). 200+ Codeforces verified solutions.">
+  <meta property="og:image" content="https://omar-ayman-ali.github.io/my-portfolio/favicon.svg">
+  <meta property="og:site_name" content="Omar Ayman Ali Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://omar-ayman-ali.github.io/my-portfolio/">
+  <meta name="twitter:title" content="Ain Shams AI &amp; C++ Systems Portfolio | Omar Ayman Ali">
+  <meta name="twitter:description" content="High-performance systems engineering, algorithmic problem solving, and C++ architectures by Omar Ayman Ali (Itz_Arslan).">
+  <meta name="twitter:image" content="https://omar-ayman-ali.github.io/my-portfolio/favicon.svg">
+
+  <!-- Structured Data: Person, ProfilePage, WebSite (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://omar-ayman-ali.github.io/my-portfolio/#person",
+        "name": "Omar Ayman Ali",
+        "alternateName": ["Omar Ali", "Itz_Arslan"],
+        "jobTitle": "C++ Systems & AI Software Engineer",
+        "description": "C++ Systems and Competitive Programming specialist at Ain Shams University with 200+ Codeforces algorithmic solutions, high-performance computing, and AI architectures.",
+        "url": "https://omar-ayman-ali.github.io/my-portfolio/",
+        "image": "https://omar-ayman-ali.github.io/my-portfolio/favicon.svg",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Ain Shams University",
+          "url": "https://www.asu.edu.eg/"
+        },
+        "knowsAbout": [
+          "C++20",
+          "Competitive Programming",
+          "Algorithms & Data Structures",
+          "High-Performance Computing",
+          "Artificial Intelligence"
+        ],
+        "sameAs": [
+          "https://codeforces.com/profile/Itz_Arslan",
+          "https://github.com/Omar-Ayman-Ali",
+          "https://www.linkedin.com/in/omar-ayman-el-sayed/"
+        ]
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://omar-ayman-ali.github.io/my-portfolio/#profilepage",
+        "url": "https://omar-ayman-ali.github.io/my-portfolio/",
+        "name": "Ain Shams AI & C++ Systems Portfolio | High-Performance Computing",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://omar-ayman-ali.github.io/my-portfolio/#website",
+          "name": "Omar Ayman Ali Portfolio",
+          "url": "https://omar-ayman-ali.github.io/my-portfolio/"
+        },
+        "mainEntity": {
+          "@id": "https://omar-ayman-ali.github.io/my-portfolio/#person"
+        }
+      }
+    ]
+  }
+  </script>
   
   <!-- Zero White Flash Critical Style -->
   <style>
@@ -22,8 +94,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Lenis CSS with Subresource Integrity -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.css" integrity="sha384-UuB6deGAnAeGSShmQfNVypuoM4D1q+qgqcc3FRyZPVLuPc4psm5o1VShNhqmootN" crossorigin="anonymous">
+  <!-- Lenis Core Styles (Inlined to eliminate render-blocking network roundtrip) -->
+  <style>html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:clip}.lenis.lenis-smooth iframe{pointer-events:none}</style>
 
   <!-- Project Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
@@ -1002,7 +1074,7 @@
                     <span class="heatmap-weekday"></span>
                   </div>
 
-                  <div id="github-heatmap-grid" class="heatmap-grid" aria-label="GitHub Activity Heatmap">
+                  <div id="github-heatmap-grid" class="heatmap-grid" role="region" aria-label="GitHub Activity Heatmap">
                     <!-- Populated by app.js with 53x7 larger cells -->
                   </div>
                 </div>
@@ -1502,7 +1574,7 @@ masterTl
           <!-- Direct Interactive Communication Channels Grid -->
           <div class="contact-channels-grid">
             <!-- Codeforces -->
-            <a href="https://codeforces.com/profile/Itz_Arslan" target="_blank" rel="noopener noreferrer" class="channel-card" data-magnetic aria-label="Visit Omar Ali's Codeforces Profile (@Itz_Arslan)">
+            <a href="https://codeforces.com/profile/Itz_Arslan" target="_blank" rel="noopener noreferrer" class="channel-card" data-magnetic aria-label="CODEFORCES // ITZ_ARSLAN - Inspect 219 solved problems on Codeforces">
               <div class="channel-top">
                 <span class="channel-proto">PROTOCOL: CP_RANK</span>
                 <span class="channel-status status-active">ONLINE</span>
@@ -1519,7 +1591,7 @@ masterTl
             </a>
 
             <!-- GitHub -->
-            <a href="https://github.com/Omar-Ayman-Ali" target="_blank" rel="noopener noreferrer" class="channel-card" data-magnetic aria-label="Visit Omar Ali's GitHub Profile (@Omar-Ayman-Ali)">
+            <a href="https://github.com/Omar-Ayman-Ali" target="_blank" rel="noopener noreferrer" class="channel-card" data-magnetic aria-label="GITHUB // @OMAR-AYMAN-ALI - Audit open-source repositories on GitHub">
               <div class="channel-top">
                 <span class="channel-proto">PROTOCOL: GIT_VCS</span>
                 <span class="channel-status status-active">ONLINE</span>
@@ -1536,7 +1608,7 @@ masterTl
             </a>
 
             <!-- Email Direct -->
-            <a href="mailto:omar.ayman.ali@outlook.com" class="channel-card" data-magnetic aria-label="Send direct email to Omar Ali (omar.ayman.ali@outlook.com)">
+            <a href="mailto:omar.ayman.ali@outlook.com" class="channel-card" data-magnetic aria-label="EMAIL DIRECT - Compose message to Omar Ali (omar.ayman.ali@outlook.com)">
               <div class="channel-top">
                 <span class="channel-proto">PROTOCOL: SMTP</span>
                 <span class="channel-status status-active">ONLINE</span>
@@ -1553,7 +1625,7 @@ masterTl
             </a>
 
             <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/omar-ayman-el-sayed/" target="_blank" rel="noopener noreferrer" class="channel-card" data-magnetic aria-label="Visit Omar Ali's LinkedIn Profile">
+            <a href="https://www.linkedin.com/in/omar-ayman-el-sayed/" target="_blank" rel="noopener noreferrer" class="channel-card" data-magnetic aria-label="LINKEDIN - Establish connection with Omar Ali on LinkedIn">
               <div class="channel-top">
                 <span class="channel-proto">PROTOCOL: NETWORK</span>
                 <span class="channel-status status-active">ONLINE</span>
@@ -1583,11 +1655,11 @@ masterTl
             </div>
 
             <div class="terminal-quick-actions">
-              <button id="btn-switch-algo" class="btn-terminal-action" type="button" data-magnetic aria-label="Switch Benchmark Algorithm">
+              <button id="btn-switch-algo" class="btn-terminal-action" type="button" data-magnetic aria-label="TOGGLE STRUCTURE - Switch Benchmark Algorithm">
                 <span>TOGGLE STRUCTURE</span>
                 <span class="action-symbol">&gt;&gt;</span>
               </button>
-              <a href="#hero" class="btn-terminal-action" data-magnetic aria-label="Return to top of page">
+              <a href="#hero" class="btn-terminal-action" data-magnetic aria-label="RETURN TO ROOT - Return to top of page">
                 <span>RETURN TO ROOT</span>
                 <span class="action-symbol">^</span>
               </a>
@@ -1629,21 +1701,21 @@ masterTl
   </footer>
 
   <!-- GSAP 3.12+ Core and Plugins from CDN with Subresource Integrity -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" integrity="sha384-RVPQwTb0fPz9kI8s5GwAq1Qioto9fnEQt1aKGSQSm8xV6+DIdBSgcCShoHqfKnhv" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="js/vendor/SplitText.min.js"></script>
-  <script src="js/vendor/ScrambleTextPlugin.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" integrity="sha384-RVPQwTb0fPz9kI8s5GwAq1Qioto9fnEQt1aKGSQSm8xV6+DIdBSgcCShoHqfKnhv" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="js/vendor/SplitText.min.js"></script>
+  <script defer src="js/vendor/ScrambleTextPlugin.min.js"></script>
 
   <!-- Lenis 1.1+ Smooth Scrolling Engine from CDN with Subresource Integrity -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" integrity="sha384-eD5ubmuCcvTdCADWuSchJYE7wcj2nzNr0itbrh6w/KJyBiltSZ8w3VFRBSWu5YQ8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" integrity="sha384-eD5ubmuCcvTdCADWuSchJYE7wcj2nzNr0itbrh6w/KJyBiltSZ8w3VFRBSWu5YQ8" crossorigin="anonymous"></script>
 
   <!-- Application Modules -->
-  <script src="js/canvas-graph.js"></script>
-  <script src="js/cursor.js"></script>
-  <script src="js/intro-sequence.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/api-sync.js"></script>
+  <script defer src="js/canvas-graph.js"></script>
+  <script defer src="js/cursor.js"></script>
+  <script defer src="js/intro-sequence.js"></script>
+  <script defer src="js/animations.js"></script>
+  <script defer src="js/app.js"></script>
+  <script defer src="js/api-sync.js"></script>
 </body>
 </html>

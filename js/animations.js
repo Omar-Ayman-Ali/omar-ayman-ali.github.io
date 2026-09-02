@@ -1876,7 +1876,7 @@
       const words = manifestoStatement.querySelectorAll('.manifesto-word');
       if (words.length) {
         gsap.from(words, {
-          opacity: 0.25,
+          opacity: 0.45,
           y: 10,
           stagger: 0.08,
           scrollTrigger: {
