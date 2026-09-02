@@ -16,6 +16,10 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- GSAP 3 & ScrollTrigger (Matching Portfolio Tech Stack) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <style>
     /* Codeforces Brand & Theme Variables */
     :root {
@@ -28,6 +32,15 @@
       --gh-purple: #8957E5;
       --gh-purple-light: #BC8CFF;
       --gh-purple-dim: rgba(137, 87, 229, 0.12);
+    }
+
+    /* Hardware-accelerated animation properties */
+    .archive-header,
+    .repo-workbench-card,
+    .controls-panel,
+    .problem-card,
+    .filter-tab {
+      will-change: transform, opacity;
     }
 
     /* Problems Archive Layout */
@@ -73,7 +86,7 @@
       color: #FFFFFF;
       background-color: var(--cf-blue-dim);
       box-shadow: 0 0 16px var(--cf-blue-glow);
-      transform: translateX(-2px);
+      transform: translateX(-3px);
     }
 
     .archive-telemetry {
@@ -102,7 +115,7 @@
 
     @keyframes pulse-indicator {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
+      50% { opacity: 0.4; transform: scale(0.8); }
     }
 
     /* ==========================================================================
@@ -116,12 +129,30 @@
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
       position: relative;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .repo-workbench-card:hover {
       border-color: #2D3648;
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(49, 140, 231, 0.08);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(49, 140, 231, 0.12);
+    }
+
+    /* Subtle top light sheen on hover */
+    .repo-workbench-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cf-blue-light), transparent);
+      pointer-events: none;
+      transition: none;
+    }
+
+    .repo-workbench-card:hover::before {
+      left: 100%;
+      transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* Terminal-style top navigation bar */
@@ -179,18 +210,35 @@
 
     .cf-bars-icon {
       display: inline-flex;
-      align-items: center;
-      gap: 2px;
+      align-items: flex-end;
+      gap: 2.5px;
       height: 12px;
     }
 
     .cf-bar {
       width: 2.5px;
       border-radius: 1px;
+      transform-origin: bottom center;
+      transition: transform 0.2s ease;
     }
-    .cf-bar-1 { height: 7px; background: #FFD233; align-self: flex-end; }
+    .cf-bar-1 { height: 7px; background: #FFD233; }
     .cf-bar-2 { height: 12px; background: #318CE7; }
-    .cf-bar-3 { height: 9px; background: #FF3B30; align-self: flex-end; }
+    .cf-bar-3 { height: 9px; background: #FF3B30; }
+
+    .repo-workbench-card:hover .cf-bar-1 {
+      animation: cf-bar-pulse 0.7s ease infinite alternate;
+    }
+    .repo-workbench-card:hover .cf-bar-2 {
+      animation: cf-bar-pulse 0.7s ease infinite alternate 0.15s;
+    }
+    .repo-workbench-card:hover .cf-bar-3 {
+      animation: cf-bar-pulse 0.7s ease infinite alternate 0.3s;
+    }
+
+    @keyframes cf-bar-pulse {
+      0% { transform: scaleY(0.75); }
+      100% { transform: scaleY(1.3); }
+    }
 
     /* Main body layout */
     .repo-wb-body {
@@ -265,6 +313,12 @@
       border: 1px solid #1F2430;
       padding: 5px 11px;
       border-radius: 3px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .repo-wb-spec-pill:hover {
+      border-color: rgba(49, 140, 231, 0.35);
+      transform: translateY(-1px);
     }
 
     .repo-wb-spec-label {
@@ -380,7 +434,7 @@
       font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -389,13 +443,18 @@
     .filter-tab:hover {
       border-color: var(--tab-color, var(--cf-blue-light));
       color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .filter-tab:active {
+      transform: scale(0.96);
     }
 
     .filter-tab.active {
       background: rgba(16, 22, 34, 0.95);
       border-color: var(--tab-color, var(--cf-blue-light));
       color: var(--tab-color, var(--cf-blue-light));
-      box-shadow: 0 0 12px var(--tab-glow, rgba(49, 140, 231, 0.3));
+      box-shadow: 0 0 14px var(--tab-glow, rgba(49, 140, 231, 0.3));
       font-weight: 700;
     }
 
@@ -422,15 +481,15 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
       position: relative;
     }
 
     .problem-card:hover {
       border-color: var(--card-accent, var(--cf-blue-light));
       background: #0C1018;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 16px var(--card-glow, rgba(49, 140, 231, 0.15));
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75), 0 0 18px var(--card-glow, rgba(49, 140, 231, 0.15));
     }
 
     .problem-card-top {
@@ -530,7 +589,7 @@
     .problem-tag-chip:hover {
       border-color: var(--t-color);
       box-shadow: 0 0 10px var(--t-glow, rgba(49, 140, 231, 0.25));
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
     .problem-actions-row {
@@ -744,6 +803,11 @@
     (function () {
       'use strict';
 
+      // Register ScrollTrigger if available
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
       const REPO_URL = 'https://github.com/Omar-Ayman-Ali/codeforces-solutions';
 
       // Complete verified problems database for Itz_Arslan
@@ -788,6 +852,7 @@
 
       let activeTag = 'ALL';
       let searchQuery = '';
+      let isInitialLoad = true;
 
       // Parse URL parameters (e.g. ?tag=implementation or ?tag=math)
       function getInitialTag() {
@@ -845,7 +910,19 @@
           btn.addEventListener('click', () => {
             activeTag = tagName;
             renderTabs();
-            renderProblems();
+            renderProblems(false);
+
+            // Tactile feedback bounce on active tab
+            if (typeof gsap !== 'undefined') {
+              const activeBtn = tabsContainer.querySelector('.filter-tab.active');
+              if (activeBtn) {
+                gsap.fromTo(activeBtn, 
+                  { scale: 0.94 }, 
+                  { scale: 1, duration: 0.3, ease: 'back.out(2)' }
+                );
+              }
+            }
+
             // Update URL search param without page reload
             try {
               const url = new URL(window.location);
@@ -881,8 +958,8 @@
         return `<span class="problem-rating-badge ${rankClass}" title="${rankLabel}">★ ${rating}</span>`;
       }
 
-      // Render problems list
-      function renderProblems() {
+      // Render problems list with GSAP transition support
+      function renderProblems(isInitial = false) {
         const grid = document.getElementById('problems-grid');
         if (!grid) return;
 
@@ -907,7 +984,7 @@
           grid.innerHTML = `
             <div class="empty-state">
               <p>// NO PROBLEMS FOUND MATCHING CURRENT FILTER CRITERIA</p>
-              <button class="filter-tab" onclick="document.getElementById('problem-search').value = ''; activeTag = 'ALL'; renderTabs(); renderProblems();" style="margin-top: 10px;">RESET FILTERS</button>
+              <button class="filter-tab" onclick="document.getElementById('problem-search').value = ''; activeTag = 'ALL'; renderTabs(); renderProblems(false);" style="margin-top: 10px;">RESET FILTERS</button>
             </div>
           `;
           return;
@@ -962,20 +1039,134 @@
         });
 
         grid.appendChild(fragment);
+
+        // Interactive Animated Transition on Filter/Search update
+        if (!isInitial && typeof gsap !== 'undefined') {
+          const cards = grid.querySelectorAll('.problem-card');
+          if (cards.length > 0) {
+            gsap.fromTo(cards,
+              { y: 16, autoAlpha: 0, scale: 0.98 },
+              {
+                y: 0,
+                autoAlpha: 1,
+                scale: 1,
+                duration: 0.35,
+                stagger: 0.025,
+                ease: 'power2.out',
+                overwrite: 'auto',
+                clearProps: 'transform,opacity'
+              }
+            );
+          }
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+          }
+        }
       }
 
-      // Wire search input
+      // Wire search input with debouncing to prevent layout thrashing
       const searchInput = document.getElementById('problem-search');
       if (searchInput) {
+        let searchDebounceTimer = null;
         searchInput.addEventListener('input', (e) => {
-          searchQuery = e.target.value.trim();
-          renderProblems();
+          clearTimeout(searchDebounceTimer);
+          searchDebounceTimer = setTimeout(() => {
+            searchQuery = e.target.value.trim();
+            renderProblems(false);
+          }, 140);
+        });
+      }
+
+      // GSAP Master Page Orchestration & Entrance Animation
+      function initGsapAnimations() {
+        if (typeof gsap === 'undefined') return;
+
+        const mm = gsap.matchMedia();
+
+        mm.add({
+          isMotionOk: '(prefers-reduced-motion: no-preference)',
+          isReduced: '(prefers-reduced-motion: reduce)'
+        }, (context) => {
+          const { isMotionOk } = context.conditions;
+
+          if (!isMotionOk) {
+            // Accessible fallback: instant visibility without motion
+            gsap.set(['.archive-header', '.repo-workbench-card', '.controls-panel', '.problem-card', '.filter-tab'], {
+              autoAlpha: 1,
+              y: 0,
+              scale: 1,
+              clearProps: 'all'
+            });
+            return;
+          }
+
+          // Clean, high-performance entrance orchestration (~0.85s)
+          const tl = gsap.timeline({
+            defaults: { ease: 'power3.out' }
+          });
+
+          tl.from('.archive-header', {
+            y: -18,
+            autoAlpha: 0,
+            duration: 0.45,
+            clearProps: 'all'
+          })
+          .from('.repo-workbench-card', {
+            y: 24,
+            autoAlpha: 0,
+            duration: 0.55,
+            clearProps: 'all'
+          }, '-=0.25')
+          .from('.search-box-row', {
+            y: 14,
+            autoAlpha: 0,
+            duration: 0.4,
+            clearProps: 'all'
+          }, '-=0.3')
+          .from('.filter-tab', {
+            y: 12,
+            scale: 0.92,
+            autoAlpha: 0,
+            duration: 0.35,
+            stagger: 0.02,
+            ease: 'power2.out',
+            clearProps: 'all'
+          }, '-=0.25')
+          .from('.problem-card', {
+            y: 24,
+            autoAlpha: 0,
+            duration: 0.45,
+            stagger: {
+              amount: 0.3,
+              ease: 'power2.out'
+            },
+            clearProps: 'all'
+          }, '-=0.2');
+
+          // ScrollTrigger batching for problems revealed as user scrolls
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.batch('.problem-card', {
+              interval: 0.1,
+              batchMax: 6,
+              start: 'top 90%',
+              once: true,
+              onEnter: (batch) => {
+                gsap.fromTo(batch, 
+                  { autoAlpha: 0, y: 20 },
+                  { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.04, ease: 'power2.out', clearProps: 'all', overwrite: 'auto' }
+                );
+              }
+            });
+            ScrollTrigger.refresh();
+          }
         });
       }
 
       // Initialize
       renderTabs();
-      renderProblems();
+      renderProblems(true);
+      initGsapAnimations();
+      isInitialLoad = false;
     })();
   </script>
 </body>
