@@ -873,14 +873,38 @@ a, button {
   line-height: 1.4;
 }
 
-/* Interactive SVG Rating Trajectory Chart with Ambient Glow Bleed */
-.cf-rating-bleed-path {
+/* Interactive SVG Rating Trajectory Chart with Ambient Glow Bleed Behind Box */
+.cf-chart-outer-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.cf-chart-backdrop-glow {
+  position: absolute;
+  top: 94px;
+  left: var(--space-6);
+  right: var(--space-6);
+  height: 420px;
+  pointer-events: none;
+  z-index: 0; /* Positioned BEHIND the card */
+  overflow: visible;
+}
+
+#cf-backdrop-glow-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  display: block;
+}
+
+.cf-backdrop-bleed-path {
   fill: none;
-  stroke-width: 32px;
+  stroke-width: 68px;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  opacity: 0.85;
+  opacity: 1;
   pointer-events: none;
   will-change: stroke-dashoffset, opacity;
 }
@@ -888,8 +912,8 @@ a, button {
 /* Interactive SVG Rating Trajectory Chart */
 .cf-chart-card {
   position: relative;
-  z-index: 1;
-  background-color: rgba(12, 16, 24, 0.92);
+  z-index: 1; /* In front of backdrop glow */
+  background-color: #07090D;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-rule);
@@ -898,7 +922,7 @@ a, button {
   flex-direction: column;
   gap: var(--space-4);
   transition: border-color var(--duration-micro) ease, box-shadow 0.3s ease;
-  overflow: visible; /* Enables ambient glow bleed past card boundary */
+  overflow: hidden; /* Cleanly bounds the internal chart elements while glow blooms behind the box */
 }
 
 .cf-chart-card:hover {
@@ -1023,23 +1047,13 @@ a, button {
 .cf-rating-glow {
   fill: none;
   stroke: var(--accent-green);
-  stroke-width: 10px;
+  stroke-width: 5px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.65;
-  filter: blur(8px) drop-shadow(0 0 16px rgba(0, 255, 102, 0.8));
+  opacity: 0.35;
+  filter: blur(3px) drop-shadow(0 0 6px rgba(0, 255, 102, 0.6));
   vector-effect: non-scaling-stroke;
-  animation: cfGlowAura 2.4s ease-in-out infinite alternate;
   pointer-events: none;
-}
-
-@keyframes cfGlowAura {
-  0% {
-    opacity: 0.45;
-  }
-  100% {
-    opacity: 0.85;
-  }
 }
 
 .cf-rating-path {

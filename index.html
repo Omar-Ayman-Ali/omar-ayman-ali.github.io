@@ -644,8 +644,36 @@
         </div>
       </div>
 
-      <!-- Interactive SVG Rating Trajectory Chart with Ambient Glow Bleed -->
-      <div id="cf-chart-card" class="cf-chart-card">
+      <!-- Interactive SVG Rating Trajectory Chart with Ambient Glow Bleed Behind Box -->
+      <div class="cf-chart-outer-wrapper">
+        <!-- Backdrop Glow Layer Behind the Box Itself -->
+        <div id="cf-chart-backdrop-glow" class="cf-chart-backdrop-glow" aria-hidden="true">
+          <svg id="cf-backdrop-glow-svg" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="cf-backdrop-stroke-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00FF66" stop-opacity="0"></stop>
+                <stop offset="6%" stop-color="#00FF66" stop-opacity="0.85"></stop>
+                <stop offset="14%" stop-color="#00FF66" stop-opacity="1"></stop>
+                <stop offset="86%" stop-color="#00FF66" stop-opacity="1"></stop>
+                <stop offset="94%" stop-color="#00FF66" stop-opacity="0.85"></stop>
+                <stop offset="100%" stop-color="#00FF66" stop-opacity="0"></stop>
+              </linearGradient>
+              <!-- Multi-stage Gaussian filter for oversized ambient glow bleed behind box -->
+              <filter id="cf-backdrop-glow-filter" x="-80%" y="-100%" width="260%" height="300%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="45" result="blurDeep"></feGaussianBlur>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blurMid"></feGaussianBlur>
+                <feMerge>
+                  <feMergeNode in="blurDeep"></feMergeNode>
+                  <feMergeNode in="blurMid"></feMergeNode>
+                </feMerge>
+              </filter>
+            </defs>
+            <path id="cf-backdrop-bleed-path" class="cf-backdrop-bleed-path" stroke="url(#cf-backdrop-stroke-gradient)" filter="url(#cf-backdrop-glow-filter)"
+                  d="M -140 354 C -30 348, 70 334, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1140 196"></path>
+          </svg>
+        </div>
+
+        <div id="cf-chart-card" class="cf-chart-card">
         <div class="cf-chart-header">
           <div class="cf-chart-title-group">
             <span class="chart-main-title">RATING TRAJECTORY: 3 RATED ROUNDS</span>
@@ -675,15 +703,6 @@
                 <stop offset="94%" stop-color="#00FF66" stop-opacity="0.3"></stop>
                 <stop offset="100%" stop-color="#00FF66" stop-opacity="0"></stop>
               </linearGradient>
-              <!-- Multi-stage Gaussian filter for oversized ambient glow bleed -->
-              <filter id="cf-bleed-filter" x="-40%" y="-60%" width="180%" height="220%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="22" result="blurDeep"></feGaussianBlur>
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blurMid"></feGaussianBlur>
-                <feMerge>
-                  <feMergeNode in="blurDeep"></feMergeNode>
-                  <feMergeNode in="blurMid"></feMergeNode>
-                </feMerge>
-              </filter>
             </defs>
 
             <!-- Rating Threshold Gridlines & Zones -->
@@ -712,10 +731,6 @@
 
             <!-- Area Fill Gradient (Full span from 0 to 1000) -->
             <path id="cf-rating-area" class="cf-rating-area" fill="url(#cf-gradient)" d="M 0 340 C 80 330, 120 320, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1000 196 L 1000 370 L 0 370 Z"></path>
-
-            <!-- Layer 0: Oversized Ambient Bleed Glow (Bleeds smoothly past card bounds) -->
-            <path id="cf-rating-bleed-path" class="cf-rating-bleed-path" stroke="url(#cf-stroke-gradient)" filter="url(#cf-bleed-filter)"
-                  d="M -70 348 C 10 342, 90 328, 160 313 C 320 295, 420 250, 520 236 C 660 218, 770 200, 880 196 L 1070 196"></path>
 
             <!-- Layer 1: Ambient Pulsing Glow Aura (Extended soft fade curve) -->
             <path id="cf-rating-glow" class="cf-rating-glow" stroke="url(#cf-stroke-gradient)"
@@ -789,6 +804,7 @@
             </div>
           </div>
         </div>
+      </div>
 
       <!-- Codeforces Annual Activity Matrix & Consistency Grid -->
       <div class="cf-activity-card">

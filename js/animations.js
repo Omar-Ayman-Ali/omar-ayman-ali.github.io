@@ -398,10 +398,9 @@
       });
     };
 
-    // 4.6. Codeforces SVG Rating Trajectory Path Initialization & Stroke-Dasharray Reveal
     const chartPath = document.getElementById('cf-rating-line');
     const chartGlow = document.getElementById('cf-rating-glow');
-    const chartBleed = document.getElementById('cf-rating-bleed-path');
+    const chartBleed = document.getElementById('cf-backdrop-bleed-path') || document.getElementById('cf-rating-bleed-path');
     const chartBeam = document.getElementById('cf-rating-beam');
     const chartArea = document.getElementById('cf-rating-area');
     const chartSvg = document.getElementById('cf-rating-chart');
@@ -409,8 +408,27 @@
     const chartPoints = document.querySelectorAll('.chart-point, .chart-point-peak');
     const chartPills = document.querySelectorAll('.chart-pill');
 
+    function alignChartBackdropGlow() {
+      const card = document.getElementById('cf-chart-card');
+      const svgContainer = document.getElementById('cf-svg-container');
+      const backdrop = document.getElementById('cf-chart-backdrop-glow');
+      if (!card || !svgContainer || !backdrop) return;
+
+      const cardRect = card.getBoundingClientRect();
+      const svgRect = svgContainer.getBoundingClientRect();
+
+      backdrop.style.top = `${svgRect.top - cardRect.top}px`;
+      backdrop.style.left = `${svgRect.left - cardRect.left}px`;
+      backdrop.style.width = `${svgRect.width}px`;
+      backdrop.style.height = `${svgRect.height}px`;
+    }
+
+    alignChartBackdropGlow();
+    window.addEventListener('resize', alignChartBackdropGlow, { passive: true });
+
     if (chartPath) {
       if (prefersReducedMotion) {
+        alignChartBackdropGlow();
         chartPath.style.strokeDasharray = 'none';
         chartPath.style.strokeDashoffset = '0';
         if (chartGlow) {
@@ -456,6 +474,7 @@
           start: 'top 82%',
           once: true,
           onEnter: () => {
+            alignChartBackdropGlow();
             const chartEntranceTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
             // 1. Draw trajectory paths (core line, tight glow, and ambient bleed) in synchrony
