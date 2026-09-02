@@ -910,11 +910,11 @@
         <div class="github-stats-row">
           <div class="github-stat-item">
             <span class="stat-label">TOTAL CONTRIBUTIONS (PAST YEAR)</span>
-            <span id="github-contrib-val" class="stat-value highlight-purple">22</span>
+            <span id="github-contrib-val" class="stat-value highlight-green">47</span>
           </div>
           <div class="github-stat-item">
             <span class="stat-label">PUBLIC REPOSITORIES</span>
-            <span id="github-repos-val" class="stat-value highlight-purple">4 REPOS</span>
+            <span id="github-repos-val" class="stat-value highlight-green">4 REPOS</span>
           </div>
           <div class="github-stat-item">
             <span class="stat-label">PRIMARY SYSTEMS LANGUAGE</span>
@@ -926,29 +926,83 @@
           </div>
         </div>
 
-        <!-- Heatmap Grid Container -->
+        <!-- Heatmap Grid Container Matching User Reference -->
         <div class="heatmap-container">
           <div class="heatmap-header">
-            <span class="heatmap-title">52-WEEK CONTRIBUTIONS MATRIX // @Omar-Ayman-Ali</span>
-            <div class="heatmap-legend">
-              <span>LESS</span>
-              <span class="legend-box git-lvl-0"></span>
-              <span class="legend-box git-lvl-1"></span>
-              <span class="legend-box git-lvl-2"></span>
-              <span class="legend-box git-lvl-3"></span>
-              <span class="legend-box git-lvl-4"></span>
-              <span>MORE</span>
+            <span class="heatmap-main-title">47 contributions in the last year</span>
+            <div class="heatmap-settings-tag">
+              <span class="status-led-blink gh-led-green"></span>
+              <span>GITHUB // @Omar-Ayman-Ali</span>
             </div>
           </div>
-          <div class="heatmap-scroll-area">
-            <div id="github-heatmap-grid" class="heatmap-grid" aria-label="GitHub Activity Heatmap">
-              <!-- Populated with 52x7 contribution blocks by app.js in dark purple theme -->
+
+          <!-- Heatmap Outer Frame matching reference -->
+          <div class="heatmap-frame">
+            <div class="heatmap-scroll-area">
+              <div class="heatmap-table-wrap">
+                <!-- Month Labels Header -->
+                <div class="heatmap-months-row" aria-hidden="true">
+                  <span class="heatmap-month-spacer"></span>
+                  <div class="heatmap-months-track">
+                    <span class="heatmap-month" style="grid-column: 1;">Sep</span>
+                    <span class="heatmap-month" style="grid-column: 5;">Oct</span>
+                    <span class="heatmap-month" style="grid-column: 9;">Nov</span>
+                    <span class="heatmap-month" style="grid-column: 14;">Dec</span>
+                    <span class="heatmap-month" style="grid-column: 18;">Jan</span>
+                    <span class="heatmap-month" style="grid-column: 23;">Feb</span>
+                    <span class="heatmap-month" style="grid-column: 27;">Mar</span>
+                    <span class="heatmap-month" style="grid-column: 31;">Apr</span>
+                    <span class="heatmap-month" style="grid-column: 36;">May</span>
+                    <span class="heatmap-month" style="grid-column: 40;">Jun</span>
+                    <span class="heatmap-month" style="grid-column: 44;">Jul</span>
+                    <span class="heatmap-month" style="grid-column: 49;">Aug</span>
+                  </div>
+                </div>
+
+                <!-- Grid with Weekday Labels on Left -->
+                <div class="heatmap-body-row">
+                  <div class="heatmap-weekdays-col" aria-hidden="true">
+                    <span class="heatmap-weekday"></span>
+                    <span class="heatmap-weekday">Mon</span>
+                    <span class="heatmap-weekday"></span>
+                    <span class="heatmap-weekday">Wed</span>
+                    <span class="heatmap-weekday"></span>
+                    <span class="heatmap-weekday">Fri</span>
+                    <span class="heatmap-weekday"></span>
+                  </div>
+
+                  <div id="github-heatmap-grid" class="heatmap-grid" aria-label="GitHub Activity Heatmap">
+                    <!-- Populated by app.js with 53x7 larger cells -->
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <!-- Floating GitHub Heatmap Tooltip -->
-          <div id="github-heatmap-tooltip" class="github-heatmap-tooltip" aria-hidden="true">
-            <span id="github-tooltip-count" class="github-tooltip-count">1 contribution</span>
-            <span id="github-tooltip-date" class="github-tooltip-date">Nov 8, 2025</span>
+
+            <!-- Heatmap Frame Footer matching reference -->
+            <div class="heatmap-frame-footer">
+              <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/why-are-my-contributions-not-showing-up-on-my-profile"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="heatmap-help-link">
+                Learn how we count contributions
+              </a>
+
+              <div class="heatmap-legend">
+                <span class="legend-text">Less</span>
+                <span class="legend-box git-lvl-0" title="0 contributions"></span>
+                <span class="legend-box git-lvl-1" title="1-2 contributions"></span>
+                <span class="legend-box git-lvl-2" title="3-4 contributions"></span>
+                <span class="legend-box git-lvl-3" title="5-6 contributions"></span>
+                <span class="legend-box git-lvl-4" title="7+ contributions"></span>
+                <span class="legend-text">More</span>
+              </div>
+            </div>
+
+            <!-- Floating GitHub Heatmap Tooltip -->
+            <div id="github-heatmap-tooltip" class="github-heatmap-tooltip" aria-hidden="true">
+              <span id="github-tooltip-count" class="github-tooltip-count">1 contribution</span>
+              <span id="github-tooltip-date" class="github-tooltip-date">Nov 8, 2025</span>
+            </div>
           </div>
         </div>
 

@@ -2417,7 +2417,7 @@ code::-webkit-scrollbar {
   color: var(--text-primary);
 }
 
-/* Heatmap Grid */
+/* Heatmap Grid Matching User Reference */
 .heatmap-container {
   position: relative;
   display: flex;
@@ -2430,25 +2430,48 @@ code::-webkit-scrollbar {
   align-items: center;
   justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
+  font-size: 0.8125rem;
+  color: var(--text-primary);
   flex-wrap: wrap;
   gap: var(--space-2);
 }
 
-.heatmap-legend {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.625rem;
-  color: var(--text-dim);
+.heatmap-main-title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #E6EDF3;
+  letter-spacing: -0.01em;
 }
 
-.legend-box {
-  width: 10px;
-  height: 10px;
-  border-radius: 1px;
+.heatmap-settings-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.gh-led-green {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #39D353;
+  box-shadow: 0 0 8px #39D353;
+}
+
+/* Heatmap Frame matching reference border */
+.heatmap-frame {
+  position: relative;
+  background-color: #0D1117;
+  border: 1px solid #30363D;
+  border-radius: 6px;
+  padding: 18px 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .heatmap-scroll-area {
@@ -2457,57 +2480,152 @@ code::-webkit-scrollbar {
   padding-bottom: 4px;
 }
 
+.heatmap-table-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: max-content;
+}
+
+/* Month Labels Header */
+.heatmap-months-row {
+  display: flex;
+  align-items: center;
+  height: 16px;
+}
+
+.heatmap-month-spacer {
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.heatmap-months-track {
+  display: grid;
+  grid-template-columns: repeat(53, 14px);
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #7D8590;
+}
+
+.heatmap-month {
+  grid-column-end: span 4;
+  white-space: nowrap;
+}
+
+/* Weekday Labels Column and 14px Grid */
+.heatmap-body-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.heatmap-weekdays-col {
+  display: grid;
+  grid-template-rows: repeat(7, 14px);
+  gap: 4px;
+  width: 32px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #7D8590;
+  line-height: 14px;
+}
+
 .heatmap-grid {
   display: grid;
-  grid-template-rows: repeat(7, 11px);
+  grid-template-rows: repeat(7, 14px);
   grid-auto-flow: column;
-  grid-auto-columns: 11px;
-  gap: 3px;
+  grid-auto-columns: 14px;
+  gap: 4px;
   width: max-content;
 }
 
+/* Larger Boxes (14px x 14px) */
 .heatmap-cell {
-  width: 11px;
-  height: 11px;
-  border-radius: 1px;
+  width: 14px;
+  height: 14px;
+  border-radius: 2.5px;
   transition: transform var(--duration-micro) ease, box-shadow var(--duration-micro) ease, border-color var(--duration-micro) ease;
   will-change: transform;
+  cursor: pointer;
 }
 
 .heatmap-cell:hover {
-  transform: scale(1.4);
-  z-index: 10;
-  box-shadow: 0 0 10px #BC8CFF, 0 0 20px rgba(137, 87, 229, 0.7);
+  transform: scale(1.35);
+  z-index: 15;
+  box-shadow: 0 0 10px #39D353, 0 0 22px rgba(57, 211, 83, 0.75);
   border-color: #FFFFFF !important;
 }
 
 .heatmap-cell.git-lvl-0:hover {
-  background-color: #21283B;
-  box-shadow: 0 0 8px rgba(137, 87, 229, 0.4);
+  background-color: #21262D;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
-.git-lvl-0 { background-color: #0E121A; border: 1px solid #161C27; }
-.git-lvl-1 { background-color: #3B2361; border: 1px solid #4D2E7C; }
-.git-lvl-2 { background-color: #5C32A3; }
-.git-lvl-3 { background-color: #8957E5; }
-.git-lvl-4 { background-color: #BC8CFF; box-shadow: 0 0 8px rgba(188, 140, 255, 0.6); }
+/* Official GitHub Green Palette */
+.git-lvl-0 { background-color: #161B22; border: 1px solid rgba(255, 255, 255, 0.05); }
+.git-lvl-1 { background-color: #0E4429; border: 1px solid rgba(14, 68, 41, 0.6); }
+.git-lvl-2 { background-color: #006D32; border: 1px solid rgba(0, 109, 50, 0.7); }
+.git-lvl-3 { background-color: #26A641; border: 1px solid rgba(38, 166, 65, 0.8); box-shadow: 0 0 6px rgba(38, 166, 65, 0.4); }
+.git-lvl-4 { background-color: #39D353; border: 1px solid rgba(57, 211, 83, 0.9); box-shadow: 0 0 10px rgba(57, 211, 83, 0.6); }
+
+/* Heatmap Frame Footer */
+.heatmap-frame-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: #7D8590;
+}
+
+.heatmap-help-link {
+  color: #7D8590;
+  text-decoration: none;
+  font-size: 11px;
+  transition: color var(--duration-micro) ease;
+}
+
+.heatmap-help-link:hover {
+  color: #39D353;
+  text-decoration: underline;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-text {
+  font-size: 11px;
+  color: #7D8590;
+}
+
+.legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  cursor: pointer;
+}
 
 /* Floating GitHub Heatmap Tooltip */
 .github-heatmap-tooltip {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(14, 18, 26, 0.96);
-  border: 1px solid #8957E5;
-  padding: 6px 12px;
+  background-color: rgba(13, 17, 23, 0.96);
+  border: 1px solid #39D353;
+  padding: 7px 14px;
   display: flex;
   flex-direction: column;
   gap: 3px;
   pointer-events: none;
   z-index: 50;
   font-family: var(--font-mono);
-  border-radius: 4px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 14px rgba(137, 87, 229, 0.45);
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.95), 0 0 14px rgba(57, 211, 83, 0.45);
   transform: translate(-50%, -125%);
   opacity: 0;
   visibility: hidden;
@@ -2525,7 +2643,7 @@ code::-webkit-scrollbar {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #8957E5;
+  border-top: 5px solid #39D353;
 }
 
 .github-heatmap-tooltip.active {
@@ -2534,15 +2652,15 @@ code::-webkit-scrollbar {
 }
 
 .github-tooltip-count {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: #FFFFFF;
   line-height: 1.2;
 }
 
 .github-tooltip-date {
-  font-size: 9.5px;
-  color: #BC8CFF;
+  font-size: 10px;
+  color: #39D353;
   line-height: 1.2;
   letter-spacing: 0.02em;
 }

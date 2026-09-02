@@ -191,63 +191,74 @@
   }
 
   /**
-   * Populate GitHub Activity Heatmap Grid (52 Weeks x 7 Days) with Interactive Precision Tooltip
+   * Populate GitHub Activity Heatmap Grid (53 Weeks x 7 Days) with Reference Contributions & Interactive Tooltip
    */
   function initGitHubHeatmap() {
     const grid = document.getElementById('github-heatmap-grid');
     if (!grid) return;
 
-    const container = document.querySelector('.heatmap-container');
+    const frame = document.querySelector('.heatmap-frame') || document.querySelector('.heatmap-container');
     const tooltip = document.getElementById('github-heatmap-tooltip');
     const tooltipCount = document.getElementById('github-tooltip-count');
     const tooltipDate = document.getElementById('github-tooltip-date');
 
-    // 22 verified contribution events distributed across active sprints for @Omar-Ayman-Ali
-    const totalCells = 52 * 7;
+    // 47 verified contribution events distributed across active sprints matching user reference
+    const activeCellsMap = {
+      '32-0': { lvl: 1, count: 2 }, // Sun (Apr)
+      '34-4': { lvl: 2, count: 3 }, // Thu (May)
+      '40-6': { lvl: 4, count: 8 }, // Sat (Jun)
+      '48-2': { lvl: 2, count: 3 }, // Tue (Aug)
+      '49-2': { lvl: 3, count: 4 }, // Tue (Aug)
+      '50-0': { lvl: 4, count: 7 }, // Sun (Aug)
+      '50-5': { lvl: 2, count: 3 }, // Fri (Aug)
+      '51-1': { lvl: 2, count: 3 }, // Mon (Aug)
+      '51-3': { lvl: 3, count: 5 }, // Wed (Sep)
+      '52-1': { lvl: 4, count: 5 }, // Mon (Sep)
+      '52-3': { lvl: 4, count: 4 }  // Wed (Sep)
+    };
+
+    const totalCols = 53;
+    const totalRows = 7;
     const fragment = document.createDocumentFragment();
 
-    // 22 active indices representing hospital-management-system-cpp and ecommerce training commits
-    const activeIndices = new Set([
-      142, 143, 145, 149, 150, 151, 156, 157, 160, 162,
-      210, 211, 214, 218, 220, 225, 230,
-      310, 312, 315, 320, 322
-    ]);
+    // Anchor timeline starting September 2025 (matching column 0 = Sep in reference)
+    const startSunday = new Date(2025, 8, 7);
 
-    // Anchor timeline to modern portfolio reference date
-    const baseDate = new Date(2026, 8, 2);
+    for (let col = 0; col < totalCols; col++) {
+      for (let row = 0; row < totalRows; row++) {
+        const cell = document.createElement('div');
+        cell.className = 'heatmap-cell';
 
-    for (let i = 0; i < totalCells; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'heatmap-cell';
-      
-      let level = 0;
-      let count = 0;
-      if (activeIndices.has(i)) {
-        level = (i % 3 === 0) ? 3 : (i % 2 === 0 ? 2 : 1);
-        count = level === 1 ? 1 : (level === 2 ? 2 : (level === 3 ? 3 : 5));
+        const key = `${col}-${row}`;
+        const active = activeCellsMap[key];
+        const level = active ? active.lvl : 0;
+        const count = active ? active.count : 0;
+
+        // Calculate calendar date for this cell
+        const dayOffset = col * 7 + row;
+        const cellDate = new Date(startSunday);
+        cellDate.setDate(startSunday.getDate() + dayOffset);
+        const dateStr = cellDate.toLocaleDateString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        });
+
+        cell.classList.add(`git-lvl-${level}`);
+        cell.setAttribute('data-col', col);
+        cell.setAttribute('data-row', row);
+        cell.setAttribute('data-level', level);
+        cell.setAttribute('data-count', count);
+        cell.setAttribute('data-date', dateStr);
+        fragment.appendChild(cell);
       }
-
-      // Calculate calendar date for this cell
-      const daysAgo = (totalCells - 1) - i;
-      const cellDate = new Date(baseDate);
-      cellDate.setDate(baseDate.getDate() - daysAgo);
-      const dateStr = cellDate.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
-
-      cell.classList.add(`git-lvl-${level}`);
-      cell.setAttribute('data-level', level);
-      cell.setAttribute('data-count', count);
-      cell.setAttribute('data-date', dateStr);
-      fragment.appendChild(cell);
     }
 
     grid.appendChild(fragment);
 
     // Interactive Floating Tooltip Listener
-    if (container && tooltip) {
+    if (frame && tooltip) {
       grid.addEventListener('mousemove', (e) => {
         const cell = e.target.closest('.heatmap-cell');
         if (cell) {
@@ -267,10 +278,10 @@
             tooltipDate.textContent = date;
           }
 
-          const containerRect = container.getBoundingClientRect();
+          const frameRect = frame.getBoundingClientRect();
           const cellRect = cell.getBoundingClientRect();
-          const posX = cellRect.left - containerRect.left + cellRect.width / 2;
-          const posY = cellRect.top - containerRect.top;
+          const posX = cellRect.left - frameRect.left + cellRect.width / 2;
+          const posY = cellRect.top - frameRect.top;
 
           tooltip.style.left = `${posX}px`;
           tooltip.style.top = `${posY}px`;
@@ -288,19 +299,19 @@
       const legendBoxes = document.querySelectorAll('.heatmap-legend .legend-box');
       const legendLabels = [
         'No contributions',
-        '1 contribution',
-        '2-3 contributions',
-        '4-5 contributions',
-        '6+ contributions'
+        '1-2 contributions',
+        '3-4 contributions',
+        '5-6 contributions',
+        '7+ contributions'
       ];
       legendBoxes.forEach((box, idx) => {
         box.addEventListener('mousemove', () => {
           if (tooltipCount) tooltipCount.textContent = legendLabels[idx] || 'Contributions';
-          if (tooltipDate) tooltipDate.textContent = 'Activity Intensity';
-          const containerRect = container.getBoundingClientRect();
+          if (tooltipDate) tooltipDate.textContent = 'Activity Level';
+          const frameRect = frame.getBoundingClientRect();
           const boxRect = box.getBoundingClientRect();
-          const posX = boxRect.left - containerRect.left + boxRect.width / 2;
-          const posY = boxRect.top - containerRect.top;
+          const posX = boxRect.left - frameRect.left + boxRect.width / 2;
+          const posY = boxRect.top - frameRect.top;
           tooltip.style.left = `${posX}px`;
           tooltip.style.top = `${posY}px`;
           tooltip.classList.add('active');
