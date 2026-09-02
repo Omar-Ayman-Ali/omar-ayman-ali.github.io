@@ -224,6 +224,21 @@
       window.PortfolioMotion = { triggerHeroEntrance: triggerHeroEntrance };
     }
 
+    // 2.4. Soft Neon-Green Entry Glow Pulse Helper (One-time entry pulse, zero continuous loop)
+    function triggerEntryGlowPulse(elements, stagger = 0.08) {
+      if (prefersReducedMotion) return;
+      gsap.to(elements, {
+        boxShadow: '0 0 24px rgba(0, 255, 102, 0.38), inset 0 0 10px rgba(0, 255, 102, 0.12)',
+        borderColor: 'rgba(0, 255, 102, 0.65)',
+        duration: 0.42,
+        stagger: stagger,
+        ease: 'power2.out',
+        yoyo: true,
+        repeat: 1,
+        clearProps: 'boxShadow,borderColor'
+      });
+    }
+
     // 2.5. Academic & Systems About Section Entrance
     const aboutTerminal = document.querySelector('.about-terminal-card');
     const aboutTiles = document.querySelectorAll('.about-metric-tile');
@@ -231,16 +246,18 @@
     if (aboutTerminal) {
       gsap.fromTo(
         aboutTerminal,
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 28, scale: 0.98 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 0.65,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: '.about-section',
             start: 'top 80%',
-            toggleActions: 'play none none none'
+            toggleActions: 'play none none none',
+            onEnter: () => triggerEntryGlowPulse(aboutTerminal, 0)
           }
         }
       );
@@ -249,17 +266,19 @@
     if (aboutTiles.length > 0) {
       gsap.fromTo(
         aboutTiles,
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 24, scale: 0.97 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.45,
-          stagger: 0.08,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 0.55,
+          stagger: 0.1,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: '.about-metrics-grid',
             start: 'top 85%',
-            toggleActions: 'play none none none'
+            toggleActions: 'play none none none',
+            onEnter: () => triggerEntryGlowPulse(aboutTiles, 0.1)
           }
         }
       );
@@ -280,16 +299,17 @@
           scrollTrigger: {
             trigger: '.metrics-section',
             start: 'top 85%',
-            toggleActions: 'play none none none'
+            toggleActions: 'play none none none',
+            onEnter: () => triggerEntryGlowPulse(telemetryTiles, 0.08)
           }
         }
       );
     }
 
-    // 3. Capabilities Pillars Batch Entrance
+    // 3. Capabilities Pillars Batch Entrance with Soft Neon Pulse
     const capabilityPillars = document.querySelectorAll('.capability-pillar');
     if (capabilityPillars.length > 0) {
-      gsap.set(capabilityPillars, { opacity: 0, y: 24 });
+      gsap.set(capabilityPillars, { opacity: 0, y: 28, scale: 0.98 });
       ScrollTrigger.batch(capabilityPillars, {
         start: 'top 85%',
         once: true,
@@ -297,19 +317,21 @@
           gsap.to(batch, {
             opacity: 1,
             y: 0,
+            scale: 1,
             stagger: 0.12,
-            duration: 0.55,
-            ease: 'power2.out',
+            duration: 0.6,
+            ease: 'power3.out',
             overwrite: 'auto'
           });
+          triggerEntryGlowPulse(batch, 0.12);
         }
       });
     }
 
-    // 4. Arsenal Memory Allocation Blocks Batch Entrance
+    // 4. Arsenal Memory Allocation Blocks Batch Entrance with Soft Neon Pulse
     const arsenalBlocks = document.querySelectorAll('.arsenal-memory-block');
     if (arsenalBlocks.length > 0) {
-      gsap.set(arsenalBlocks, { opacity: 0, y: 24 });
+      gsap.set(arsenalBlocks, { opacity: 0, y: 26, scale: 0.98 });
       ScrollTrigger.batch(arsenalBlocks, {
         start: 'top 85%',
         once: true,
@@ -317,11 +339,13 @@
           gsap.to(batch, {
             opacity: 1,
             y: 0,
+            scale: 1,
             stagger: 0.1,
-            duration: 0.5,
-            ease: 'power2.out',
+            duration: 0.55,
+            ease: 'power3.out',
             overwrite: 'auto'
           });
+          triggerEntryGlowPulse(batch, 0.1);
         }
       });
     }
