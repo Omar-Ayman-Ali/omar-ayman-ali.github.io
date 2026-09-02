@@ -86,18 +86,36 @@ body {
    Magnetic Crosshair & Spring Cursor (2-Layer Physics)
    ========================================================================== */
 
+.custom-cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--cursor-glow-color, rgba(0, 255, 102, 0.25)) 0%, transparent 70%);
+  filter: blur(10px);
+  will-change: transform, background, opacity;
+  transition: opacity 0.25s ease;
+}
+
 .custom-cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
   width: 4px;
   height: 4px;
-  background-color: var(--accent-green);
+  background-color: var(--cursor-dot-color, var(--accent-green));
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
   transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px var(--cursor-dot-color, var(--accent-green));
   will-change: transform;
 }
 
@@ -107,26 +125,28 @@ body {
   left: 0;
   width: 28px;
   height: 28px;
-  border: 1px solid var(--accent-green);
+  border: 1px solid var(--cursor-ring-color, var(--accent-green));
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   opacity: 0;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+  box-shadow: 0 0 14px var(--cursor-glow-color, rgba(0, 255, 102, 0.28));
   will-change: transform, width, height, border-color;
   transition: border-color var(--duration-micro) ease, background-color var(--duration-micro) ease;
 }
 
 @media (pointer: coarse), (max-width: 768px) {
   .custom-cursor-dot,
-  .custom-cursor-ring {
+  .custom-cursor-ring,
+  .custom-cursor-glow {
     display: none !important;
   }
 }
 
 html.no-custom-cursor .custom-cursor-dot,
-html.no-custom-cursor .custom-cursor-ring {
+html.no-custom-cursor .custom-cursor-ring,
+html.no-custom-cursor .custom-cursor-glow {
   display: none !important;
 }
 
@@ -198,6 +218,19 @@ a, button {
   transform-origin: top center;
   transform: scaleY(0);
   will-change: transform;
+}
+
+.edge-scrubber-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px var(--accent-green), 0 0 20px rgba(0, 255, 102, 0.7);
+  pointer-events: none;
 }
 
 /* Minimalist Corner Telemetry Tag (Top-Right) */
