@@ -10,42 +10,45 @@
 (function () {
   'use strict';
 
-  // Check touch devices or coarse pointers
-  const isTouchDevice = () => {
-    return (
-      window.matchMedia('(pointer: coarse)').matches ||
-      window.innerWidth <= 768 ||
-      'ontouchstart' in window ||
-      navigator.maxTouchPoints > 0
-    );
-  };
+  // Helper to reliably run code when DOM is ready
+  function onReady(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
 
-  // Check reduced motion
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Only treat as touch-only if pointer is coarse AND no fine pointer (mouse) exists
+  const isTouchOnly = () => {
+    return window.matchMedia('(pointer: coarse) and not (any-pointer: fine)').matches && window.innerWidth <= 768;
+  };
 
   class MagneticCursor {
     constructor() {
-      if (isTouchDevice() || prefersReducedMotion) {
-        document.documentElement.classList.add('no-custom-cursor');
-        return;
-      }
-
       this.dot = document.querySelector('.custom-cursor-dot');
       this.ring = document.querySelector('.custom-cursor-ring');
       this.glow = document.querySelector('.custom-cursor-glow');
       if (!this.dot || !this.ring) return;
+
+      if (isTouchOnly()) {
+        document.documentElement.classList.add('no-custom-cursor');
+        return;
+      }
 
       this.mouse = { x: -100, y: -100 };
       this.activeMagneticEl = null;
       this.isHoveringClickable = false;
       this.currentColor = '#00FF66';
       this.currentGlow = 'rgba(0, 255, 102, 0.28)';
+      this.cursorVisible = false;
 
       this.init();
     }
 
     init() {
       // Add custom cursor class to html to hide default pointer where appropriate
+      document.documentElement.classList.remove('no-custom-cursor');
       document.documentElement.classList.add('has-custom-cursor');
 
       // GSAP quickTo for ultra-smooth 60fps tracking without lag or jitter
@@ -94,16 +97,30 @@
         this.mouse.x = mouseX;
         this.mouse.y = mouseY;
 
+        // Ensure has-custom-cursor is active when real mouse is detected
+        if (!document.documentElement.classList.contains('has-custom-cursor')) {
+          document.documentElement.classList.remove('no-custom-cursor');
+          document.documentElement.classList.add('has-custom-cursor');
+        }
+
         // Reveal cursor elements once initial coordinate is captured
         if (!this.cursorVisible) {
           this.cursorVisible = true;
-          gsap.to(allCursorEls, { opacity: 1, duration: 0.25, overwrite: 'auto' });
+          gsap.to(allCursorEls, { opacity: 1, duration: 0.2, overwrite: 'auto' });
         }
 
         if (!rafPending) {
           rafPending = true;
           requestAnimationFrame(updateCursorFrame);
         }
+      }, { passive: true });
+
+      // Hide custom cursor on actual touch tap
+      window.addEventListener('touchstart', () => {
+        this.cursorVisible = false;
+        gsap.to(allCursorEls, { opacity: 0, duration: 0.15, overwrite: 'auto' });
+        document.documentElement.classList.remove('has-custom-cursor');
+        document.documentElement.classList.add('no-custom-cursor');
       }, { passive: true });
 
       window.addEventListener('mouseleave', () => {
@@ -270,8 +287,8 @@
     }
   }
 
-  // Self-initialize on DOM ready
-  document.addEventListener('DOMContentLoaded', () => {
+  // Self-initialize reliably on DOM ready
+  onReady(() => {
     window.magneticCursorInstance = new MagneticCursor();
   });
 })();

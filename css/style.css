@@ -92,7 +92,7 @@ body {
   height: 56px;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9997;
+  z-index: 1000000;
   opacity: 0;
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, var(--cursor-glow-color, rgba(0, 255, 102, 0.25)) 0%, transparent 70%);
@@ -110,7 +110,7 @@ body {
   background-color: var(--cursor-dot-color, var(--accent-green));
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 1000002;
   opacity: 0;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 8px var(--cursor-dot-color, var(--accent-green));
@@ -126,7 +126,7 @@ body {
   border: 1px solid var(--cursor-ring-color, var(--accent-green));
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9998;
+  z-index: 1000001;
   opacity: 0;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 14px var(--cursor-glow-color, rgba(0, 255, 102, 0.28));
@@ -3937,7 +3937,6 @@ button:focus-visible,
   align-items: center;
   justify-content: center;
   user-select: none;
-  cursor: default;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   will-change: clip-path, opacity;
 }

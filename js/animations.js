@@ -104,12 +104,39 @@
       });
     }
 
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.headline-inner').forEach(el => {
+        el.style.clipPath = 'none';
+        el.style.transform = 'none';
+        el.style.opacity = '1';
+      });
+      document.querySelectorAll('.hero-chip').forEach(el => {
+        el.style.opacity = '1';
+      });
+      document.querySelectorAll('[data-target]').forEach(el => {
+        const target = el.getAttribute('data-target') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        el.textContent = `${target}${suffix}`;
+      });
+      gsap.set([
+        '.about-terminal-card', '.about-metric-tile', '.capability-pillar',
+        '.arsenal-memory-block', '.telemetry-tile', '.cf-metric-card',
+        '.cf-chart-card', '.cf-activity-card'
+      ], {
+        opacity: 1,
+        visibility: 'visible',
+        y: 0,
+        x: 0,
+        scale: 1,
+        clearProps: 'all'
+      });
+      return;
+    }
 
     // 2. Hero Section Entrance: Synchronized with Intro or Immediate
     let heroEntered = false;
     function triggerHeroEntrance() {
-      if (heroEntered || prefersReducedMotion) return;
+      if (heroEntered) return;
       heroEntered = true;
 
       const heroMasterTl = gsap.timeline({ delay: 0.05 });
@@ -1953,8 +1980,17 @@
     });
   }
 
+  // Helper to reliably run code when DOM is ready
+  function onReady(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
   // Self-initializing lifecycle hook
-  document.addEventListener('DOMContentLoaded', () => {
+  onReady(() => {
     initLenis();
     initScrollAnimations();
     initAnchorNavigation();
@@ -1967,13 +2003,13 @@
     }
   });
 
-  // Export for external modules
-  window.PortfolioMotion = {
+  // Export for external modules (safely preserve triggerHeroEntrance)
+  window.PortfolioMotion = Object.assign(window.PortfolioMotion || {}, {
     getLenis: () => lenisInstance,
     refreshScrollTrigger: () => {
       if (typeof ScrollTrigger !== 'undefined') {
         ScrollTrigger.refresh();
       }
     }
-  };
+  });
 })();

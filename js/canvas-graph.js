@@ -321,8 +321,17 @@
     }
   }
 
+  // Helper to reliably run code when DOM is ready
+  function onReady(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
   // Initialize once DOM is ready
-  document.addEventListener('DOMContentLoaded', () => {
+  onReady(() => {
     window.graphVisualizerInstance = new GraphVisualizer('graph-canvas');
   });
 })();

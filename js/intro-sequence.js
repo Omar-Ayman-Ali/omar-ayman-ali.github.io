@@ -47,16 +47,6 @@
     alreadyViewed = false;
   }
 
-  // If already viewed this session, tear down immediately with zero delay
-  if (alreadyViewed) {
-    overlay.style.display = 'none';
-    overlay.setAttribute('aria-hidden', 'true');
-    return;
-  }
-
-  // Prevent background scrolling while intro is active
-  document.body.style.overflow = 'hidden';
-
   // Master GSAP Timeline & Context references
   let masterTl = null;
   let introCtx = null;
@@ -115,6 +105,15 @@
     } catch (e) {}
   }
 
+  // If already viewed this session, tear down immediately and awaken hero
+  if (alreadyViewed) {
+    finishIntro();
+    return;
+  }
+
+  // Prevent background scrolling while intro is active
+  document.body.style.overflow = 'hidden';
+
   /**
    * Fast-forward / Skip Intro straight to Phase 4 exit transition
    */
@@ -137,7 +136,7 @@
     }
   }
 
-  // Wire skip triggers: Skip button, backdrop click, and ESC key
+  // Wire skip triggers: Skip button, click anywhere on overlay, ESC/space key, scroll or swipe
   if (skipBtn) {
     skipBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -145,18 +144,30 @@
     });
   }
 
-  overlay.addEventListener('click', (e) => {
-    // Skip on backdrop or ambient click
-    if (e.target === overlay || e.target.closest('#intro-grid') || e.target.closest('#intro-hacker-rain')) {
+  overlay.addEventListener('click', () => {
+    skipIntro();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc' || e.key === ' ' || e.key === 'Enter') {
       skipIntro();
     }
   });
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' || e.key === 'Esc') {
-      skipIntro();
+  window.addEventListener('wheel', () => {
+    if (!isFinished) skipIntro();
+  }, { passive: true, once: true });
+
+  window.addEventListener('touchmove', () => {
+    if (!isFinished) skipIntro();
+  }, { passive: true, once: true });
+
+  // Failsafe watchdog timer: ensure intro overlay never stays stuck past 5.5 seconds
+  setTimeout(() => {
+    if (!isFinished) {
+      finishIntro();
     }
-  });
+  }, 5500);
 
   /**
    * Reduced Motion Fallback Path: Simple gentle fade with zero heavy loops

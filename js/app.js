@@ -323,8 +323,17 @@
     }
   }
 
+  // Helper to reliably run code when DOM is ready
+  function onReady(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
   // Initialization lifecycle
-  document.addEventListener('DOMContentLoaded', () => {
+  onReady(() => {
     initTelemetryMonitor();
     initAlgorithmSwitcher();
     initGitHubHeatmap();
