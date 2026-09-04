@@ -1749,6 +1749,227 @@
 
     initCodeSnapHoverExpansion();
 
+    // ==========================================================================
+    // 4.11. Apple HIG Menus, Pop-Ups & Context Menu (macOS Liquid Glass)
+    // ==========================================================================
+
+    function showAppleToast(message, duration = 2400) {
+      const toast = document.getElementById('hig-toast');
+      const text = document.getElementById('hig-toast-text');
+      if (!toast || !text) return;
+      text.textContent = message;
+      toast.hidden = false;
+      void toast.offsetWidth;
+      toast.classList.add('is-visible');
+
+      if (window.__toastTimeout) clearTimeout(window.__toastTimeout);
+      window.__toastTimeout = setTimeout(() => {
+        toast.classList.remove('is-visible');
+        setTimeout(() => {
+          if (!toast.classList.contains('is-visible')) toast.hidden = true;
+        }, 350);
+      }, duration);
+    }
+
+    // Apple HIG Pop-Up Button for Codeforces Year Selection
+    function initApplePopUpMenu() {
+      const btn = document.getElementById('hig-year-btn');
+      const menu = document.getElementById('hig-year-menu');
+      const label = document.getElementById('hig-year-label');
+      const nativeSelect = document.getElementById('cf-year-select');
+
+      if (!btn || !menu || !label || !nativeSelect) return;
+
+      function openMenu() {
+        menu.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeMenu() {
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      }
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        if (isOpen) closeMenu();
+        else openMenu();
+      });
+
+      const items = menu.querySelectorAll('.hig-menu-item');
+      items.forEach((item) => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const val = item.getAttribute('data-value');
+          const txt = item.querySelector('.hig-menu-text').textContent;
+
+          items.forEach((i) => {
+            i.classList.remove('is-selected');
+            const check = i.querySelector('.hig-menu-checkmark');
+            if (check) check.textContent = '';
+          });
+          item.classList.add('is-selected');
+          const check = item.querySelector('.hig-menu-checkmark');
+          if (check) check.textContent = '✓';
+
+          label.textContent = txt;
+          closeMenu();
+
+          // Sync with hidden native select and trigger events
+          nativeSelect.value = val;
+          nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+
+          showAppleToast(`Season Filter: ${txt}`);
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+          closeMenu();
+          btn.focus();
+        }
+      });
+    }
+
+    // Apple HIG Context Menu
+    function initAppleContextMenu() {
+      const menu = document.getElementById('hig-context-menu');
+      if (!menu) return;
+
+      let activeTarget = null;
+
+      function closeContextMenu() {
+        if (!menu.hidden) {
+          menu.hidden = true;
+          activeTarget = null;
+        }
+      }
+
+      document.addEventListener('contextmenu', (e) => {
+        if (e.shiftKey) return;
+        e.preventDefault();
+
+        activeTarget = e.target;
+        const terminalParent = e.target.closest('.code-snap-card, .terminal-body, .cf-terminal-card');
+
+        const copyBtn = document.getElementById('hig-ctx-copy');
+        const focusBtn = document.getElementById('hig-ctx-focus');
+        if (copyBtn) {
+          copyBtn.style.display = 'flex';
+          const label = copyBtn.querySelector('.hig-ctx-label');
+          if (label) {
+            label.textContent = terminalParent ? 'Copy Solution Code' : 'Copy Portfolio URL';
+          }
+        }
+        if (focusBtn) {
+          focusBtn.style.display = terminalParent ? 'flex' : 'none';
+        }
+
+        menu.hidden = false;
+        const menuRect = menu.getBoundingClientRect();
+        const winWidth = window.innerWidth;
+        const winHeight = window.innerHeight;
+
+        let posX = e.clientX;
+        let posY = e.clientY;
+
+        if (posX + menuRect.width > winWidth - 10) {
+          posX = Math.max(10, winWidth - menuRect.width - 10);
+        }
+        if (posY + menuRect.height > winHeight - 10) {
+          posY = Math.max(10, winHeight - menuRect.height - 10);
+        }
+
+        menu.style.left = `${posX}px`;
+        menu.style.top = `${posY}px`;
+
+        if (typeof gsap !== 'undefined') {
+          gsap.fromTo(menu,
+            { scale: 0.92, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.22, ease: 'back.out(1.6)' }
+          );
+        }
+      });
+
+      const copyBtn = document.getElementById('hig-ctx-copy');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const terminal = activeTarget ? activeTarget.closest('.code-snap-card') : null;
+          const codeEl = terminal ? terminal.querySelector('code, pre, .terminal-body') : null;
+          const textToCopy = codeEl ? codeEl.innerText : window.location.href;
+
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            showAppleToast(codeEl ? 'Solution Code copied to clipboard' : 'Portfolio URL copied to clipboard');
+          }).catch(() => {
+            showAppleToast('Copied to clipboard');
+          });
+          closeContextMenu();
+        });
+      }
+
+      const focusBtn = document.getElementById('hig-ctx-focus');
+      if (focusBtn) {
+        focusBtn.addEventListener('click', () => {
+          const terminal = activeTarget ? activeTarget.closest('.code-snap-card') : document.querySelector('.cf-terminal-card');
+          if (terminal) {
+            terminal.classList.toggle('code-snap-expanded');
+            showAppleToast('Toggled 3s Focus Glow');
+          }
+          closeContextMenu();
+        });
+      }
+
+      const navBtns = menu.querySelectorAll('[data-nav]');
+      navBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-nav');
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            if (window.lenis) {
+              window.lenis.scrollTo(targetEl, { offset: -20, duration: 1.2 });
+            } else {
+              targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+            showAppleToast(`Navigating to ${targetId.toUpperCase()}`);
+          }
+          closeContextMenu();
+        });
+      });
+
+      const topBtn = document.getElementById('hig-ctx-top');
+      if (topBtn) {
+        topBtn.addEventListener('click', () => {
+          if (window.lenis) {
+            window.lenis.scrollTo(0, { duration: 1.2 });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+          showAppleToast('Scrolled to Top');
+          closeContextMenu();
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target)) closeContextMenu();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeContextMenu();
+      });
+
+      window.addEventListener('scroll', closeContextMenu, { passive: true });
+    }
+
+    initApplePopUpMenu();
+    initAppleContextMenu();
+
     // 5. GitHub Activity Card Entrance & 52-Week Contributions Staggered Cell Ripple
     const githubCard = document.querySelector('.github-matrix-card');
     if (githubCard) {

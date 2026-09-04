@@ -815,13 +815,38 @@
           </div>
 
           <div class="cf-activity-controls">
-            <div class="cf-control-group">
+            <div class="cf-control-group hig-popup-group">
               <label class="cf-control-label" for="cf-year-select">YEAR:</label>
-              <select id="cf-year-select" class="cf-filter-select" aria-label="Choose Year">
+              <!-- Hidden native select for backward compatibility with automated tests -->
+              <select id="cf-year-select" class="cf-filter-select visually-hidden-select" aria-label="Choose Year">
                 <option value="rolling" selected>Choose year</option>
                 <option value="2026">2026</option>
                 <option value="2025">2025</option>
               </select>
+
+              <!-- Apple HIG Pop-Up Button -->
+              <div class="hig-popup-container" id="hig-year-popup">
+                <button type="button" class="hig-popup-btn" id="hig-year-btn" aria-haspopup="menu" aria-expanded="false" aria-label="Select Year Filter">
+                  <span class="hig-popup-label" id="hig-year-label">Choose year</span>
+                  <svg class="hig-popup-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <div class="hig-popup-menu" id="hig-year-menu" role="menu" aria-orientation="vertical" hidden>
+                  <button type="button" class="hig-menu-item is-selected" role="menuitem" data-value="rolling">
+                    <span class="hig-menu-checkmark" aria-hidden="true">✓</span>
+                    <span class="hig-menu-text">Choose year</span>
+                  </button>
+                  <button type="button" class="hig-menu-item" role="menuitem" data-value="2026">
+                    <span class="hig-menu-checkmark" aria-hidden="true"></span>
+                    <span class="hig-menu-text">2026</span>
+                  </button>
+                  <button type="button" class="hig-menu-item" role="menuitem" data-value="2025">
+                    <span class="hig-menu-checkmark" aria-hidden="true"></span>
+                    <span class="hig-menu-text">2025</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1715,6 +1740,94 @@ masterTl
       </div>
     </div>
   </footer>
+
+  <!-- Apple HIG Context Menu (macOS Liquid Glass Style) -->
+  <div id="hig-context-menu" class="hig-context-menu" role="menu" aria-label="Quick Actions Context Menu" hidden>
+    <div class="hig-context-header">
+      <span class="hig-context-badge">macOS // QUICK ACTIONS</span>
+      <span class="hig-context-esc">ESC</span>
+    </div>
+    <div class="hig-context-body">
+      <!-- Context-dependent action: Copy Code -->
+      <button type="button" class="hig-context-item" role="menuitem" id="hig-ctx-copy">
+        <span class="hig-ctx-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </span>
+        <span class="hig-ctx-label">Copy Solution Code</span>
+        <kbd class="hig-ctx-shortcut">⌘C</kbd>
+      </button>
+
+      <!-- Focus Mode -->
+      <button type="button" class="hig-context-item" role="menuitem" id="hig-ctx-focus">
+        <span class="hig-ctx-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        </span>
+        <span class="hig-ctx-label">Toggle 3s Focus Glow</span>
+        <kbd class="hig-ctx-shortcut">⌘F</kbd>
+      </button>
+
+      <div class="hig-context-separator" role="separator"></div>
+
+      <!-- Quick Navigation Header / Items -->
+      <div class="hig-context-subheader">JUMP TO SECTION</div>
+      <button type="button" class="hig-context-item" role="menuitem" data-nav="#hero">
+        <span class="hig-ctx-icon">01</span>
+        <span class="hig-ctx-label">Hero // Terminal</span>
+        <kbd class="hig-ctx-shortcut">1</kbd>
+      </button>
+      <button type="button" class="hig-context-item" role="menuitem" data-nav="#about">
+        <span class="hig-ctx-icon">02</span>
+        <span class="hig-ctx-label">About // Systems</span>
+        <kbd class="hig-ctx-shortcut">2</kbd>
+      </button>
+      <button type="button" class="hig-context-item" role="menuitem" data-nav="#codeforces">
+        <span class="hig-ctx-icon">05</span>
+        <span class="hig-ctx-label">Codeforces Telemetry</span>
+        <kbd class="hig-ctx-shortcut">5</kbd>
+      </button>
+      <button type="button" class="hig-context-item" role="menuitem" data-nav="#projects">
+        <span class="hig-ctx-icon">06</span>
+        <span class="hig-ctx-label">Projects &amp; GitHub</span>
+        <kbd class="hig-ctx-shortcut">6</kbd>
+      </button>
+      <button type="button" class="hig-context-item" role="menuitem" data-nav="#contact">
+        <span class="hig-ctx-icon">07</span>
+        <span class="hig-ctx-label">Connect Terminal</span>
+        <kbd class="hig-ctx-shortcut">7</kbd>
+      </button>
+
+      <div class="hig-context-separator" role="separator"></div>
+
+      <!-- External Links -->
+      <a href="https://codeforces.com/profile/Itz_Arslan" target="_blank" rel="noopener noreferrer" class="hig-context-item" role="menuitem">
+        <span class="hig-ctx-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </span>
+        <span class="hig-ctx-label">Codeforces Profile (Itz_Arslan)</span>
+        <span class="hig-ctx-shortcut">↗</span>
+      </a>
+      <a href="https://github.com/Omar-Ayman-Ali" target="_blank" rel="noopener noreferrer" class="hig-context-item" role="menuitem">
+        <span class="hig-ctx-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        </span>
+        <span class="hig-ctx-label">GitHub (Omar-Ayman-Ali)</span>
+        <span class="hig-ctx-shortcut">↗</span>
+      </a>
+      <button type="button" class="hig-context-item" role="menuitem" id="hig-ctx-top">
+        <span class="hig-ctx-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </span>
+        <span class="hig-ctx-label">Scroll to Top</span>
+        <kbd class="hig-ctx-shortcut">↑</kbd>
+      </button>
+    </div>
+  </div>
+
+  <!-- Apple HIG Feedback Toast -->
+  <div id="hig-toast" class="hig-toast" role="status" aria-live="polite" hidden>
+    <span class="hig-toast-icon">✓</span>
+    <span id="hig-toast-text" class="hig-toast-text">Action completed</span>
+  </div>
 
   <!-- GSAP 3.12+ Core and Plugins from CDN with Subresource Integrity -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
