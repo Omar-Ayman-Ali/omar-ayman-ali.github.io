@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T14:29:08.818Z",
+  "generatedAt": "2026-10-26T19:15:13.372Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4950,8 +4950,12 @@
         1792678633
       ],
       [
-        395634093,
-        1792707464
+        396209580,
+        1793039294
+      ],
+      [
+        396212893,
+        1793041569
       ]
     ]
   },
@@ -4965,7 +4969,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1792223035,
+    "lastOnlineAt": 1793038911,
     "contests": [
       {
         "contestId": 2227,
@@ -4992,9 +4996,129 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 658,
+    "submissionCount": 668,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "727035B",
+        "id": 396212125,
+        "at": 1793041011,
+        "entry": {
+          "contestId": 727035,
+          "index": "B",
+          "name": "Missing number",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396212125,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "727035A",
+        "id": 396210990,
+        "at": 1793040216,
+        "entry": {
+          "contestId": 727035,
+          "index": "A",
+          "name": "City Roads",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396210990,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726911D",
+        "id": 396210560,
+        "at": 1793039931,
+        "entry": {
+          "contestId": 726911,
+          "index": "D",
+          "name": "Movie Night",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396210560,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726911C",
+        "id": 396210202,
+        "at": 1793039692,
+        "entry": {
+          "contestId": 726911,
+          "index": "C",
+          "name": "Apple Grapple",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396210202,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726911B",
+        "id": 396210075,
+        "at": 1793039601,
+        "entry": {
+          "contestId": 726911,
+          "index": "B",
+          "name": "Even Lover ",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396210075,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726911A",
+        "id": 396209580,
+        "at": 1793039294,
+        "entry": {
+          "contestId": 726911,
+          "index": "A",
+          "name": "A Treat",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396209580,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "596491D",
         "id": 392228286,
@@ -10284,6 +10408,46 @@
     ],
     "anchors": [
       [
+        396212893,
+        1793041569
+      ],
+      [
+        396212125,
+        1793041011
+      ],
+      [
+        396211673,
+        1793040690
+      ],
+      [
+        396211600,
+        1793040633
+      ],
+      [
+        396210990,
+        1793040216
+      ],
+      [
+        396210560,
+        1793039931
+      ],
+      [
+        396210202,
+        1793039692
+      ],
+      [
+        396210075,
+        1793039601
+      ],
+      [
+        396209862,
+        1793039457
+      ],
+      [
+        396209580,
+        1793039294
+      ],
+      [
         392228286,
         1790440902
       ],
@@ -12938,7 +13102,7 @@
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-10-24T10:53:09Z"
+        "pushedAt": "2026-10-24T14:29:09Z"
       },
       {
         "name": "java-project-roadmap",
