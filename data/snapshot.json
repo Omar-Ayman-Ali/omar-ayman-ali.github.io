@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T07:46:25.228Z",
+  "generatedAt": "2026-10-27T14:25:33.532Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4954,8 +4954,12 @@
         1793039294
       ],
       [
-        396213992,
-        1793042382
+        396294168,
+        1793106678
+      ],
+      [
+        396303250,
+        1793110834
       ]
     ]
   },
@@ -4969,7 +4973,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1793042543,
+    "lastOnlineAt": 1793103236,
     "contests": [
       {
         "contestId": 2227,
@@ -4996,9 +5000,170 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 670,
+    "submissionCount": 682,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "726213H",
+        "id": 396303250,
+        "at": 1793110834,
+        "entry": {
+          "contestId": 726213,
+          "index": "H",
+          "name": "Divisibility Game",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396303250,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213G",
+        "id": 396301427,
+        "at": 1793110037,
+        "entry": {
+          "contestId": 726213,
+          "index": "G",
+          "name": "Shapes",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396301427,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213F",
+        "id": 396300818,
+        "at": 1793109761,
+        "entry": {
+          "contestId": 726213,
+          "index": "F",
+          "name": "Can you sort them?",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396300818,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213E",
+        "id": 396298185,
+        "at": 1793108550,
+        "entry": {
+          "contestId": 726213,
+          "index": "E",
+          "name": "Money, Money, Money!",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396298185,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213D",
+        "id": 396297532,
+        "at": 1793108272,
+        "entry": {
+          "contestId": 726213,
+          "index": "D",
+          "name": "Watermelon",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396297532,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 62,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213C",
+        "id": 396296422,
+        "at": 1793107771,
+        "entry": {
+          "contestId": 726213,
+          "index": "C",
+          "name": "Stones",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396296422,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213B",
+        "id": 396295716,
+        "at": 1793107434,
+        "entry": {
+          "contestId": 726213,
+          "index": "B",
+          "name": "GG EZ",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396295716,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213A",
+        "id": 396294168,
+        "at": 1793106678,
+        "entry": {
+          "contestId": 726213,
+          "index": "A",
+          "name": "Fair Enough",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396294168,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "727035B",
         "id": 396212125,
@@ -10408,6 +10573,54 @@
     ],
     "anchors": [
       [
+        396303250,
+        1793110834
+      ],
+      [
+        396302997,
+        1793110732
+      ],
+      [
+        396301427,
+        1793110037
+      ],
+      [
+        396300818,
+        1793109761
+      ],
+      [
+        396298185,
+        1793108550
+      ],
+      [
+        396297995,
+        1793108469
+      ],
+      [
+        396297532,
+        1793108272
+      ],
+      [
+        396297114,
+        1793108081
+      ],
+      [
+        396296422,
+        1793107771
+      ],
+      [
+        396296269,
+        1793107703
+      ],
+      [
+        396295716,
+        1793107434
+      ],
+      [
+        396294168,
+        1793106678
+      ],
+      [
         396213992,
         1793042382
       ],
@@ -13106,11 +13319,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 364,
+        "size": 365,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-10-27T02:02:02Z"
+        "pushedAt": "2026-10-27T07:46:26Z"
       },
       {
         "name": "java-project-roadmap",
