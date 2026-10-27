@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T14:25:33.532Z",
+  "generatedAt": "2026-10-27T20:03:16.196Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4958,8 +4958,8 @@
         1793106678
       ],
       [
-        396303250,
-        1793110834
+        396318722,
+        1793118463
       ]
     ]
   },
@@ -5000,9 +5000,110 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 682,
+    "submissionCount": 687,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "726213M",
+        "id": 396318722,
+        "at": 1793118463,
+        "entry": {
+          "contestId": 726213,
+          "index": "M",
+          "name": "Sticks",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396318722,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213L",
+        "id": 396313432,
+        "at": 1793115805,
+        "entry": {
+          "contestId": 726213,
+          "index": "L",
+          "name": "Again Twenty Five!",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396313432,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213K",
+        "id": 396312245,
+        "at": 1793115194,
+        "entry": {
+          "contestId": 726213,
+          "index": "K",
+          "name": "Guess what?",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396312245,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213J",
+        "id": 396310900,
+        "at": 1793114525,
+        "entry": {
+          "contestId": 726213,
+          "index": "J",
+          "name": "Almost rectangle",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396310900,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213I",
+        "id": 396305126,
+        "at": 1793111726,
+        "entry": {
+          "contestId": 726213,
+          "index": "I",
+          "name": "Onmi-man & Malak",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396305126,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "726213H",
         "id": 396303250,
@@ -10573,6 +10674,26 @@
     ],
     "anchors": [
       [
+        396318722,
+        1793118463
+      ],
+      [
+        396313432,
+        1793115805
+      ],
+      [
+        396312245,
+        1793115194
+      ],
+      [
+        396310900,
+        1793114525
+      ],
+      [
+        396305126,
+        1793111726
+      ],
+      [
         396303250,
         1793110834
       ],
@@ -13319,11 +13440,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 365,
+        "size": 366,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-10-27T07:46:26Z"
+        "pushedAt": "2026-10-27T14:25:34Z"
       },
       {
         "name": "java-project-roadmap",
