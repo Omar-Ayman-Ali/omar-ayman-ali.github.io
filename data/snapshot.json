@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T12:45:33.239Z",
+  "generatedAt": "2026-10-28T18:49:32.118Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4958,8 +4958,12 @@
         1793106678
       ],
       [
-        396318722,
-        1793118463
+        396453919,
+        1793203430
+      ],
+      [
+        396463960,
+        1793208822
       ]
     ]
   },
@@ -4973,7 +4977,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1793187974,
+    "lastOnlineAt": 1793207007,
     "contests": [
       {
         "contestId": 2227,
@@ -5000,9 +5004,70 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 687,
+    "submissionCount": 692,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "726213P",
+        "id": 396463960,
+        "at": 1793208822,
+        "entry": {
+          "contestId": 726213,
+          "index": "P",
+          "name": "Nada The Chess Master",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396463960,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213O",
+        "id": 396457562,
+        "at": 1793205383,
+        "entry": {
+          "contestId": 726213,
+          "index": "O",
+          "name": "Soldier and Bananas",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396457562,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "726213N",
+        "id": 396455240,
+        "at": 1793204132,
+        "entry": {
+          "contestId": 726213,
+          "index": "N",
+          "name": "Unknown lines",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 396455240,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "726213M",
         "id": 396318722,
@@ -10674,6 +10739,26 @@
     ],
     "anchors": [
       [
+        396463960,
+        1793208822
+      ],
+      [
+        396457562,
+        1793205383
+      ],
+      [
+        396455240,
+        1793204132
+      ],
+      [
+        396453994,
+        1793203465
+      ],
+      [
+        396453919,
+        1793203430
+      ],
+      [
         396318722,
         1793118463
       ],
@@ -13440,11 +13525,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 369,
+        "size": 370,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-10-28T05:34:23Z"
+        "pushedAt": "2026-10-28T12:45:34Z"
       },
       {
         "name": "java-project-roadmap",
