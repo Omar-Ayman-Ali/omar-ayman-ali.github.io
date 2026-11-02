@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T00:44:49.659Z",
+  "generatedAt": "2026-11-02T00:39:24.013Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4962,8 +4962,8 @@
         1793203430
       ],
       [
-        396463960,
-        1793208822
+        397060549,
+        1793569541
       ]
     ]
   },
@@ -4977,7 +4977,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1793387764,
+    "lastOnlineAt": 1793569126,
     "contests": [
       {
         "contestId": 2227,
@@ -5004,9 +5004,29 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 692,
+    "submissionCount": 693,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "728960A",
+        "id": 397060549,
+        "at": 1793569541,
+        "entry": {
+          "contestId": 728960,
+          "index": "A",
+          "name": "Yan and Maths",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397060549,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "726213P",
         "id": 396463960,
@@ -10739,6 +10759,10 @@
     ],
     "anchors": [
       [
+        397060549,
+        1793569541
+      ],
+      [
         396463960,
         1793208822
       ],
@@ -13529,7 +13553,7 @@
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-10-30T20:45:00Z"
+        "pushedAt": "2026-10-31T00:44:51Z"
       },
       {
         "name": "java-project-roadmap",
