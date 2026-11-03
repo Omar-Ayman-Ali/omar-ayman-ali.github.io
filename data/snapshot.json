@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T18:16:52.444Z",
+  "generatedAt": "2026-11-03T00:59:49.379Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4964,6 +4964,14 @@
       [
         397060549,
         1793569541
+      ],
+      [
+        397162272,
+        1793648095
+      ],
+      [
+        397162645,
+        1793648444
       ]
     ]
   },
@@ -4977,7 +4985,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1793629063,
+    "lastOnlineAt": 1793651123,
     "contests": [
       {
         "contestId": 2227,
@@ -5004,9 +5012,49 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 693,
+    "submissionCount": 695,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "728960C",
+        "id": 397162645,
+        "at": 1793648444,
+        "entry": {
+          "contestId": 728960,
+          "index": "C",
+          "name": "Counting Gifts",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397162645,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 78,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728960B",
+        "id": 397162272,
+        "at": 1793648095,
+        "entry": {
+          "contestId": 728960,
+          "index": "B",
+          "name": "Bokloz and Numbers",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397162272,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "728960A",
         "id": 397060549,
@@ -10759,6 +10807,14 @@
     ],
     "anchors": [
       [
+        397162645,
+        1793648444
+      ],
+      [
+        397162272,
+        1793648095
+      ],
+      [
         397060549,
         1793569541
       ],
@@ -13549,11 +13605,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 382,
+        "size": 383,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-02T07:38:30Z"
+        "pushedAt": "2026-11-02T18:16:53Z"
       },
       {
         "name": "java-project-roadmap",
