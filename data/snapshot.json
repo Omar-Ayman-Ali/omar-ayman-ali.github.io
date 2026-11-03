@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T07:53:17.783Z",
+  "generatedAt": "2026-11-03T16:12:04.191Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4970,8 +4970,12 @@
         1793648095
       ],
       [
-        397162645,
-        1793648444
+        397212524,
+        1793697366
+      ],
+      [
+        397252807,
+        1793720382
       ]
     ]
   },
@@ -4985,7 +4989,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1793651129,
+    "lastOnlineAt": 1793699728,
     "contests": [
       {
         "contestId": 2227,
@@ -5012,9 +5016,273 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 695,
+    "submissionCount": 717,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "728964F",
+        "id": 397252807,
+        "at": 1793720382,
+        "entry": {
+          "contestId": 728964,
+          "index": "F",
+          "name": "Wrong Subtraction",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397252807,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728964E",
+        "id": 397252460,
+        "at": 1793720206,
+        "entry": {
+          "contestId": 728964,
+          "index": "E",
+          "name": "Harry the Curious",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397252460,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728964D",
+        "id": 397244043,
+        "at": 1793715519,
+        "entry": {
+          "contestId": 728964,
+          "index": "D",
+          "name": "Following Directions",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397244043,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728964C",
+        "id": 397242567,
+        "at": 1793714773,
+        "entry": {
+          "contestId": 728964,
+          "index": "C",
+          "name": "Ramadan in Berland",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397242567,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 140,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728964B",
+        "id": 397237667,
+        "at": 1793712254,
+        "entry": {
+          "contestId": 728964,
+          "index": "B",
+          "name": "Odd Hater",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397237667,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728964A",
+        "id": 397237348,
+        "at": 1793712090,
+        "entry": {
+          "contestId": 728964,
+          "index": "A",
+          "name": "Jumping Mario",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397237348,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728961D",
+        "id": 397236033,
+        "at": 1793711425,
+        "entry": {
+          "contestId": 728961,
+          "index": "D",
+          "name": "Sushi for Two",
+          "rating": 900,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397236033,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728961E",
+        "id": 397234244,
+        "at": 1793710443,
+        "entry": {
+          "contestId": 728961,
+          "index": "E",
+          "name": "Hard Equation",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397234244,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 2468,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728961C",
+        "id": 397221563,
+        "at": 1793703002,
+        "entry": {
+          "contestId": 728961,
+          "index": "C",
+          "name": "Recruitment",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397221563,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728961B",
+        "id": 397220736,
+        "at": 1793702439,
+        "entry": {
+          "contestId": 728961,
+          "index": "B",
+          "name": "Contest Performance",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397220736,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 62,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728961A",
+        "id": 397217311,
+        "at": 1793700363,
+        "entry": {
+          "contestId": 728961,
+          "index": "A",
+          "name": "Struggling CapMan",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397217311,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728960E",
+        "id": 397215872,
+        "at": 1793699421,
+        "entry": {
+          "contestId": 728960,
+          "index": "E",
+          "name": "Beautiful Matrix",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397215872,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 62,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "728960D",
+        "id": 397212905,
+        "at": 1793697599,
+        "entry": {
+          "contestId": 728960,
+          "index": "D",
+          "name": "World War III",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 397212905,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "728960C",
         "id": 397162645,
@@ -10807,6 +11075,94 @@
     ],
     "anchors": [
       [
+        397252807,
+        1793720382
+      ],
+      [
+        397252460,
+        1793720206
+      ],
+      [
+        397244043,
+        1793715519
+      ],
+      [
+        397242567,
+        1793714773
+      ],
+      [
+        397238150,
+        1793712489
+      ],
+      [
+        397237667,
+        1793712254
+      ],
+      [
+        397237348,
+        1793712090
+      ],
+      [
+        397236033,
+        1793711425
+      ],
+      [
+        397234244,
+        1793710443
+      ],
+      [
+        397234050,
+        1793710346
+      ],
+      [
+        397221563,
+        1793703002
+      ],
+      [
+        397221219,
+        1793702753
+      ],
+      [
+        397220736,
+        1793702439
+      ],
+      [
+        397220654,
+        1793702384
+      ],
+      [
+        397220574,
+        1793702342
+      ],
+      [
+        397218063,
+        1793700786
+      ],
+      [
+        397217311,
+        1793700363
+      ],
+      [
+        397217197,
+        1793700293
+      ],
+      [
+        397217055,
+        1793700206
+      ],
+      [
+        397215872,
+        1793699421
+      ],
+      [
+        397212905,
+        1793697599
+      ],
+      [
+        397212524,
+        1793697366
+      ],
+      [
         397162645,
         1793648444
       ],
@@ -13605,11 +13961,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 384,
+        "size": 385,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-03T00:59:50Z"
+        "pushedAt": "2026-11-03T07:53:18Z"
       },
       {
         "name": "java-project-roadmap",
