@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T21:57:12.013Z",
+  "generatedAt": "2026-11-14T02:23:13.232Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -13961,11 +13961,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 393,
+        "size": 330,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-05T15:26:28Z"
+        "pushedAt": "2026-11-13T21:57:13Z"
       },
       {
         "name": "java-project-roadmap",
