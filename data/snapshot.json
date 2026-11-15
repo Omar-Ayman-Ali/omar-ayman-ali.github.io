@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T10:16:17.348Z",
+  "generatedAt": "2026-11-15T21:44:49.382Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4974,8 +4974,12 @@
         1793697366
       ],
       [
-        397252807,
-        1793720382
+        398711888,
+        1794767997
+      ],
+      [
+        398721019,
+        1794772902
       ]
     ]
   },
@@ -4989,7 +4993,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1794587534,
+    "lastOnlineAt": 1794767129,
     "contests": [
       {
         "contestId": 2227,
@@ -5016,9 +5020,69 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 717,
+    "submissionCount": 721,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "732490C",
+        "id": 398721019,
+        "at": 1794772902,
+        "entry": {
+          "contestId": 732490,
+          "index": "C",
+          "name": "Matrix Sums",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 398721019,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "732490B",
+        "id": 398712742,
+        "at": 1794768660,
+        "entry": {
+          "contestId": 732490,
+          "index": "B",
+          "name": "Frequent Letter",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 398712742,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 102400
+        },
+        "public": false
+      },
+      {
+        "key": "732490A",
+        "id": 398711888,
+        "at": 1794767997,
+        "entry": {
+          "contestId": 732490,
+          "index": "A",
+          "name": "Equal Halves",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 398711888,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "728964F",
         "id": 397252807,
@@ -11075,6 +11139,22 @@
     ],
     "anchors": [
       [
+        398721019,
+        1794772902
+      ],
+      [
+        398720907,
+        1794772797
+      ],
+      [
+        398712742,
+        1794768660
+      ],
+      [
+        398711888,
+        1794767997
+      ],
+      [
         397252807,
         1793720382
       ],
@@ -13965,7 +14045,7 @@
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-14T02:23:14Z"
+        "pushedAt": "2026-11-14T10:16:18Z"
       },
       {
         "name": "java-project-roadmap",
