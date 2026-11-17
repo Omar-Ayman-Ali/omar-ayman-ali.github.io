@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T03:47:29.497Z",
+  "generatedAt": "2026-11-17T13:16:14.490Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4982,8 +4982,8 @@
         1794878273
       ],
       [
-        398838762,
-        1794880054
+        398938013,
+        1794919060
       ]
     ]
   },
@@ -4997,7 +4997,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1794882867,
+    "lastOnlineAt": 1794918498,
     "contests": [
       {
         "contestId": 2227,
@@ -5024,9 +5024,71 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 724,
+    "submissionCount": 728,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "732453C",
+        "id": 398938013,
+        "at": 1794919060,
+        "entry": {
+          "contestId": 732453,
+          "index": "C",
+          "name": "Lights Out",
+          "rating": 900,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 398938013,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "732453A",
+        "id": 398927099,
+        "at": 1794917343,
+        "entry": {
+          "contestId": 732453,
+          "index": "A",
+          "name": "Array with Odd Sum",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 398927099,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "732453B",
+        "id": 398926319,
+        "at": 1794916893,
+        "entry": {
+          "contestId": 732453,
+          "index": "B",
+          "name": "Finally, some rest.",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 398926319,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 109,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "732490D",
         "id": 398837831,
@@ -11163,6 +11225,22 @@
     ],
     "anchors": [
       [
+        398938013,
+        1794919060
+      ],
+      [
+        398927099,
+        1794917343
+      ],
+      [
+        398926982,
+        1794917273
+      ],
+      [
+        398926319,
+        1794916893
+      ],
+      [
         398838762,
         1794880054
       ],
@@ -14077,11 +14155,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 335,
+        "size": 336,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-16T20:23:46Z"
+        "pushedAt": "2026-11-17T03:47:30Z"
       },
       {
         "name": "java-project-roadmap",
