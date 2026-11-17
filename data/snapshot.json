@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T20:23:44.773Z",
+  "generatedAt": "2026-11-17T03:47:29.497Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4978,8 +4978,12 @@
         1794767997
       ],
       [
-        398721019,
-        1794772902
+        398837831,
+        1794878273
+      ],
+      [
+        398838762,
+        1794880054
       ]
     ]
   },
@@ -4993,7 +4997,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1794833000,
+    "lastOnlineAt": 1794882867,
     "contests": [
       {
         "contestId": 2227,
@@ -5020,9 +5024,29 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 721,
+    "submissionCount": 724,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "732490D",
+        "id": 398837831,
+        "at": 1794878273,
+        "entry": {
+          "contestId": 732490,
+          "index": "D",
+          "name": "Max Subarray",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 398837831,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "732490C",
         "id": 398721019,
@@ -11139,6 +11163,18 @@
     ],
     "anchors": [
       [
+        398838762,
+        1794880054
+      ],
+      [
+        398838021,
+        1794878674
+      ],
+      [
+        398837831,
+        1794878273
+      ],
+      [
         398721019,
         1794772902
       ],
@@ -14045,7 +14081,7 @@
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-16T09:33:47Z"
+        "pushedAt": "2026-11-16T20:23:46Z"
       },
       {
         "name": "java-project-roadmap",
