@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T03:41:50.854Z",
+  "generatedAt": "2026-11-18T21:23:36.994Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4982,8 +4982,12 @@
         1794878273
       ],
       [
-        398938013,
-        1794919060
+        399050872,
+        1795007763
+      ],
+      [
+        399063012,
+        1795018908
       ]
     ]
   },
@@ -4997,7 +5001,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1794924862,
+    "lastOnlineAt": 1795001416,
     "contests": [
       {
         "contestId": 2227,
@@ -5024,9 +5028,30 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 728,
+    "submissionCount": 733,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "732453E",
+        "id": 399050872,
+        "at": 1795007763,
+        "entry": {
+          "contestId": 732453,
+          "index": "E",
+          "name": "Polycarp and Sums of Subsequences",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399050872,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 62,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "732453C",
         "id": 398938013,
@@ -11225,6 +11250,26 @@
     ],
     "anchors": [
       [
+        399063012,
+        1795018908
+      ],
+      [
+        399062967,
+        1795018853
+      ],
+      [
+        399062910,
+        1795018798
+      ],
+      [
+        399062237,
+        1795018052
+      ],
+      [
+        399050872,
+        1795007763
+      ],
+      [
         398938013,
         1794919060
       ],
@@ -14159,7 +14204,7 @@
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-17T21:47:00Z"
+        "pushedAt": "2026-11-18T03:41:51Z"
       },
       {
         "name": "java-project-roadmap",
