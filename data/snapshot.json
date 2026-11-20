@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T03:20:43.607Z",
+  "generatedAt": "2026-11-20T20:06:39.022Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4986,8 +4986,12 @@
         1795007763
       ],
       [
-        399063012,
-        1795018908
+        399267621,
+        1795198697
+      ],
+      [
+        399274402,
+        1795203680
       ]
     ]
   },
@@ -5001,7 +5005,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1795019755,
+    "lastOnlineAt": 1795180400,
     "contests": [
       {
         "contestId": 2227,
@@ -5028,9 +5032,72 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 733,
+    "submissionCount": 738,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "734269C",
+        "id": 399269148,
+        "at": 1795199590,
+        "entry": {
+          "contestId": 734269,
+          "index": "C",
+          "name": "Abo El-Gawasir",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399269148,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "734269D",
+        "id": 399268126,
+        "at": 1795198991,
+        "entry": {
+          "contestId": 734269,
+          "index": "D",
+          "name": "Big Sum",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399268126,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "734269E",
+        "id": 399267621,
+        "at": 1795198697,
+        "entry": {
+          "contestId": 734269,
+          "index": "E",
+          "name": "Rare Badges",
+          "rating": 1200,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399267621,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "732453E",
         "id": 399050872,
@@ -11250,6 +11317,26 @@
     ],
     "anchors": [
       [
+        399274402,
+        1795203680
+      ],
+      [
+        399271859,
+        1795201643
+      ],
+      [
+        399269148,
+        1795199590
+      ],
+      [
+        399268126,
+        1795198991
+      ],
+      [
+        399267621,
+        1795198697
+      ],
+      [
         399063012,
         1795018908
       ],
@@ -14204,7 +14291,7 @@
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-18T21:23:38Z"
+        "pushedAt": "2026-11-19T03:20:45Z"
       },
       {
         "name": "java-project-roadmap",
