@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T01:27:49.147Z",
+  "generatedAt": "2026-11-21T09:42:35.005Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -5005,7 +5005,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1795180400,
+    "lastOnlineAt": 1795251198,
     "contests": [
       {
         "contestId": 2227,
@@ -14287,11 +14287,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 343,
+        "size": 344,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-20T20:06:40Z"
+        "pushedAt": "2026-11-21T01:27:50Z"
       },
       {
         "name": "java-project-roadmap",
