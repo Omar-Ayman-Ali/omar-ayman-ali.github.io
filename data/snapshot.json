@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T09:42:35.005Z",
+  "generatedAt": "2026-11-22T11:13:19.192Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4990,8 +4990,12 @@
         1795198697
       ],
       [
-        399274402,
-        1795203680
+        399446825,
+        1795338216
+      ],
+      [
+        399464017,
+        1795342037
       ]
     ]
   },
@@ -5005,7 +5009,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1795251198,
+    "lastOnlineAt": 1795337380,
     "contests": [
       {
         "contestId": 2227,
@@ -5032,9 +5036,71 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 738,
+    "submissionCount": 742,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "732493N",
+        "id": 399464017,
+        "at": 1795342037,
+        "entry": {
+          "contestId": 732493,
+          "index": "N",
+          "name": "I Wanna Be the Guy",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399464017,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "732493C",
+        "id": 399459531,
+        "at": 1795340844,
+        "entry": {
+          "contestId": 732493,
+          "index": "C",
+          "name": "Fix You",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399459531,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 31,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "732493D",
+        "id": 399446825,
+        "at": 1795338216,
+        "entry": {
+          "contestId": 732493,
+          "index": "D",
+          "name": "Sushi buddies",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399446825,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "734269C",
         "id": 399269148,
@@ -11317,6 +11383,22 @@
     ],
     "anchors": [
       [
+        399464017,
+        1795342037
+      ],
+      [
+        399463836,
+        1795341990
+      ],
+      [
+        399459531,
+        1795340844
+      ],
+      [
+        399446825,
+        1795338216
+      ],
+      [
         399274402,
         1795203680
       ],
@@ -14291,7 +14373,7 @@
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-21T01:27:50Z"
+        "pushedAt": "2026-11-21T09:42:36Z"
       },
       {
         "name": "java-project-roadmap",
