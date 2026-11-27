@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T04:59:47.909Z",
+  "generatedAt": "2026-11-27T14:59:00.749Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -4996,6 +4996,14 @@
       [
         399783713,
         1795600556
+      ],
+      [
+        399999007,
+        1795783663
+      ],
+      [
+        400009355,
+        1795789725
       ]
     ]
   },
@@ -5009,7 +5017,7 @@
     "country": "Egypt",
     "avatar": "https://userpic.codeforces.org/5255724/title/134d06bc8a311607.jpg",
     "registeredAt": 1760547015,
-    "lastOnlineAt": 1795600617,
+    "lastOnlineAt": 1795782875,
     "contests": [
       {
         "contestId": 2227,
@@ -5036,9 +5044,92 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 743,
+    "submissionCount": 750,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "734202C",
+        "id": 400009355,
+        "at": 1795789725,
+        "entry": {
+          "contestId": 734202,
+          "index": "C",
+          "name": "Places",
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 400009355,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 250,
+          "memoryConsumedBytes": 1024000
+        },
+        "public": false
+      },
+      {
+        "key": "734202B",
+        "id": 400008315,
+        "at": 1795789071,
+        "entry": {
+          "contestId": 734202,
+          "index": "B",
+          "name": "Black and White Stripe",
+          "rating": 1000,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 400008315,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "734202A",
+        "id": 400004241,
+        "at": 1795786648,
+        "entry": {
+          "contestId": 734202,
+          "index": "A",
+          "name": "Kuriyama Mirai's Stones",
+          "rating": 1200,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 400004241,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 140,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "732493H",
+        "id": 399999007,
+        "at": 1795783663,
+        "entry": {
+          "contestId": 732493,
+          "index": "H",
+          "name": "Gifts Fixing",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 399999007,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 15,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "732493N",
         "id": 399464017,
@@ -11383,6 +11474,34 @@
     ],
     "anchors": [
       [
+        400009355,
+        1795789725
+      ],
+      [
+        400009240,
+        1795789644
+      ],
+      [
+        400008902,
+        1795789434
+      ],
+      [
+        400008315,
+        1795789071
+      ],
+      [
+        400004241,
+        1795786648
+      ],
+      [
+        400002694,
+        1795785750
+      ],
+      [
+        399999007,
+        1795783663
+      ],
+      [
         399783713,
         1795600556
       ],
@@ -14373,11 +14492,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 352,
+        "size": 353,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-26T22:17:38Z"
+        "pushedAt": "2026-11-27T04:59:48Z"
       },
       {
         "name": "java-project-roadmap",
