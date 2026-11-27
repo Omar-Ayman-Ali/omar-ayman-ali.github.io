@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T14:59:00.749Z",
+  "generatedAt": "2026-11-27T23:24:56.650Z",
   "archive": {
     "total": 256,
     "solved": [
@@ -5002,8 +5002,8 @@
         1795783663
       ],
       [
-        400009355,
-        1795789725
+        400092774,
+        1795804390
       ]
     ]
   },
@@ -5044,9 +5044,51 @@
         "at": 1785862200
       }
     ],
-    "submissionCount": 750,
+    "submissionCount": 753,
     "acceptedCount": 25,
     "accepted": [
+      {
+        "key": "736428A",
+        "id": 400092774,
+        "at": 1795804390,
+        "entry": {
+          "contestId": 736428,
+          "index": "A",
+          "name": "Wael's Home",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 400092774,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
+      {
+        "key": "734202D",
+        "id": 400031645,
+        "at": 1795792230,
+        "entry": {
+          "contestId": 734202,
+          "index": "D",
+          "name": "Min Or Sum",
+          "rating": 800,
+          "tags": [
+            "untagged"
+          ],
+          "url": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionUrl": "https://codeforces.com/submissions/Itz_Arslan",
+          "submissionId": 400031645,
+          "language": "C++23 (GCC 14-64, msys2)",
+          "timeConsumedMillis": 46,
+          "memoryConsumedBytes": 0
+        },
+        "public": false
+      },
       {
         "key": "734202C",
         "id": 400009355,
@@ -11474,6 +11516,18 @@
     ],
     "anchors": [
       [
+        400092774,
+        1795804390
+      ],
+      [
+        400092271,
+        1795804036
+      ],
+      [
+        400031645,
+        1795792230
+      ],
+      [
         400009355,
         1795789725
       ],
@@ -14492,11 +14546,11 @@
         "language": "JavaScript",
         "stars": 1,
         "forks": 0,
-        "size": 353,
+        "size": 354,
         "topics": [],
         "license": "",
         "createdAt": "2026-09-02T10:43:32Z",
-        "pushedAt": "2026-11-27T04:59:48Z"
+        "pushedAt": "2026-11-27T14:59:01Z"
       },
       {
         "name": "java-project-roadmap",
